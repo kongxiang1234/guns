@@ -1,0 +1,29 @@
+@layout("/common/_container.html",{js:["/assets/integral/queTotalMeiri.js"]}){
+
+<div class="layui-body-header">
+    <span class="layui-body-header-title">管理</span>
+</div>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-sm12 layui-col-md12 layui-col-lg12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="layui-form toolbar">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <input id="account" type="hidden" value="${account}"/>
+                                <input id="btime" type="hidden" value="${btime}"/>
+                                <input id="etime" type="hidden" value="${etime}"/>
+                                <button id="btnBack" onclick="javascript:history.back(-1);" class="layui-btn icon-btn layui-btn-normal"><i class="layui-icon">&#xe65c;</i>返回</button>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="layui-table" id="integralTable" lay-filter="integralTable"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@}

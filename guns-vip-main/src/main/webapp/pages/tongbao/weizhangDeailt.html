@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>情况通报-违章通报</title>
+    <link rel="stylesheet" href="${ctxPath}/assets/e365/css/iconfont.css">
+    <link rel="stylesheet" href="${ctxPath}/assets/e365/css/layout.css">
+    <style>
+        .top_title{margin-top: 2vh;text-align: center;}
+        .top_title h5{color:#181818;font-size:.9rem;margin-bottom:2vh;}
+        .top_title .title_tip{margin:2vh 0 3vh;font-size:.6rem;}
+        .top_title .title_tip span{color:grey;}
+        .article_content{width:94%;margin:0 auto;font-size:.8rem;line-height:2;color:black;margin-top:4vh;text-indent:2em;}
+        .article_content h6{font-weight:normal;margin:0;font-size: .8rem;}
+        .article_content strong{font-weight:normal;}
+    </style>
+</head>
+<body>
+    <div class="top_title">
+        <h5>${content.wzTitle}</h5>
+        <div class="title_tip">
+            <span>督查时间：${content.dcTime}</span>
+        </div>
+    </div>
+    <article class="article_content">
+        <h6>${content.content}</h6>
+
+        <p><strong>违章人：</strong>${content.wzPeople}</p>
+        <p><strong>违章单位：</strong>${content.xmUnit}</p>
+        <p><strong>督查类型：</strong>${content.dcTypeV}</p>
+        <p><strong>违章类别：</strong>${content.wzStatusV}</p>
+        <p><strong>违章性质：</strong>${content.wzTypeV}</p>
+        <p><strong>处罚人：</strong>${content.createUser}</p>
+        <p><strong>项目经理：</strong>${content.fzPeople}</p>
+        <p><strong>计分：</strong>${content.num}</p>
+    </article>
+</body>
+</html>

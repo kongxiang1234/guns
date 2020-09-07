@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>有奖举报</title>
+
+    <link rel="stylesheet" href="${ctxPath}/assets/e365/css/iconfont.css">
+    <link rel="stylesheet" href="${ctxPath}/assets/e365/css/layout.css">
+    <link rel="stylesheet" href="${ctxPath}/assets/e365/css/pickout.css">
+    <style>
+        html,body{height:100%;}
+        body{background: url(${ctxPath}/assets/e365/images/awardreport/bg.png) #226DFF no-repeat center top;width:100%;background-size:100%;position:relative;}
+        .container{position:relative;width:100%;height:100%;display:flex;justify-content: center;align-items: flex-end;}
+        .container img.bgimg{position:absolute;left:0;top:30%;width:3vw;height:4vw;}
+        .container .wrap_content{position:relative;width:96%;margin:0 auto;border-radius:10px;padding:2vw 0;height:70%;}
+        .container .wrap_content img.erweima{width:30vw;height:30vw;position:absolute;left:50%;top:0;margin-top:-12vw;margin-left:-15vw;}
+        .container .wrap_content .content_text{background:#fff;border:2vw solid #4A5DFF;border-radius:10px;overflow-x:hidden;overflow-y:scroll;max-height:calc(100% - 16vw);padding-top:14vw;}
+        .container .wrap_content .content_text article{padding:2vw;text-indent:2em;color:#333;font-size:.8rem;line-height:2;}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="wrap_content">
+            <img class="erweima" src="${ctxPath}/assets/e365/images/awardreport/ewm.png" alt="">
+            
+            <div class="content_text">
+                <article>
+                    <p>
+                        微信扫描上方二维码，加入“国网江苏电力"企业公众号，点击发现"<font color="#007BFF">-有奖举报</font>"，参与举报危及电力设施安全运行的外部活动。包括：在线路附近施工、起吊、垂钓、火灾，线下种植高杆树竹，在杆塔附近堆土、取土，杆塔或线路上有风筝、气球、横幅等异物等。
+                    </p>
+                    <p>
+                        供电公司将对隐患现场进行核查。对举报情况属实的，将在<font color="#FF0101">20</font>个工作日内奖励<font color="#FF0101">5至50元</font>
+                        电费充值抵用金，请您将电费缴费卡户号与微信账号进行绑定。电费充值抵用金将自动充入绑定的户号，无法转让。
+                    </p>
+                    <p>本次活动最终解释权归国网江苏省电力有限公司。</p>
+                </article>
+            </div>
+        </div>
+        <img class="bgimg" src="${ctxPath}/assets/e365/images/awardreport/bgimg.png" alt="">
+    </div>
+</body>
+</html>

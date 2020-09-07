@@ -1,0 +1,135 @@
+@layout("/common/_form.html",{js:["/assets/paper/paper_add.js"],css:["/assets/expand/module/formSelects/formSelects-v4.css"]}){
+
+<form class="layui-form" id="paperForm" lay-filter="paperForm">
+    <div class="layui-fluid" style="padding-bottom: 75px;">
+        <div class="layui-card">
+            <div class="layui-card-header">基本信息</div>
+            <div class="layui-card-body">
+                <div class="layui-form-item layui-row">
+                    <input name="id" type="hidden"/>
+                    <div class="layui-inline layui-col-md6">
+                        <label class="layui-form-label">试卷名称<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="sjname" name="sjname" placeholder="请输入试卷名称" type="text" class="layui-input" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md6">
+                        <label class="layui-form-label">所属专业<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <select name="sszy" id="sszy" lay-verify="required"  lay-filter="sszy">
+
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="layui-inline">
+                        <label class="layui-form-label">单选题高<span style="color: red;">*</span></label>
+                        <div class="layui-input-inline">
+                          <input id="danxt"  name="danxtg" placeholder="请输入难度高" type="text" class="layui-input" lay-verify="required|num" required/>
+                        </div>
+                    </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">单选题中<span style="color: red;">*</span></label>
+                            <div class="layui-input-inline">
+                            <input id="danxt1"  name="danxtz" placeholder="请输入难度中" type="text" class="layui-input" lay-verify="required|num" required/>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">单选题低<span style="color: red;">*</span></label>
+                            <div class="layui-input-inline">
+                            <input id="danxt2"  name="danxtd" placeholder="请输入难度低" type="text" class="layui-input" lay-verify="required|num" required/>
+                            </div>
+                        </div>
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label">单选题分数<span style="color: red;">*</span></label>
+                            <div class="layui-input-inline">
+                            <input id="danxt3"  name="danxtValue" placeholder="每题多少分" type="text" class="layui-input" lay-verify="required|num" required/>
+                            </div>
+                        </div>
+
+            <br/>
+
+
+                    <div class="layui-inline">
+                        <label class="layui-form-label">多选题高<span style="color: red;">*</span></label>
+                        <div class="layui-input-inline">
+                            <input id="duoxt"  name="duoxtg" placeholder="请输入难度高" type="text" class="layui-input" lay-verify="required|num" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">多选题中<span style="color: red;">*</span></label>
+                        <div class="layui-input-inline">
+                            <input id="duoxt1"  name="duoxtz" placeholder="请输入难度中" type="text" class="layui-input" lay-verify="required|num" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">多选题低<span style="color: red;">*</span></label>
+                        <div class="layui-input-inline">
+                            <input id="duoxt2"  name="duoxtd" placeholder="请输入难度低" type="text" class="layui-input" lay-verify="required|num" required/>
+                        </div>
+                    </div>
+
+                    <div class="layui-inline">
+                        <label class="layui-form-label">多选题分数<span style="color: red;">*</span></label>
+                        <div class="layui-input-inline">
+                            <input id="duoxt3"  name="duoxtValue" placeholder="每题多少分" type="text" class="layui-input" lay-verify="required|num" required/>
+                        </div>
+                    </div>
+
+                    <br/>
+
+
+
+                    <div class="layui-inline">
+                        <label class="layui-form-label">判断题高<span style="color: red;">*</span></label>
+                        <div class="layui-input-inline">
+                            <input id="pdtd"  name="pdtg" placeholder="请输入难度高" type="text" class="layui-input" lay-verify="required|num" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">判断题中<span style="color: red;">*</span></label>
+                        <div class="layui-input-inline">
+                            <input id="pdtd1"  name="pdtz" placeholder="请输入难度中" type="text" class="layui-input" lay-verify="required|num" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">判断题低<span style="color: red;">*</span></label>
+                        <div class="layui-input-inline">
+                            <input id="pdtd2"  name="pdtd" placeholder="请输入难度低" type="text" class="layui-input" lay-verify="required|num" required/>
+                        </div>
+                    </div>
+
+                    <div class="layui-inline">
+                        <label class="layui-form-label">判断题分数<span style="color: red;">*</span></label>
+                        <div class="layui-input-inline">
+                            <input id="pdtd3"  name="pdtValue" placeholder="每题多少分" type="text" class="layui-input" lay-verify="required|num" required/>
+                        </div>
+                    </div>
+
+
+                    <div class="layui-inline layui-col-md6">
+                        <label class="layui-form-label">考试开始时间<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input type="text" name="btime" class="layui-input" lay-verify="required"  placeholder="yyyy-MM-dd HH:mm:ss" id="btime">
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md6">
+                        <label class="layui-form-label">考试结束时间<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input type="text" name="etime" class="layui-input" lay-verify="required"  placeholder="yyyy-MM-dd HH:mm:ss" id="etime">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group-bottom text-center">
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit>&emsp;提交&emsp;</button>
+        <button type="reset" class="layui-btn layui-btn-primary" ew-event="closeDialog"  onclick="javascript:history.back(-1);" >&emsp;取消&emsp;</button>
+    </div>
+
+</form>
+
+@}

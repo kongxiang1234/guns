@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.e365.mapper.PaperMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.e365.entity.Paper">
+        <id column="id" property="id" />
+        <result column="sjbh" property="sjbh" />
+        <result column="sjname" property="sjname" />
+        <result column="sszy" property="sszy" />
+        <result column="danxt" property="danxt" />
+        <result column="danxtValue" property="danxtValue" />
+        <result column="duoxt" property="duoxt" />
+        <result column="duoxtValue" property="duoxtValue" />
+        <result column="pdt" property="pdt" />
+        <result column="pdtValue" property="pdtValue" />
+        <result column="tmtotle" property="tmtotle" />
+        <result column="tmfs" property="tmfs" />
+        <result column="btime" property="btime" />
+        <result column="etime" property="etime" />
+        <result column="create_time" property="createTime" />
+        <result column="create_user" property="createUser" />
+        <result column="type" property="type" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id AS "id", sjbh AS "sjbh", sjname AS "sjname", sszy AS "sszy", danxt AS "danxt", danxtValue AS "danxtValue", duoxt AS "duoxt", duoxtValue AS "duoxtValue", pdt AS "pdt", pdtValue AS "pdtValue", tmtotle AS "tmtotle", tmfs AS "tmfs", btime AS "btime", etime AS "etime", create_time AS "createTime", create_user AS "createUser", type AS "type"
+    </sql>
+
+
+    <select id="customList" resultType="cn.stylefeng.guns.modular.e365.model.result.PaperResult" parameterType="cn.stylefeng.guns.modular.e365.model.params.PaperParam">
+        select
+        <include refid="Base_Column_List"/>
+        from e365_paper where 1 = 1
+            <if test="paramCondition.sjbh != null and paramCondition.sjbh != ''">
+                and sjbh like CONCAT('%',#{paramCondition.sjbh},'%')
+            </if>
+            <if test="paramCondition.sjname != null and paramCondition.sjname != ''">
+                and sjname like CONCAT('%',#{paramCondition.sjname},'%')
+            </if>
+            <if test="paramCondition.sszy != null and paramCondition.sszy != ''">
+                and sszy like CONCAT('%',#{paramCondition.sszy},'%')
+            </if>
+            <if test="paramCondition.btime != null and paramCondition.btime != ''">
+                and btime like CONCAT('%',#{paramCondition.btime},'%')
+            </if>
+            <if test="paramCondition.etime != null and paramCondition.etime != ''">
+                and etime like CONCAT('%',#{paramCondition.etime},'%')
+            </if>
+            <if test="paramCondition.type != null and paramCondition.type != ''">
+                and type like CONCAT('%',#{paramCondition.type},'%')
+            </if>
+    </select>
+
+    <select id="customMapList" resultType="map" parameterType="cn.stylefeng.guns.modular.e365.model.params.PaperParam">
+        select
+        <include refid="Base_Column_List"/>
+        from e365_paper where 1 = 1
+            <if test="paramCondition.sjbh != null and paramCondition.sjbh != ''">
+                and sjbh like CONCAT('%',#{paramCondition.sjbh},'%')
+            </if>
+            <if test="paramCondition.sjname != null and paramCondition.sjname != ''">
+                and sjname like CONCAT('%',#{paramCondition.sjname},'%')
+            </if>
+            <if test="paramCondition.sszy != null and paramCondition.sszy != ''">
+                and sszy like CONCAT('%',#{paramCondition.sszy},'%')
+            </if>
+            <if test="paramCondition.btime != null and paramCondition.btime != ''">
+                and btime like CONCAT('%',#{paramCondition.btime},'%')
+            </if>
+            <if test="paramCondition.etime != null and paramCondition.etime != ''">
+                and etime like CONCAT('%',#{paramCondition.etime},'%')
+            </if>
+            <if test="paramCondition.type != null and paramCondition.type != ''">
+                and type like CONCAT('%',#{paramCondition.type},'%')
+            </if>
+    </select>
+
+    <select id="customPageList" resultType="java.util.Map" parameterType="cn.stylefeng.guns.modular.e365.model.params.PaperParam">
+        select  sum(a.danxtd+a.danxtg+a.danxtz) danxtd,sum(a.duoxtd+a.duoxtg+a.duoxtz) duoxtd,sum(a.pdtd+a.pdtg+a.pdtz) pdtd,
+        a.create_time,a.create_user,a.danxtValue,a.duoxtValue,a.etime,a.id,a.pdtValue,a.sjbh,a.sszy,a.sjname,a.type,a.tmtotle,a.tmfs, a.btime
+        from e365_paper a where 1 = 1
+        <if test="sjbh != null and sjbh != ''">
+            and sjbh like CONCAT('%',#{sjbh},'%') or sjname like CONCAT('%',#{sjbh},'%')
+        </if>
+        <if test="specialty != null and specialty != ''">
+            and sszy =#{specialty}
+        </if>
+        <if test="type != null and type != ''">
+            and type =#{type}
+        </if>
+
+        <if test="beginTime != null and beginTime != '' and endTime != null and endTime != ''">
+            AND DATE_FORMAT(btime, '%Y-%m-%d')&gt;=#{beginTime} AND DATE_FORMAT(etime, '%Y-%m-%d')&lt;=#{endTime}
+
+        </if>
+        GROUP BY a.id
+
+        order by create_time desc
+    </select>
+
+    <select id="customPageMapList" resultType="map" parameterType="cn.stylefeng.guns.modular.e365.model.params.PaperParam">
+        select
+        <include refid="Base_Column_List"/>
+        from e365_paper where 1 = 1
+            <if test="paramCondition.sjbh != null and paramCondition.sjbh != ''">
+                and sjbh like CONCAT('%',#{paramCondition.sjbh},'%')
+            </if>
+            <if test="paramCondition.sjname != null and paramCondition.sjname != ''">
+                and sjname like CONCAT('%',#{paramCondition.sjname},'%')
+            </if>
+            <if test="paramCondition.sszy != null and paramCondition.sszy != ''">
+                and sszy like CONCAT('%',#{paramCondition.sszy},'%')
+            </if>
+            <if test="paramCondition.btime != null and paramCondition.btime != ''">
+                and btime like CONCAT('%',#{paramCondition.btime},'%')
+            </if>
+            <if test="paramCondition.etime != null and paramCondition.etime != ''">
+                and etime like CONCAT('%',#{paramCondition.etime},'%')
+            </if>
+            <if test="paramCondition.type != null and paramCondition.type != ''">
+                and type like CONCAT('%',#{paramCondition.type},'%')
+            </if>
+    </select>
+
+
+
+    <select id="selectYueQuary" resultType="java.util.Map">
+        select t4.title,t4.questions_type,t3.* from e365_papermanage t1
+        LEFT JOIN e365_management t4 on t1.managementId=t4.id
+        LEFT JOIN e365_answer t3 on t1.managementId=t3.managementId
+         where t1.paperNuber=#{number}
+
+
+
+        and t4.specialty in
+             <foreach item="item" collection="specialty" separator="," open="(" close=")" index="">
+              #{item}
+            </foreach>
+
+          and t4.rolename=#{role} and t4.questions_type is not null limit 100
+
+
+
+    </select>
+    <select id="selectQuary" resultType="java.util.Map">
+        select t4.title,t4.questions_type,t3.* from e365_management t4
+
+         JOIN e365_answer t3 on t4.id=t3.managementId
+         where t4.specialty=#{specialty} ORDER BY RAND() limit 5
+    </select>
+
+    <select id="selectZhouQuary" resultType="java.util.Map">
+        select t4.title,t4.questions_type,t3.* from e365_management t4
+
+
+         JOIN e365_answer t3 on t4.id=t3.managementId
+         where t4.ztype=#{type} ORDER BY RAND() limit 15
+    </select>
+
+</mapper>

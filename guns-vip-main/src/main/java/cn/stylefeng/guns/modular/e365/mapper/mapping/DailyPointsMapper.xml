@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.e365.mapper.DailyPointsMapper">
+
+    <select id="listMeiri" resultType="cn.stylefeng.guns.modular.e365.entity.DailyPoints">
+           select t2.simple_name unit,t3.`name`,t1.name account from e365_dailypoints t1 LEFT JOIN sys_dept t2 on t1.unit=t2.dept_id
+           LEFT JOIN sys_user t3 on t1.name=t3.account where 1=1
+            <if test="name!=null and name!=''">
+                and t1.name like CONCAT('%',#{name},'%')
+            </if>
+            GROUP BY `name`
+    </select>
+
+
+</mapper>

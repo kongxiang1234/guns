@@ -1,0 +1,182 @@
+@layout("/common/_form.html",{js:["/assets/break/break_edit.js"],plugins:["ue"]}){
+
+<form class="layui-form" id="breakForm" lay-filter="breakForm">
+    <div class="layui-fluid" style="padding-bottom: 75px;">
+        <div class="layui-card">
+            <div class="layui-card-header">基本信息</div>
+            <div class="layui-card-body">
+                <div class="layui-form-item layui-row">
+                    <input name="id" type="hidden"/>
+                    <div class="layui-inline layui-col-md6">
+                        <label class="layui-form-label">督查主体<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <select name="dcNoumenon"  id="dcNoumenon" lay-filter="dcNoumenon" lay-verify="required" required>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md6">
+                        <label class="layui-form-label">通知书编号<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="dcNumber" name="dcNumber" placeholder="请输入通知书编号" type="text" class="layui-input" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md6">
+                        <label class="layui-form-label">督查日期<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input type="text" name="dcTime" placeholder="请选择督查日期" class="layui-input" id="dcTime" lay-verify="required" required>
+                        </div>
+                    </div>
+
+                    <div class="layui-inline layui-col-md6">
+                        <label class="layui-form-label">违章级别<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <select name="wzStatus"  id="wzStatus" lay-filter="wzStatus" lay-verify="required" required>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md6">
+                        <label class="layui-form-label">违章一级分类<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <select name="oneSecondary"  id="oneSecondary" lay-filter="oneSecondary" lay-verify="required" required>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md6">
+                        <label class="layui-form-label">违章二级分类<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <select name="secondary"  id="secondary" lay-filter="secondary" lay-verify="required" required>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md6">
+                        <label class="layui-form-label">现场类别<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <select name="siteCategory"  id="siteCategory" lay-filter="siteCategory" lay-verify="required" required>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md6">
+                        <label class="layui-form-label">督查形式<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <select name="supervision"  id="supervision" lay-filter="supervision" lay-verify="required" required>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md6">
+                        <label class="layui-form-label">施工单位<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="construction" name="construction" placeholder="请输入施工单位须填全称" type="text" class="layui-input" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md6">
+                        <label class="layui-form-label">违章记分<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="score" name="score" placeholder="请输入违章记分" value="0" type="number" class="layui-input" />
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md6">
+                        <label class="layui-form-label">身份证号码</label>
+                        <div class="layui-input-block">
+                            <input id="idCard" name="idCard" placeholder="请输入身份证号码" type="text" class="layui-input" />
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md6">
+                        <label class="layui-form-label">违章人员记分</label>
+                        <div class="layui-input-block">
+                            <input id="personnelScore" name="personnelScore" placeholder="请输入违章人员记分" type="text" class="layui-input" />
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md6">
+                        <label class="layui-form-label">人员性质<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <select name="nature"  id="nature" lay-filter="nature" lay-verify="required" required>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md6">
+                        <label class="layui-form-label">考核金额</label>
+                        <div class="layui-input-block">
+                            <input id="money" name="money" placeholder="请输入考核金额" type="text" class="layui-input" />
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md6">
+                        <label class="layui-form-label">项目管理单位记分</label>
+                        <div class="layui-input-block">
+                            <input id="unitScore" name="unitScore" placeholder="请输入项目管理单位记分" type="text" class="layui-input" />
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md6">
+                        <label class="layui-form-label">是否闭环</label>
+                        <div class="layui-input-block">
+                            <input type="radio" name="closed" value="0" title="是">
+                            <input type="radio" name="closed" value="1" title="否">
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md6">
+                        <label class="layui-form-label">是否考核外包单位<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input type="radio" name="waibao" value="0" title="是" checked="checked">
+                            <input type="radio" name="waibao" value="1" title="否">
+                        </div>
+                    </div>
+
+                    <div class="layui-inline layui-col-md6">
+                        <label class="layui-form-label">图片</label>
+                        <div class="layui-input-block">
+                            <input id="pic" name="pic" type="hidden" class="layui-input"/>
+                            <button type="button" class="layui-btn layui-btn-sm" id="picBtn"><i class="layui-icon"></i>选择图片</button>
+                            <div class="layui-upload-list">
+                                <img class="layui-upload-img" id="img1" width="92px" height="92px" >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md6">
+                        <label class="layui-form-label">违章单位<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <select name="xmUnit" lay-search id="xmUnit" lay-verify="required" required>
+                                <option value="">直接选择或搜索选择</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md6">
+                        <label class="layui-form-label">违章人员<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <select name="wzPeople" lay-search id="wzPeople" lay-verify="required" required>
+                                <option value="">直接选择或搜索选择</option>
+
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">备注</label>
+                        <div class="layui-input-block">
+                            <textarea rows="7" cols="200" name="descs"  id="descs"></textarea>
+
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">作业内容</label>
+                        <div class="layui-input-block">
+                            <textarea rows="7" cols="200" name="workContent"  id="workContent"></textarea>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">违章情况</label>
+                        <div class="layui-input-block">
+                            <textarea rows="7" cols="200" name="content"  id="content"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group-bottom text-center">
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit>&emsp;提交&emsp;</button>
+        <button type="reset" class="layui-btn layui-btn-primary" onclick="javascript:history.back(-1);"  >&emsp;取消&emsp;</button>
+    </div>
+
+</form>
+
+@}

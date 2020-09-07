@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.e365.mapper.MonthlyPointsMapper">
+
+
+    <select id="listPaper" resultType="java.util.Map">
+        select t1.score,t1.ranking,t2.sjname,t2.btime,t2.etime from e365_monthlypoints t1
+        LEFT JOIN e365_paper t2 on t1.paperId=t2.id where t1.userId=#{userId}
+    </select>
+
+
+    <select id="listMeiyue" resultType="java.util.Map">
+        SELECT GROUP_CONCAT(t3.sjname) sjname,count(t1.id) total,AVG( t1.score) avgScore,MAX(t1.score) mscore,MIN(t1.score) score,AVG(t1.ranking) avgranking,t2.simple_name unit,t1.`name`
+        from e365_monthlypoints t1 LEFT JOIN sys_dept t2 on t1.unit=t2.dept_id LEFT JOIN e365_paper t3 on t1.paperId=t3.id
+        where 1=1  and t1.dateYear&gt;=#{map.byear} and t1.dateYear&lt;=#{map.eyear}
+        and t1.`month`&gt;=#{map.bmonth} and t1.`month`&lt;=#{map.emonth}
+        <if test="map.name!=null and map.name!=''">
+            and t1.name like CONCAT('%',#{map.name},'%')
+        </if>
+        GROUP BY t1.userId
+    </select>
+</mapper>

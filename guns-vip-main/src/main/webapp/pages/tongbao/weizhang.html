@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>情况通报-违章通报</title>
+    <link rel="stylesheet" href="${ctxPath}/assets/e365/css/iconfont.css">
+    <link rel="stylesheet" href="${ctxPath}/assets/e365/css/layout.css">
+    <style>
+        .reportList{width:94%;margin:4vh auto;}
+        .reportList a{display:block;background:#fff;box-shadow:0px 3px 6px 0px rgba(0, 0, 0, 0.08);overflow: hidden;border-radius: 10px;}
+        .reportList li{margin:3vh 0;}
+        .reportList li div{width:100%;display:block;height:20vh;}
+        .reportList li div img{width:100%;height:100%;}
+        .reportList li p{line-height:1.5;margin:2vh 0;color:#181818;font-size:.8rem;text-indent:1em;}
+    </style>
+</head>
+<body>
+    <div class="reportList">
+        <ul>
+            @for(item in list){
+            <li>
+                <a href="/information/informationDetailed/${item.id}">
+                    <div><img src="/rest/system/preview/${item.pic}" alt=""></div>
+                    <p>${item.wzTitle}</p>
+                </a>
+            </li>
+            @}
+        </ul>
+    </div>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.demos.mapper.TGameAgentUserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.demos.entity.TGameAgentUser">
+        <id column="ID" property="id" />
+        <result column="RoleId" property="RoleId" />
+        <result column="Account" property="Account" />
+        <result column="Password" property="Password" />
+        <result column="WeiXin" property="WeiXin" />
+        <result column="RealName" property="RealName" />
+        <result column="ManagerId" property="ManagerId" />
+        <result column="PromoterId" property="PromoterId" />
+        <result column="RoomCard" property="RoomCard" />
+        <result column="RelativeRoomCard" property="RelativeRoomCard" />
+        <result column="RelativeCheckStatus" property="RelativeCheckStatus" />
+        <result column="Mobile" property="Mobile" />
+        <result column="Address" property="Address" />
+        <result column="IdCard" property="IdCard" />
+        <result column="Desc" property="Desc" />
+        <result column="Ctime" property="Ctime" />
+        <result column="Salt" property="Salt" />
+        <result column="ActivityStatus" property="ActivityStatus" />
+        <result column="Status" property="Status" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        ID AS "id", RoleId AS "RoleId", Account AS "Account", Password AS "Password", WeiXin AS "WeiXin", RealName AS "RealName", ManagerId AS "ManagerId", PromoterId AS "PromoterId", RoomCard AS "RoomCard", RelativeRoomCard AS "RelativeRoomCard", RelativeCheckStatus AS "RelativeCheckStatus", Mobile AS "Mobile", Address AS "Address", IdCard AS "IdCard", Desc AS "Desc", Ctime AS "Ctime", Salt AS "Salt", ActivityStatus AS "ActivityStatus", Status AS "Status"
+    </sql>
+
+
+    <select id="customList" resultType="cn.stylefeng.guns.modular.demos.model.result.TGameAgentUserResult" parameterType="cn.stylefeng.guns.modular.demos.model.params.TGameAgentUserParam">
+        select
+        <include refid="Base_Column_List"/>
+        from t_game_agent_user where 1 = 1
+    </select>
+
+    <select id="customMapList" resultType="map" parameterType="cn.stylefeng.guns.modular.demos.model.params.TGameAgentUserParam">
+        select
+        <include refid="Base_Column_List"/>
+        from t_game_agent_user where 1 = 1
+    </select>
+
+    <select id="customPageList" resultType="cn.stylefeng.guns.modular.demos.model.result.TGameAgentUserResult" parameterType="cn.stylefeng.guns.modular.demos.model.params.TGameAgentUserParam">
+        select
+        <include refid="Base_Column_List"/>
+        from t_game_agent_user where 1 = 1
+    </select>
+
+    <select id="customPageMapList" resultType="map" parameterType="cn.stylefeng.guns.modular.demos.model.params.TGameAgentUserParam">
+        select
+        <include refid="Base_Column_List"/>
+        from t_game_agent_user where 1 = 1
+    </select>
+
+</mapper>

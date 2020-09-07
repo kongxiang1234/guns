@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.e365.mapper.BreakMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.e365.entity.Break">
+        <id column="id" property="id" />
+        <result column="dc_time" property="dcTime" />
+        <result column="dc_type" property="dcType" />
+        <result column="wz_title" property="wzTitle" />
+        <result column="pic" property="pic" />
+        <result column="xm_unit" property="xmUnit" />
+        <result column="wz_unit" property="wzUnit" />
+        <result column="wz_people" property="wzPeople" />
+        <result column="fz_people" property="fzPeople" />
+        <result column="wz_type" property="wzType" />
+        <result column="wz_status" property="wzStatus" />
+        <result column="num" property="num" />
+        <result column="content" property="content" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id AS "id", dc_time AS "dcTime", dc_type AS "dcType", wz_title AS "wzTitle", pic AS "pic", xm_unit AS "xmUnit", wz_unit AS "wzUnit", wz_people AS "wzPeople", fz_people AS "fzPeople", wz_type AS "wzType", wz_status AS "wzStatus", num AS "num", content AS "content"
+    </sql>
+
+
+    <select id="customList" resultType="cn.stylefeng.guns.modular.e365.model.result.BreakResult" parameterType="cn.stylefeng.guns.modular.e365.model.params.BreakParam">
+        select
+        <include refid="Base_Column_List"/>
+        from e365_break where 1 = 1
+            <if test="paramCondition.dcTime != null and paramCondition.dcTime != ''">
+                and dc_time like CONCAT('%',#{paramCondition.dcTime},'%')
+            </if>
+            <if test="paramCondition.dcType != null and paramCondition.dcType != ''">
+                and dc_type like CONCAT('%',#{paramCondition.dcType},'%')
+            </if>
+            <if test="paramCondition.wzTitle != null and paramCondition.wzTitle != ''">
+                and wz_title like CONCAT('%',#{paramCondition.wzTitle},'%')
+            </if>
+            <if test="paramCondition.pic != null and paramCondition.pic != ''">
+                and pic like CONCAT('%',#{paramCondition.pic},'%')
+            </if>
+            <if test="paramCondition.xmUnit != null and paramCondition.xmUnit != ''">
+                and xm_unit like CONCAT('%',#{paramCondition.xmUnit},'%')
+            </if>
+            <if test="paramCondition.wzUnit != null and paramCondition.wzUnit != ''">
+                and wz_unit like CONCAT('%',#{paramCondition.wzUnit},'%')
+            </if>
+            <if test="paramCondition.wzPeople != null and paramCondition.wzPeople != ''">
+                and wz_people like CONCAT('%',#{paramCondition.wzPeople},'%')
+            </if>
+            <if test="paramCondition.fzPeople != null and paramCondition.fzPeople != ''">
+                and fz_people like CONCAT('%',#{paramCondition.fzPeople},'%')
+            </if>
+            <if test="paramCondition.wzType != null and paramCondition.wzType != ''">
+                and wz_type like CONCAT('%',#{paramCondition.wzType},'%')
+            </if>
+            <if test="paramCondition.wzStatus != null and paramCondition.wzStatus != ''">
+                and wz_status like CONCAT('%',#{paramCondition.wzStatus},'%')
+            </if>
+    </select>
+
+    <select id="customMapList" resultType="map" parameterType="cn.stylefeng.guns.modular.e365.model.params.BreakParam">
+        select
+        <include refid="Base_Column_List"/>
+        from e365_break where 1 = 1
+            <if test="paramCondition.dcTime != null and paramCondition.dcTime != ''">
+                and dc_time like CONCAT('%',#{paramCondition.dcTime},'%')
+            </if>
+            <if test="paramCondition.dcType != null and paramCondition.dcType != ''">
+                and dc_type like CONCAT('%',#{paramCondition.dcType},'%')
+            </if>
+            <if test="paramCondition.wzTitle != null and paramCondition.wzTitle != ''">
+                and wz_title like CONCAT('%',#{paramCondition.wzTitle},'%')
+            </if>
+            <if test="paramCondition.pic != null and paramCondition.pic != ''">
+                and pic like CONCAT('%',#{paramCondition.pic},'%')
+            </if>
+            <if test="paramCondition.xmUnit != null and paramCondition.xmUnit != ''">
+                and xm_unit like CONCAT('%',#{paramCondition.xmUnit},'%')
+            </if>
+            <if test="paramCondition.wzUnit != null and paramCondition.wzUnit != ''">
+                and wz_unit like CONCAT('%',#{paramCondition.wzUnit},'%')
+            </if>
+            <if test="paramCondition.wzPeople != null and paramCondition.wzPeople != ''">
+                and wz_people like CONCAT('%',#{paramCondition.wzPeople},'%')
+            </if>
+            <if test="paramCondition.fzPeople != null and paramCondition.fzPeople != ''">
+                and fz_people like CONCAT('%',#{paramCondition.fzPeople},'%')
+            </if>
+            <if test="paramCondition.wzType != null and paramCondition.wzType != ''">
+                and wz_type like CONCAT('%',#{paramCondition.wzType},'%')
+            </if>
+            <if test="paramCondition.wzStatus != null and paramCondition.wzStatus != ''">
+                and wz_status like CONCAT('%',#{paramCondition.wzStatus},'%')
+            </if>
+    </select>
+
+    <select id="customPageList" resultType="cn.stylefeng.guns.modular.e365.model.result.BreakResult" parameterType="java.lang.String">
+        select
+        *
+        from e365_break where 1 = 1
+        <if test="wzTitle != null and wzTitle != ''">
+            and dc_noumenon like CONCAT('%',#{wzTitle},'%') or dc_number like CONCAT('%',#{wzTitle},'%') or work_content like CONCAT('%',#{wzTitle},'%')
+            or construction like CONCAT('%',#{wzTitle},'%')
+        </if>
+        <if test="dcType != '' and dcType != null">
+            and wz_status =#{dcType}
+        </if>
+        <if test="wzType != '' and wzType != null">
+            and one_secondary =#{wzType}
+        </if>
+        <if test="wzStatus != '' and wzStatus != null ">
+            and secondary =#{wzStatus}
+        </if>
+
+        <if test="btime != null and btime != '' and etime != null and etime != ''">
+            AND DATE_FORMAT(dc_time, '%Y-%m-%d')&gt;=#{btime} AND DATE_FORMAT(dc_time, '%Y-%m-%d')&lt;=#{etime}
+
+        </if>
+        order by create_time desc
+    </select>
+
+    <select id="customPageMapList" resultType="map" parameterType="cn.stylefeng.guns.modular.e365.model.params.BreakParam">
+        select
+        <include refid="Base_Column_List"/>
+        from e365_break where 1 = 1
+            <if test="paramCondition.dcTime != null and paramCondition.dcTime != ''">
+                and dc_time like CONCAT('%',#{paramCondition.dcTime},'%')
+            </if>
+            <if test="paramCondition.dcType != null and paramCondition.dcType != ''">
+                and dc_type like CONCAT('%',#{paramCondition.dcType},'%')
+            </if>
+            <if test="paramCondition.wzTitle != null and paramCondition.wzTitle != ''">
+                and wz_title like CONCAT('%',#{paramCondition.wzTitle},'%')
+            </if>
+            <if test="paramCondition.pic != null and paramCondition.pic != ''">
+                and pic like CONCAT('%',#{paramCondition.pic},'%')
+            </if>
+            <if test="paramCondition.xmUnit != null and paramCondition.xmUnit != ''">
+                and xm_unit like CONCAT('%',#{paramCondition.xmUnit},'%')
+            </if>
+            <if test="paramCondition.wzUnit != null and paramCondition.wzUnit != ''">
+                and wz_unit like CONCAT('%',#{paramCondition.wzUnit},'%')
+            </if>
+            <if test="paramCondition.wzPeople != null and paramCondition.wzPeople != ''">
+                and wz_people like CONCAT('%',#{paramCondition.wzPeople},'%')
+            </if>
+            <if test="paramCondition.fzPeople != null and paramCondition.fzPeople != ''">
+                and fz_people like CONCAT('%',#{paramCondition.fzPeople},'%')
+            </if>
+            <if test="paramCondition.wzType != null and paramCondition.wzType != ''">
+                and wz_type like CONCAT('%',#{paramCondition.wzType},'%')
+            </if>
+            <if test="paramCondition.wzStatus != null and paramCondition.wzStatus != ''">
+                and wz_status like CONCAT('%',#{paramCondition.wzStatus},'%')
+            </if>
+    </select>
+
+    <select id="findPageListTotal" resultType="java.util.Map">
+        select sum(score) num,count(wz_people) wzPeople,xm_unit wzUnit,DATE_FORMAT(dc_time, '%Y-%m-%d') dcTime  from e365_break
+
+        where 1=1
+        <if test="btime != null and btime != '' and etime != null and etime != ''">
+            AND DATE_FORMAT(dc_time, '%Y-%m-%d')&gt;=#{btime} AND DATE_FORMAT(dc_time, '%Y-%m-%d')&lt;=#{etime}
+
+        </if>
+        <if test="wzUnit != null and wzUnit != ''">
+            and xm_unit like CONCAT('%',#{wzUnit},'%')
+        </if>
+
+
+        GROUP BY xm_unit  ORDER BY dc_time desc
+
+    </select>
+</mapper>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.e365.mapper.IntegralMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.e365.entity.Integral">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="userId" property="userId" />
+        <result column="ssdw" property="ssdw" />
+        <result column="yj_integral" property="yjIntegral" />
+        <result column="mr_integral" property="mrIntegral" />
+        <result column="mz_integral" property="mzIntegral" />
+        <result column="my_integral" property="myIntegral" />
+        <result column="dkwz_integral" property="dkwzIntegral" />
+        <result column="sdkwz_integral" property="sdkwzIntegral" />
+        <result column="sy_integral" property="syIntegral" />
+        <result column="create_time" property="createTime" />
+        <result column="create_user" property="createUser" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id AS "id", name AS "name", userId AS "userId", ssdw AS "ssdw", yj_integral AS "yjIntegral", mr_integral AS "mrIntegral", mz_integral AS "mzIntegral", my_integral AS "myIntegral", dkwz_integral AS "dkwzIntegral", sdkwz_integral AS "sdkwzIntegral", sy_integral AS "syIntegral", create_time AS "createTime", create_user AS "createUser"
+    </sql>
+
+
+    <select id="customList" resultType="cn.stylefeng.guns.modular.e365.model.result.IntegralResult" parameterType="cn.stylefeng.guns.modular.e365.model.params.IntegralParam">
+        select
+        <include refid="Base_Column_List"/>
+        from e365_integral where 1 = 1
+    </select>
+
+    <select id="customMapList" resultType="map" parameterType="cn.stylefeng.guns.modular.e365.model.params.IntegralParam">
+        select
+        <include refid="Base_Column_List"/>
+        from e365_integral where 1 = 1
+    </select>
+
+    <select id="customPageList" resultType="cn.stylefeng.guns.modular.e365.model.result.IntegralResult">
+        select
+        t1.id AS "id", t1.name AS "name", t3.`name` AS "userIds", t2.simple_name AS "ssdw", t1.mr_integral+t1.mz_integral+t1.my_integral AS "yjIntegral", t1.mr_integral AS "mrIntegral",
+        t1.mz_integral AS "mzIntegral", t1.my_integral AS "myIntegral", t1.dkwz_integral AS "dkwzIntegral", t1.sdkwz_integral AS "sdkwzIntegral",
+        t1.sy_integral AS "syIntegral", t1.create_time AS "createTime", t1.create_user AS "createUser"
+
+        from e365_integral t1 LEFT JOIN sys_dept t2 on t1.ssdw=t2.dept_id
+        LEFT JOIN sys_user t3 on t1.userId=t3.user_id where 1=1
+        <if test="name!=null">
+            and t3.`name` like CONCAT('%',#{name},'%')
+        </if>
+    </select>
+
+    <select id="customPageMapList" resultType="map" parameterType="cn.stylefeng.guns.modular.e365.model.params.IntegralParam">
+        select
+        <include refid="Base_Column_List"/>
+        from e365_integral where 1 = 1
+    </select>
+
+</mapper>

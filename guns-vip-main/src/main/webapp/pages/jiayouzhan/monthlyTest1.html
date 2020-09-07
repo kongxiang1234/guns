@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="Keywords" content="" />
+    <meta name="Description" content="" />
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-tap-highlight" content="no">
+    <link rel="stylesheet" href="${ctxPath}/assets/e365/css/iconfont.css"><!--
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/light7/0.4.3/css/light7.css">-->
+    <link href="${ctxPath}/assets/e365/js/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="${ctxPath}/assets/e365/js/jquery-weui/dist/lib/weui.min.css" rel="stylesheet" />
+    <link href="${ctxPath}/assets/e365/js/jquery-weui/dist/css/jquery-weui.min.css" rel="stylesheet" />
+
+
+    <title>月度安全考核考试</title>
+
+    <style>
+
+        * {
+            padding: 0;
+            margin: 0;
+            touch-action: none;
+        }
+
+        .weui-mask {
+            pointer-events: all;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        html, body, .text-page, .content, .online-answer, .online-wrapper {
+            height: 100%;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .text-page {
+        }
+
+        .content {
+            box-sizing: border-box;
+        }
+
+
+        .header-nav {
+            position: fixed;
+            top: 0px;
+            left: 0px;
+            background-color: #020435;
+            color: #fff;
+            width: 100%;
+            padding: 10px 0px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .test-head-tips {
+            z-index: -1;
+            position: fixed;
+            top: 40px;
+            left: 0px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .fa-chevron-left {
+            margin-left: 10px;
+        }
+
+        .time-remaining {
+            font-size: 15px;
+            color: #999;
+        }
+
+        .cut-time {
+            color: #80BDD8;
+            font-size: 18px;
+        }
+
+        .curren-num {
+            color: red;
+        }
+
+
+
+        .test-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            border-top: 1px solid #ccc;
+            padding: 10px 0;
+        }
+
+        .online-wrapper {
+            transition: all 1s;
+            white-space: nowrap;
+            box-sizing: border-box;
+            padding-top: 85px;
+        }
+
+        .online-wrapper li {
+            white-space: normal;
+            display: inline-block;
+            width: 99%;
+            height: 100%;
+            box-sizing: border-box;
+            padding: 0 10px;
+        }
+
+        .answer-list span {
+            margin-top: 15px;
+        }
+
+        .answer-list i {
+            margin-right: 10px;
+            color: #58A1BE;
+        }
+
+        .answer-list {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+    </style>
+
+
+</head>
+
+<body>
+<div class="text-page">
+    <!-- 头部 start -->
+    <header class="header-nav">
+        <i class="fa fa-chevron-left fa-lg" id="test_back"></i>
+        <span class="header-title">月度安全考核考试</span>
+        <span></span>
+    </header>
+    <!-- 头部 end -->
+    <!-- 时间、题量 start -->
+    <div class="test-head-tips">
+        <div class="time-remaining" ><input type="hidden" id="online_wrappers" value="${time}"/>剩余时间：<span class="cut-time" >00:00:00</span></div>
+        <!-- 单选题分数 -->
+        <input type="hidden" id="online_Danscore" value="${danxtValue}"/>
+        <!-- 多选题分数 -->
+        <input type="hidden" id="online_Duoscore" value="${duoxtValue}"/>
+        <!-- 判断题分数 -->
+        <input type="hidden" id="online_Panscore" value="${pdtValue}"/>
+        <div><span id="current_num" class="curren-num">1</span>/${mapListSize}</div>
+    </div>
+    <!-- 时间、题量 end -->
+    <!-- 主体内容 start -->
+    <div class="content p0 t90 b50">
+        <div id="online_answer" class="online-answer">
+            <ul id="online_wrapper" class="online-wrapper">
+                @for(item in mapList){
+                    @if(item.questions_type == "1"){
+                        <li data-type="1" data-id="${itemLP.index-1}">
+                            <div class="answer-list">
+                                <p class="subject" id="${itemLP.index}">第${itemLP.index}题单选题．${item.title}</p>
+                                @if(isNotEmpty(item.Asubject_Single)){
+                                <span><i class="fa fa-circle-o fa-lg"></i><span>A</span>.${item.Asubject_Single}</span>
+                                @}
+                                @if(isNotEmpty(item.Bsubject_Single)){
+                                <span><i class="fa fa-circle-o fa-lg"></i><span>B</span>.${item.Bsubject_Single}</span>
+                                @}
+                                @if(isNotEmpty(item.Csubject_Single)){
+                                <span><i class="fa fa-circle-o fa-lg"></i><span>C</span>.${item.Csubject_Single}</span>
+                                @}
+                                @if(isNotEmpty(item.Dsubject_Single)){
+                                <span><i class="fa fa-circle-o fa-lg"></i><span>D</span>.${item.Dsubject_Single}</span>
+                                @}
+                                @if(isNotEmpty(item.Esubject_Single)){
+                                <span><i class="fa fa-circle-o fa-lg"></i><span>E</span>.${item.Esubject_Single}</span>
+                                @}
+                                @if(isNotEmpty(item.Fsubject_Single)){
+                                <span><i class="fa fa-circle-o fa-lg"></i><span>F</span>.${item.Fsubject_Single}</span>
+                                @}
+                            </div>
+                        </li>
+                    @}
+                    @if(item.questions_type == "2"){
+                        <li data-type="2" data-id="${itemLP.index-1}">
+                            <div class="answer-list">
+                                <p class="subject" id="${itemLP.index}">第${itemLP.index}题多选题．${item.title}</p>
+                                @if(isNotEmpty(item.Asubject_Multiple)){
+                                <span><i class="fa fa-square-o fa-lg"></i><span>A</span>.${item.Asubject_Multiple}</span>
+                                @}
+                                @if(isNotEmpty(item.Bsubject_Multiple)){
+                                <span><i class="fa fa-square-o fa-lg"></i><span>B</span>.${item.Bsubject_Multiple}</span>
+                                @}
+                                @if(isNotEmpty(item.Csubject_Multiple)){
+                                <span><i class="fa fa-square-o fa-lg"></i><span>C</span>.${item.Csubject_Multiple}</span>
+                                @}
+                                @if(isNotEmpty(item.Dsubject_Multiple)){
+                                <span><i class="fa fa-square-o fa-lg"></i><span>D</span>.${item.Dsubject_Multiple}</span>
+                                @}
+                                @if(isNotEmpty(item.Esubject_Multiple)){
+                                <span><i class="fa fa-square-o fa-lg"></i><span>E</span>.${item.Esubject_Multiple}</span>
+                                @}
+                                @if(isNotEmpty(item.Fsubject_Multiple)){
+                                <span><i class="fa fa-square-o fa-lg"></i><span>F</span>.${item.Fsubject_Multiple}</span>
+                                @}
+                            </div>
+                        </li>
+                    @}
+                    @if(item.questions_type == "3"){
+                        <li data-type="1" data-id="${itemLP.index-1}">
+                            <div class="answer-list">
+                                <p class="subject" id="${itemLP.index}">第${itemLP.index}题判断题．${item.title}</p>
+                                <span><i class="fa fa-circle-o fa-lg"></i><span>1</span>.对</span>
+                                <span><i class="fa fa-circle-o fa-lg"></i><span>2</span>.错</span>
+                            </div>
+                        </li>
+                    @}
+
+                @}
+            </ul>
+        </div>
+    </div>
+    <!-- 主体内容 end -->
+    <!-- 底部悬停 start -->
+    <nav id="bar_tab" class="test-bar">
+        <a id="prev_btn" class="tab-item" href="javascript:;">
+            <i class="fa fa-arrow-circle-left fa-2x" style="color:#999"></i>
+        </a>
+        <a id="next_btn" class="tab-item" href="javascript:;">
+            <i class="fa fa-arrow-circle-right  fa-2x" style="color:#999"></i>
+        </a>
+        <!--<a id="submit_answers" class="tab-item open-popup open-card" href="javascript:;" data-popup=".popup-card">
+            <i class="fa fa-th fa-2x" style="color:#58A1BE"></i>
+        </a>-->
+        <a id="submit_answer" class="tab-item" href="javascript:;">
+            <i class="fa fa-file-text fa-2x" style="color:#4B843D"></i>
+        </a>
+    </nav>
+    <!-- 底部悬停 start -->
+</div>
+<!-- 答题卡 start -->
+<div class="popup popup-card popup-card-container" style="display: none">
+    <div class="popup-head">
+        <span>答题卡</span>
+        <a href="javascript:;" class="iconfont icon-close close-popup"></a>
+    </div>
+    <div class="answer-wrap">
+                <div class="clearfix">
+                    <p class="answer-nav">单选</p>
+                    <div class="answer-list-card">
+                        @for(item in string){
+                          <span data-id="${itemLP.index-1}">${item}</span>
+                        @}
+                    </div>
+                </div>
+    </div>
+    <div>
+        <input type="hidden" value="${danxtValue}" id="danxtValue">
+        <input type="hidden" value="${time}" id="time">
+        <input type="hidden" value="${etime}" id="etime">
+        <input type="hidden" value="${duoxtValue}" id="duoxtValue">
+        <input type="hidden" value="${pdtValue}" id="pdtValue">
+        <input type="hidden" value="${id}" id="paperId">
+        <input type="hidden" value="${string}" id="str">
+        <input type="hidden" value="${role}" id="role">
+        <input type="hidden" value="${major}" id="major">
+        <input type="hidden" value="${area}" id="area">
+        <input type="hidden" value="${mapListSize}" id="mapListSize">
+    </div>
+</div>
+<!-- 答题卡 end -->
+<!-- jquery -->
+
+<script src="${ctxPath}/assets/e365/js/jquery-weui/dist/lib/jquery-2.1.4.js"></script>
+<script src="${ctxPath}/assets/e365/js/jquery-weui/dist/js/jquery-weui.min.js"></script>
+<script src="${ctxPath}/assets/e365/js/jquery-online.js"></script>
+<!--<<script src="https://cdn.bootcdn.net/ajax/libs/light7/0.4.3/js/light7.js"></script>-->
+
+
+<script>
+    $(document).ready(function () {
+        // 调用滑动
+        $('#online_answer').onLine({
+            sureFn: function (score) {
+                $.showLoading('试卷提交中');
+                var role=$("#role").val()
+                var major=$("#major").val()
+                var area=$("#area").val()
+                var etime=$("#etime").val()
+                var paperId=$("#paperId").val()
+                $.ajax({
+                    type: 'POST',
+                    url: '/gasStation/meiyueAudit',
+                    data: {"score":score,
+                        "paperId":paperId,
+                        "role":role,
+                        "area":area,
+                        "major":major,
+                        "etime":etime},
+                    success: function (data) {
+                        if (data.success) {
+                            alert("已提交！")
+                            $('#submit_answer').removeClass();
+                            document.getElementById('submit_answer').style.display= 'none';
+                        } else {
+                            alert(data.message)
+                        }
+                    }
+                });
+
+                setTimeout(function () {
+                    $.hideLoading();
+                    $.alert('得分<br/><span style="color: red;font-size: 18px">'+score+'</span>');
+                }, 2000);
+
+            },
+            examEnd: function (score) {
+                $.alert('考试时间已结束，请提交试卷', function () {
+
+                    setTimeout(function () {
+                        $.hideLoading();
+                        $.alert('得分<br/><span style="color: red;font-size: 18px">'+score+'</span>');
+                    }, 2000);
+                });
+            }
+        });
+
+    });
+</script>
+
+</body>
+</html>

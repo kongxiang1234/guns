@@ -1,0 +1,151 @@
+@layout("/common/_container.html",{js:["/assets/integral/integral.js"]}){
+
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+    <legend>积分规则</legend>
+</fieldset>
+
+<div class="layui-form">
+    <table class="layui-table">
+        <colgroup>
+            <col width="150">
+            <col width="500">
+            <col width="200">
+            <col>
+        </colgroup>
+        <thead>
+        <tr>
+            <th align="right">积分项</th>
+            <th align="right">积分规则</th>
+            <th>获得积分</th>
+            <th>抵扣违章（最高抵${constants.getScore()}分）</th>
+        </tr>
+        </thead>
+        <tbody>
+            <form class="layui-form" id="contentForm" lay-filter="contentForm">
+                @if(isNotEmpty(integration.id)){
+                <input name="id" placeholder="" value="${integration.id}" type="hidden" class="layui-input" />
+
+                @}
+                @if(isEmpty(integration)){
+                <input name="id" placeholder="" type="hidden" class="layui-input" />
+
+                @}
+                <tr>
+                    <td>每日练习</td>
+                    <td>
+                        @if(isNotEmpty(integration.mrcs)){
+                        <input name="mrcs" placeholder="请输入每日练习次数" value="${integration.mrcs}" type="text" class="layui-input" />
+
+                        @}
+                        @if(isEmpty(integration)){
+                           <input  name="mrcs" placeholder="请输入每日练习次数" type="text" class="layui-input" onchange="num(this)"/>
+
+                        @}
+
+
+                    </td>
+                    <td>
+                        @if(isNotEmpty(integration.mrjf)){
+                        <input name="mrjf" placeholder="请输入积分" value="${integration.mrjf}" type="text" class="layui-input" />
+
+                        @}
+                        @if(isEmpty(integration)){
+                        <input  name="mrjf" placeholder="请输入积分" type="text" class="layui-input" onchange="num(this)"/>
+
+                        @}
+
+
+                    </td>
+                    <td>
+                        @if(isNotEmpty(integration.mrdk)){
+                        <input name="mrdk" placeholder="每：请输入积分 ：积分抵扣违章记分一分" value="${integration.mrdk}" type="text" class="layui-input" onchange="num(this)" />
+
+                        @}
+                        @if(isEmpty(integration)){
+                        <input id="mrdk" name="mrdk" placeholder="每：请输入积分 ：积分抵扣违章记分一分" type="text" class="layui-input" onchange="num(this)"/>
+
+                        @}
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>每周专题测试</td>
+                    <td>
+                        @if(isNotEmpty(integration.mzcs)){
+                        <input name="mzcs" placeholder="请输入每周练习次数" value="${integration.mzcs}" type="text" class="layui-input" onchange="num(this)"/>
+
+                        @}
+                        @if(isEmpty(integration)){
+                        <input id="mzcs" name="mzcs" placeholder="请输入每周练习次数" type="text" class="layui-input" onchange="num(this)" />
+
+                        @}
+
+                    </td>
+                    <td>
+                        @if(isNotEmpty(integration.mzjf)){
+                        <input name="mzjf" placeholder="请输入每周练习次数的积分" value="${integration.mzjf}" type="text" class="layui-input" onchange="num(this)"/>
+
+                        @}
+                        @if(isEmpty(integration)){
+                        <input id="mzjf" name="mzjf" placeholder="请输入每周练习次数的积分" type="text" class="layui-input" onchange="num(this)"/>
+
+                        @}
+
+                    </td>
+                    <td>
+                        @if(isNotEmpty(integration.mzdk)){
+                        <input name="mzdk" placeholder="每：请输入积分 ：积分抵扣违章记分一分" value="${integration.mzdk}" type="text" class="layui-input" onchange="num(this)"/>
+
+                        @}
+                        @if(isEmpty(integration)){
+                        <input id="mzdk" name="mzdk" placeholder="每：请输入积分 ：积分抵扣违章记分一分" type="text" class="layui-input" onchange="num(this)"/>
+
+                        @}
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>月度安全考试</td>
+                    <td>
+                        @if(isNotEmpty(integration.mycs)){
+                        <input name="mycs" placeholder="请输入累计排名：前 " value="${integration.mycs}" type="text" class="layui-input" onchange="num(this)"/>
+
+                        @}
+                        @if(isEmpty(integration)){
+                        <input id="mycs" name="mycs" placeholder="请输入累计排名：前 " type="text" class="layui-input" onchange="num(this)"/>
+
+                        @}
+
+                    </td>
+                    <td>
+                        @if(isNotEmpty(integration.myjf)){
+                        <input name="myjf" placeholder="请输入每月积分" value="${integration.myjf}" type="text" class="layui-input" onchange="num(this)"/>
+
+                        @}
+                        @if(isEmpty(integration)){
+                        <input id="myjf" name="myjf" placeholder="请输入每月积分" type="text" class="layui-input" onchange="num(this)"/>
+
+                        @}
+
+                    </td>
+                    <td>
+                        @if(isNotEmpty(integration.mydk)){
+                        <input name="mydk" placeholder="每：请输入积分 ：积分抵扣违章记分一分" value="${integration.mydk}" type="text" class="layui-input" onchange="num(this)"/>
+
+                        @}
+                        @if(isEmpty(integration)){
+                        <input id="mydk" name="mydk" placeholder="每：请输入积分 ：积分抵扣违章记分一分" type="text" class="layui-input" onchange="num(this)"/>
+
+                        @}
+
+                    </td>
+                </tr>
+            </form>
+
+        </tbody>
+    </table>
+    <div class="form-group-bottom text-center">
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit>&emsp;提交&emsp;</button>
+    </div>
+</div>
+@}

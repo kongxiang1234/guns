@@ -1,0 +1,80 @@
+@layout("/common/_form.html",{js:["/assets/management/management_setDaan.js"]}){
+<form class="layui-form" id="managementForm" lay-filter="managementForm">
+    <div class="layui-fluid" style="padding-bottom: 75px;">
+        <div class="layui-card">
+            <div class="layui-card-header">基本信息</div>
+            <div class="layui-card-body">
+                <div class="layui-form-item layui-row">
+
+                    <input name="managementId" id="managementId" type="hidden" value="${managementId}"/>
+
+
+                    @if(isNotEmpty(answer.id)){
+                    <input name="Id" type="hidden" value="${answer.id}"/>
+
+                    @}
+                    @if(isEmpty(answer)){
+                    <input name="Id" type="hidden" value=""/>
+
+                    @}
+                    @if(isNotEmpty(answer.flag)){
+                    <input id="type" type="hidden" value="${answer.flag}"/>
+
+                    @}
+                    @if(isEmpty(answer)){
+                    <input name="Id" type="hidden" value=""/>
+
+                    @}
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">试题编号</label>
+                        <div class="layui-input-block">
+                            <input id="number"  value="${detail.number}" name="number" placeholder="请输入" type="text" class="layui-input" lay-verify="required" required readonly/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">标题</label>
+                        <div class="layui-input-block">
+
+                            ${detail.title}
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">试题类型</label>
+                        <div class="layui-input-block">
+                          <input id="questionsType" value="${detail.questionsType}" name="questionsType" placeholder="请输入" type="text" class="layui-input" lay-verify="required" required readonly/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">所属专业</label>
+                        <div class="layui-input-block">
+                            <input id="specialty" value="${detail.specialty}"  name="specialty" placeholder="请输入" type="text" class="layui-input" lay-verify="required" required readonly/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">难易程度</label>
+                        <div class="layui-input-block">
+                            <input value="${detail.type}"  name="type" placeholder="请输入" type="text" class="layui-input" lay-verify="required" required readonly/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12" >
+                        <label class="layui-form-label">设置答案<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input type="radio" name="flag" value="1" title="对" >
+                            <input type="radio" name="flag" value="2" title="错" >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group-bottom text-center">
+        <button class="layui-btn" lay-filter="btnSubmitDaan" lay-submit>&emsp;提交&emsp;</button>
+        <button type="reset" onclick="javascript:history.back(-1);"  class="layui-btn layui-btn-primary" ew-event="closeDialog">&emsp;取消&emsp;</button>
+    </div>
+
+</form>
+<script>
+
+
+</script>
+@}

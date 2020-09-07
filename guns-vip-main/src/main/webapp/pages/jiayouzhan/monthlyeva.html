@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>月度测评</title>
+    <link rel="stylesheet" href="${ctxPath}/assets/e365/css/iconfont.css">
+    <link rel="stylesheet" href="${ctxPath}/assets/e365/css/layout.css">
+    <link rel="stylesheet" href="${ctxPath}/assets/e365/css/pickout.css">
+
+    <style>
+        html,body{height:100%;}
+        body{background: url(${ctxPath}/assets/e365/images/monthlyeva/bg.png) #3357E9 no-repeat center top;width:100%;background-size:100%;position:relative;}
+        .info_choose_form form li label{color:#333;font-size:1rem;font-weight:bold;}
+        .info_choose_form form li input{color:#333;font-size:.9rem;margin:2vh 0 3vh;border:0;}
+        form li input::-webkit-input-placeholder{color:#999;}
+        form li input::-moz-input-placeholder{color:#999;}
+        form li input:-moz-input-placeholder{color:#999;}
+        form li input:-ms-input-placeholder{color:#999;}
+        .info_choose_form form .submit input{width:100%;border:0;border-radius:10px;background: #007BFF;color:#fff;font-size:.9rem;text-align:center;padding:2.5vh 0;}
+
+        .info_choose_form{position:absolute;width:100%;left:0;bottom:5vh;}
+        .info_choose_form form{background:#fff;width:94%;margin:0 auto;overflow:hidden;border-radius:10px;box-shadow:0px 3px 6px 0px rgba(0, 0, 0, 0.08);}
+        .info_choose_form form ul{padding:2vh 3% 0;margin:2vh auto;overflow:hidden;}
+        .info_choose_form form li{width:96%;padding:0 2vw;margin:3vh auto 0;border-bottom:1px solid #F0F0F0;}
+        .info_choose_form form .submit{width:94%;margin:4vh auto 3vh;}
+    </style>
+</head>
+<body>
+    <div class="info_choose_form">
+        <form target="frameFile" onsubmit="return false;">
+            <ul>
+                <li class="form-group">
+                    <label for="area">地区</label>
+                    <input type="text" id="departName" value="${departName}" />
+                </li>
+                <li class="form-group">
+                    <label for="role">角色</label>
+                    <input type="text" value="${name}" />
+                </li>
+                <li class="form-group">
+                    <label for="major">专业</label>
+                    <input type="text" value="${specialty}" />
+                    <input type="hidden" id="major" value="${specialtyValue}" />
+                    <input type="hidden" id="area" value="${departId}" />
+                    <input type="hidden" id="role" value="${roleId}" />
+                    <input type="hidden" id="message" value="${message}" />
+                </li>
+            </ul>
+            <div class="submit">
+                <input type="button" value="进入答题" onclick="submitMei()">
+            </div>
+        </form>
+    </div>
+
+    <script src="${ctxPath}/assets/e365/js/pickout.js"></script>
+    <script src="${ctxPath}/assets/expand/plugins/jquery/jquery-3.2.1.min.js?v=${constants.getReleaseVersion()}"></script>
+    <script>
+        setTimeout("location=location; ", 5000);
+        function submitMei(){
+            var message=$("#message").val();
+            if (message!=""){
+                alert(message);
+                return false;
+            }
+            var role=$("#role").val();
+            if (role==""){
+                alert("请选择角色");
+                return false;
+            }
+            var major=$("#major").val();
+            if (major==""){
+                alert("请选择专业");
+                return false;
+            }
+            var area=$("#area").val();
+            if (area==""){
+                alert("请选择地区");
+                return false;
+            }
+            window.location.href="/gasStation/meiyue?role="+role+"&major="+major+"&area="+area
+
+        }
+        // Preparar o select
+        //pickout.to('.pickout');
+        pickout.to({
+            el:'.area',
+            theme: 'clean', 
+            search: true
+        });
+    
+        pickout.to({
+            el:'.role',
+            theme: 'clean',
+        });
+
+        pickout.to({
+            el:'.major',
+            theme: 'clean',
+        });
+    
+        // Caso o valor já venha do servidor, já atribui a seleção automaticamente
+        pickout.updated('.area');
+        pickout.updated('.role');
+        pickout.updated('.major');
+        
+    </script>
+</body>
+</html>

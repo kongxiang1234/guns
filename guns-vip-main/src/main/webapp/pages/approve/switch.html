@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>意见建议</title>
+    <style>
+        *{margin:0;padding:0;}
+        .wrapper{width:100%;background:#fff;}
+        .wrapper form{width:96%;margin:0 auto;}
+        .wrapper form ul,.wrapper form li{list-style: none;}
+        .wrapper form h5{color:#333;font-size:.9rem;text-align:left;margin:3vh 0;}
+        .wrapper form ul{width:100%;}
+        .wrapper form li.switch_title{display:flex;justify-content: space-between;align-items: center;}
+        .wrapper form li.switch_title span{display:inline-block;width:31.5%;height:5vh;line-height:5vh;color:#333;font-size:.9rem;text-align: center;border:1px solid #999;}
+        .wrapper form li.switch_title span.on{background: lightskyblue;}
+        .wrapper form li.switch_textarea{margin:2.5vh 0 4vh;}
+        .wrapper form li.switch_textarea textarea{resize: none;border:1px solid #999;font:400 .9rem "微软雅黑";color:#333;line-height:1.5;width:calc(100% - 2px);display:none;}
+        .wrapper form textarea::-moz-placeholder{font-size:.9rem;color:#999}
+        .wrapper form textarea:-moz-placeholder{font-size:.9rem;color:#999}
+        .wrapper form textarea::-webkit-input-placeholder{font-size:.9rem;color:#999}
+        .wrapper form textarea:-ms-input-placeholder{font-size:.9rem;color:#999}
+        .wrapper form li.switch_textarea textarea.active{display:block;}
+        .wrapper form li.submit_form{width:100%;margin-bottom:1vh;}
+        .wrapper form li.submit_form input{width:100%;display:block;background:lightskyblue;color:#fff;font-size:.85rem;text-align:center;border-radius:5px;height:5vh;line-height:5vh;border:0;}
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <form target="frameFile" onsubmit="return false;">
+            <h5>意见分类</h5>
+            <ul>
+                <li class="switch_title">
+                    <span class="on" >电力安全生产</span>
+                    <span>安全用电</span>
+                    <span>电力设施保护</span>
+                </li>
+                <li class="switch_textarea">
+                    <textarea class="textarea-comment active" name="secProd" id="feedbackSuggestions1" rows="17" placeholder="请输入您的意见与建议（500字以内）" maxlength="500"></textarea>
+                    <textarea class="textarea-comment" name="secElect" id="feedbackSuggestions2" rows="17" placeholder="请输入您的意见与建议（500字以内）"></textarea>
+                    <textarea class="textarea-comment" name="secProt" id="feedbackSuggestions" rows="17" placeholder="请输入您的意见与建议（500字以内）"></textarea>
+                    <span class="textarea-comment-tip" style="display:none;">还可以输入500个字符</span>
+                </li>
+                <li class="submit_form"><input type="submit" value="提交" onclick="submitMei()"></li>
+            </ul>
+        </form>
+    </div>
+    <script src="${ctxPath}/assets/expand/plugins/jquery/jquery-3.2.1.min.js?v=${constants.getReleaseVersion()}"></script>
+   
+    <script>
+        function submitMei() {
+            var index= $(".on")[0].firstChild.data;
+            var index1= "";
+            var type="";
+
+            if (index=="电力安全生产"){
+                type="1"
+                index1=$(".textarea-comment")[0].value
+            }else if (index=="安全用电"){
+                type="2"
+                index1=$(".textarea-comment")[1].value
+            }else if (index=="电力设施保护"){
+                type="3"
+                index1=$(".textarea-comment")[2].value
+            }
+
+            $.ajax({
+                type: 'POST',
+                url: '/approve/addappSwitch',
+                data: {
+                    "type":type,
+                    "feedbackSuggestions":index1
+                },
+                success: function (data) {
+                    if (data.success) {
+                        alert("已提交！")
+                        window.location.href="/approve/meSwitch"
+                    } else {
+                        alert(data.message)
+                    }
+                }
+            });
+        }
+        //封装一个限制字数方法
+        var checkStrLengths = function (str, maxLength) {
+            var maxLength = maxLength;
+            var result = 0;
+            if (str && str.length > maxLength) {
+                result = maxLength;
+            } else {
+                result = str.length;
+            }
+            return result;
+        }
+            
+        //监听评论字数输入
+        //允许评论内容500个字符
+        $(".textarea-comment").on('input propertychange', function () {
+            //获取输入内容
+            var userDesc = $(this).val();
+            //判断字数
+            var len;
+            if (userDesc) {
+                len = checkStrLengths(userDesc, 500);
+            } else {
+                len = 0
+            }
+            //显示字数
+            $(".textarea-comment-tip").html('还能输入'+(500-len)+'个字符');
+        });
+
+        //switch切换
+        $(".wrapper form li.switch_title span").click(function(){
+            var index = $(this).index();
+            $(this).addClass("on").siblings().removeClass("on");
+            $(".wrapper form li.switch_textarea textarea").eq(index).addClass("active").siblings().removeClass("active");
+        })
+    </script>
+</body>
+</html>

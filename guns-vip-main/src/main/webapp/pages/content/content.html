@@ -1,0 +1,57 @@
+@layout("/common/_container.html",{js:["/assets/content/content.js"]}){
+
+<div class="layui-body-header">
+    <span class="layui-body-header-title">管理</span>
+</div>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-sm12 layui-col-md12 layui-col-lg12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="layui-form toolbar">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <input id="title" name="title" class="layui-input" type="text" placeholder="请输入标题"/>
+                            </div>
+                            <div class="layui-inline" >
+                                <input id="time" name="time" class="layui-input" type="text" placeholder="请选择发布时间"/>
+                            </div>
+                            <div class="layui-inline">
+                                <select name="status" id="status"  lay-filter="status">
+                                    <option value="">请选择发布类型</option>
+                                    <option value="1">未发布</option>
+                                    <option value="2">已发布</option>
+
+                                </select>
+                            </div>
+                            <div class="layui-inline">
+                                <select name="type" id="type" lay-filter="type">
+                                    <option value="">请选择信息类型</option>
+                                    <option value="1">警告教育</option>
+                                    <option value="2">安全释义</option>
+                                    <option value="3">安全发布</option>
+                                    <option value="4">电力设施保护</option>
+                                    <option value="5">违章通报</option>
+                                </select>
+                            </div>
+                            <div class="layui-inline">
+                                <button id="btnSearch" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>搜索</button>
+                                <button id="btnAdd" class="layui-btn icon-btn"><i class="layui-icon">&#xe654;</i>添加</button>
+                                <button id="btnFa" class="layui-btn icon-btn"><i class="layui-icon">&#xe654;</i>批量发布</button>
+                                <button id="btnExp" class="layui-btn icon-btn"><i class="layui-icon">&#xe67d;</i>导出</button>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="layui-table" id="contentTable" lay-filter="contentTable"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="tableBar">
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="edit">修改</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+</script>
+@}

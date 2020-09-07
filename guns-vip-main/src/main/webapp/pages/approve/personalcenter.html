@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人中心</title>
+    <link rel="stylesheet" href="${ctxPath}/assets/e365/css/iconfont.css">
+    <link rel="stylesheet" href="${ctxPath}/assets/e365/css/layout.css">
+    <link rel="stylesheet" href="${ctxPath}/assets/e365/css/pickout.css">
+    <link rel="stylesheet" href="${ctxPath}/assets/common/libs/layui/css/layui.css?v=${constants.getReleaseVersion()}"/>
+    <link rel="stylesheet" href="${ctxPath}/assets/common/module/admin.css?v=${constants.getReleaseVersion()}" media="all"/>
+    <link rel="stylesheet" href="${ctxPath}/assets/expand/css/style.css?v=${constants.getReleaseVersion()}" media="all"/>
+    <script type="text/javascript" src="${ctxPath}/assets/common/libs/layui/layui.js?v=${constants.getReleaseVersion()}"></script>
+    <script src="${ctxPath}/assets/expand/plugins/jquery/jquery-3.2.1.min.js?v=${constants.getReleaseVersion()}"></script>
+    <style>
+        .container{background:#fff;}
+        .container .topinfo{width:100%;overflow:hidden;background-size:100%;background:url(${ctxPath}/assets/e365/images/realnamecer/personalbg.png) no-repeat center top;text-align: center;box-shadow: 0 8px 20px rgba(56,105,225,0.5);}
+        .container .topinfo .personphoto{margin:4vh auto 2vh;width:20vw;height:20vw;text-align:center;vertical-align: middle;overflow:hidden;border-radius:50%;border:3px solid rgba(255,255,255,.2);}
+        .container .topinfo .personphoto img{width:100%;height:100%;}
+        .container .topinfo h5,.container .topinfo h6{color:#F7F9FD;text-align:center;margin:0;}
+        .container .topinfo h5{font-size:.9rem;}
+        .container .topinfo h6{font-size:.7rem;font-weight:500;margin:2vh 5vh;}
+        .container .numlist{margin-top:3vh;width:100%;border-bottom:10px solid #F7F7F7;padding-bottom:4vh}
+        .container .numlist ul{width:94%;margin:0 auto;display:flex;justify-content: space-between;align-items:center;}
+        .container .numlist ul li{width:25%;text-align:center;}
+        .container .numlist ul li p{font-size:.7rem;color:#000;}
+        .container .numlist ul li strong{font-family: DINPro;color:#007BFF;font-weight:500;font-size:1.2rem;line-height:2;}
+        .container .operalist{width:100%;}
+        .container .operalist a{display:block;width:97%;margin-left:3%;margin-top:3vh;padding-bottom:3vh;border-bottom:1px solid #F7F7F7;display:flex;justify-content: space-between;align-items: center;}
+        .container .operalist a span{color:#333;font-size:.9rem;background-size:3vw !important;text-indent:5vw;}
+
+            .container .operalist a span{background-size:2vw !important;}
+
+        .container .operalist a i{margin-right:3%;}
+        .container .operalist a i img{width:1.2vw;height:2.2vw;}
+        .container .operalist a.msg span{background:url(${ctxPath}/assets/e365/images/realnamecer/ico-msg.png) no-repeat center left;}
+        .container .operalist a.feedback span{background:url(${ctxPath}/assets/e365/images/realnamecer/ico-feedback.png) no-repeat center left;}
+        .container .operalist a.signout span{background:url(${ctxPath}/assets/e365/images/realnamecer/ico-signout.png) no-repeat center left;}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="topinfo">
+            <div class="personphoto" id="imgHead">
+                <img id="avatarPreview" src="/rest/system/preview/${user.avatar}"/>
+            </div>
+            <h5>${user.name}</h5>
+            <input id="userId" value="${user.userId}" type="hidden">
+            <h6>单位：${user.deptName}</h6>
+        </div>
+        <div class="numlist">
+            <ul>
+                <li>
+                    <a href="/approve/montotal">
+                    <strong>${user.monCount}</strong>
+                    <p>考试</p></a>
+                </li>
+                <li>
+                    <a href="/approve/weeklytotal">
+                    <strong>${user.weekCount}</strong>
+                    <p>练习</p></a>
+                </li>
+                <li>
+                    <a href="/approve/meiritotal">
+                    <strong>${user.dayCount}</strong>
+                    <p>测试</p></a>
+                </li>
+                <li>
+                    <a href="/approve/jifentotal">
+                    <strong>${user.integralCount}</strong>
+                    <p>积分</p></a>
+                </li>
+            </ul>
+        </div>
+        <div class="operalist">
+            <!--<a href="#" class="msg">
+                <span>我的消息</span>
+                <i><img src="${ctxPath}/images/realnamecer/ico-rg.png"></i>
+            </a>-->
+            <a href="/approve/meSwitch" class="feedback">
+                <span>意见反馈</span>
+                <i><img src="${ctxPath}/assets/e365/images/realnamecer/ico-rg.png"></i>
+            </a>
+            <a href="/approve/loginOut?title=/approve/appUser" class="signout">
+                <span>退出登录</span>
+                <i><img src="${ctxPath}/assets/e365/images/realnamecer/ico-rg.png"></i>
+            </a>
+        </div>
+    </div>
+</body>
+
+<script>
+
+    layui.use(['form', 'upload'], function () {
+        var $ = layui.jquery;
+
+        var upload = layui.upload;
+
+
+        upload.render({
+            elem: '#imgHead'
+            , url: '/system/upload'
+            , before: function (obj) {
+                obj.preview(function (index, file, result) {
+                    $('#avatarPreview').attr('src', result);
+                });
+            }
+            , done: function (res) {
+                $.ajax({
+                    url: '/system/updateAvatarUser',
+                    data: {
+                        "fileId":res.data.fileId,
+                        "userId":$("#userId").val()
+                    },
+                    success: function (data) {
+                        if (data.success) {
+                            alert("头像已更改")
+                        } else {
+                            alert(data.message)
+                        }
+                    }
+                });
+            }
+        });
+    });
+</script>
+</html>

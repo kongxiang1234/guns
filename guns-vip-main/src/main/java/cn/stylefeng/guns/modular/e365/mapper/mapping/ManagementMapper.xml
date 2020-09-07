@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.e365.mapper.ManagementMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.e365.entity.Management">
+        <id column="id" property="id" />
+        <result column="title" property="title" />
+        <result column="questions_type" property="questionsType" />
+        <result column="specialty" property="specialty" />
+        <result column="type" property="type" />
+        <result column="status" property="status" />
+        <result column="create_time" property="createTime" />
+        <result column="create_user" property="createUser" />
+        <result column="update_time" property="updateTime" />
+        <result column="update_user" property="updateUser" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id AS "id", title AS "title", questions_type AS "questionsType", specialty AS "specialty", type AS "type", status AS "status", create_time AS "createTime", create_user AS "createUser", update_time AS "updateTime", update_user AS "updateUser", number AS "number", ztype AS "ztype"
+    </sql>
+
+    <select id="getNumber" resultType="java.util.Map" parameterType="cn.stylefeng.guns.modular.e365.model.params.ManagementParam">
+        select id,number from e365_management where questions_type=#{questionsType} and type=#{type} and specialty=#{specialty}
+    </select>
+    <select id="detailManagement" resultType="java.util.Map">
+        SELECT DISTINCT (select count(1) from e365_management where questions_type="1" and type="1" and specialty=#{specialty}) danxtg,
+            (select count(1) from e365_management where questions_type="1" and type="2" and specialty=#{specialty}) danxtz
+            ,
+            (select count(1) from e365_management where questions_type="1" and type="3" and specialty=#{specialty}) danxtd
+            ,
+            (select count(1) from e365_management where questions_type="2" and type="1" and specialty=#{specialty}) dduoxtg
+            ,
+            (select count(1) from e365_management where questions_type="2" and type="2" and specialty=#{specialty}) dduoxtz
+            ,
+            (select count(1) from e365_management where questions_type="2" and type="3" and specialty=#{specialty}) dduoxtd
+            ,
+            (select count(1) from e365_management where questions_type="3" and type="1" and specialty=#{specialty}) pdtg
+            ,
+            (select count(1) from e365_management where questions_type="3" and type="2" and specialty=#{specialty}) pdtz
+            ,
+            (select count(1) from e365_management where questions_type="3" and type="3" and specialty=#{specialty}) pdtd
+             from  e365_management
+    </select>
+
+    <select id="customList" resultType="cn.stylefeng.guns.modular.e365.model.result.ManagementResult" parameterType="cn.stylefeng.guns.modular.e365.model.params.ManagementParam">
+        select
+        <include refid="Base_Column_List"/>
+        from e365_management where 1 = 1
+            <if test="paramCondition.title != null and paramCondition.title != ''">
+                and title like CONCAT('%',#{paramCondition.title},'%')
+            </if>
+            <if test="paramCondition.questionsType != null and paramCondition.questionsType != ''">
+                and questions_type like CONCAT('%',#{paramCondition.questionsType},'%')
+            </if>
+            <if test="paramCondition.specialty != null and paramCondition.specialty != ''">
+                and specialty like CONCAT('%',#{paramCondition.specialty},'%')
+            </if>
+            <if test="paramCondition.type != null and paramCondition.type != ''">
+                and type like CONCAT('%',#{paramCondition.type},'%')
+            </if>
+            <if test="paramCondition.createTime != null and paramCondition.createTime != ''">
+                and create_time like CONCAT('%',#{paramCondition.createTime},'%')
+            </if>
+    </select>
+
+    <select id="customMapList" resultType="map" parameterType="cn.stylefeng.guns.modular.e365.model.params.ManagementParam">
+        select
+        <include refid="Base_Column_List"/>
+        from e365_management where 1 = 1
+            <if test="paramCondition.title != null and paramCondition.title != ''">
+                and title like CONCAT('%',#{paramCondition.title},'%')
+            </if>
+            <if test="paramCondition.questionsType != null and paramCondition.questionsType != ''">
+                and questions_type like CONCAT('%',#{paramCondition.questionsType},'%')
+            </if>
+            <if test="paramCondition.specialty != null and paramCondition.specialty != ''">
+                and specialty like CONCAT('%',#{paramCondition.specialty},'%')
+            </if>
+            <if test="paramCondition.type != null and paramCondition.type != ''">
+                and type like CONCAT('%',#{paramCondition.type},'%')
+            </if>
+            <if test="paramCondition.createTime != null and paramCondition.createTime != ''">
+                and create_time like CONCAT('%',#{paramCondition.createTime},'%')
+            </if>
+    </select>
+
+    <select id="customPageList" resultType="cn.stylefeng.guns.modular.e365.model.result.ManagementResult" parameterType="cn.stylefeng.guns.modular.e365.model.params.ManagementParam">
+        select
+        <include refid="Base_Column_List"/>
+        from e365_management where 1 = 1
+            <if test="paramCondition.title != null and paramCondition.title != ''">
+                and title like CONCAT('%',#{paramCondition.title},'%')
+            </if>
+            <if test="paramCondition.questionsType != null and paramCondition.questionsType != ''">
+                and questions_type like CONCAT('%',#{paramCondition.questionsType},'%')
+            </if>
+            <if test="paramCondition.specialty != null and paramCondition.specialty != ''">
+                and specialty like CONCAT('%',#{paramCondition.specialty},'%')
+            </if>
+            <if test="paramCondition.type != null and paramCondition.type != ''">
+                and type like CONCAT('%',#{paramCondition.type},'%')
+            </if>
+            <if test="paramCondition.createTime != null and paramCondition.createTime != ''">
+                and create_time like CONCAT('%',#{paramCondition.createTime},'%')
+            </if>
+            order by create_time desc
+    </select>
+
+    <select id="customPageMapList" resultType="map" parameterType="cn.stylefeng.guns.modular.e365.model.params.ManagementParam">
+        select
+        <include refid="Base_Column_List"/>
+        from e365_management where 1 = 1
+            <if test="paramCondition.title != null and paramCondition.title != ''">
+                and title like CONCAT('%',#{paramCondition.title},'%')
+            </if>
+            <if test="paramCondition.questionsType != null and paramCondition.questionsType != ''">
+                and questions_type like CONCAT('%',#{paramCondition.questionsType},'%')
+            </if>
+            <if test="paramCondition.specialty != null and paramCondition.specialty != ''">
+                and specialty like CONCAT('%',#{paramCondition.specialty},'%')
+            </if>
+            <if test="paramCondition.type != null and paramCondition.type != ''">
+                and type like CONCAT('%',#{paramCondition.type},'%')
+            </if>
+            <if test="paramCondition.createTime != null and paramCondition.createTime != ''">
+                and create_time like CONCAT('%',#{paramCondition.createTime},'%')
+            </if>
+    </select>
+
+</mapper>

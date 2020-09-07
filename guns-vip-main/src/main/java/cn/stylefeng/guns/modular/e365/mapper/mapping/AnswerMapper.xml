@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.e365.mapper.AnswerMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.e365.entity.Answer">
+        <id column="id" property="id" />
+        <result column="managementId" property="managementId" />
+        <result column="Asubject_Single" property="asubjectSingle" />
+        <result column="Bsubject_Single" property="bsubjectSingle" />
+        <result column="Csubject_Single" property="csubjectSingle" />
+        <result column="Dsubject_Single" property="dsubjectSingle" />
+        <result column="single" property="single" />
+        <result column="Asubject_Multiple" property="asubjectMultiple" />
+        <result column="Bsubject_Multiple" property="bsubjectMultiple" />
+        <result column="Csubject_Multiple" property="csubjectMultiple" />
+        <result column="Dsubject_Multiple" property="dsubjectMultiple" />
+        <result column="Multiple" property="Multiple" />
+        <result column="flag" property="flag" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id AS "id", managementId AS "managementId", Asubject_Single AS "asubjectSingle", Bsubject_Single AS "bsubjectSingle", Csubject_Single AS "csubjectSingle", Dsubject_Single AS "dsubjectSingle", single AS "single", Asubject_Multiple AS "asubjectMultiple", Bsubject_Multiple AS "bsubjectMultiple", Csubject_Multiple AS "csubjectMultiple", Dsubject_Multiple AS "dsubjectMultiple", Multiple AS "Multiple", flag AS "flag"
+    </sql>
+
+
+    <select id="customList" resultType="cn.stylefeng.guns.modular.e365.model.result.AnswerResult" parameterType="cn.stylefeng.guns.modular.e365.model.params.AnswerParam">
+        select
+        <include refid="Base_Column_List"/>
+        from e365_answer where 1 = 1
+    </select>
+
+    <select id="customMapList" resultType="map" parameterType="cn.stylefeng.guns.modular.e365.model.params.AnswerParam">
+        select
+        <include refid="Base_Column_List"/>
+        from e365_answer where 1 = 1
+    </select>
+
+    <select id="customPageList" resultType="cn.stylefeng.guns.modular.e365.model.result.AnswerResult" parameterType="cn.stylefeng.guns.modular.e365.model.params.AnswerParam">
+        select
+        <include refid="Base_Column_List"/>
+        from e365_answer where 1 = 1
+    </select>
+
+    <select id="customPageMapList" resultType="map" parameterType="cn.stylefeng.guns.modular.e365.model.params.AnswerParam">
+        select
+        <include refid="Base_Column_List"/>
+        from e365_answer where 1 = 1
+    </select>
+
+</mapper>

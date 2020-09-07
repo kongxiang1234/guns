@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>月度安全考核考试</title>
+    <link rel="stylesheet" href="${ctxPath}/assets/e365/css/iconfont.css">
+    <link rel="stylesheet" href="${ctxPath}/assets/e365/css/layout.css">
+    <link rel="stylesheet" href="${ctxPath}/assets/common/libs/layui/css/layui.css?v=${constants.getReleaseVersion()}"/>
+    <link rel="stylesheet" href="${ctxPath}/assets/common/module/admin.css?v=${constants.getReleaseVersion()}" media="all"/>
+    <link rel="stylesheet" href="${ctxPath}/assets/expand/css/style.css?v=${constants.getReleaseVersion()}" media="all"/>
+    <script type="text/javascript" src="${ctxPath}/assets/common/libs/layui/layui.js?v=${constants.getReleaseVersion()}"></script>
+    <script src="${ctxPath}/assets/expand/plugins/jquery/jquery-3.2.1.min.js?v=${constants.getReleaseVersion()}"></script>
+    <style>
+        .container{color:#181818;font-size:.9rem;}
+        .container form{width:100%;}
+        .container form li{margin:2vh 0;padding:0 3% 1vh;border-bottom: 12px solid #F7F7F7;}
+        .container form li:last-child{border-bottom: 0;}
+        .container form h5{line-height:1.8;font-size:.9rem;margin:1vh 0;}
+        .container form p{line-height:2.5;}
+        .container form p label{display:inline-block;line-height:20px;}
+        .container form p label i{font-style:normal;margin-right:2em;border-radius:50%;background:transparent;display:inline-block;width:6vw;height:6vw;line-height:6vw;text-align:center;vertical-align: middle;}
+        /* .container form p input[type="radio"]:before{content:''; width:20px;height:20px;border:1px solid red; display:inline-block;border-radius:50%;vertical-align: middle;}
+        .container form p input[type="radio"]:checked:before{ content: '';width: 20px;height: 20px;border: 1px solid #c59c5a;background:#c59c5a;display: inline-block;border-radius: 50%;vertical-align: middle;}
+        .container form p input[type="radio"]:checked:after{content: ''; width: 10px;height:5px;border: 2px solid white;border-top: transparent;border-right: transparent;text-align: center;display: block;position: absolute;top: 6px;left:5px;vertical-align: middle;transform: rotate(-45deg);} */
+
+        .container form .form_btn{display:flex;justify-content:space-between;align-items: center;width:100%;height:6vh;}
+        .container form .form_btn input{width:100%;height:100%;}
+        .container form .form_btn input[type="reset"]{background:url(${ctxPath}/images/safeknowledge/ico-reset.png) #fff no-repeat center;font-size:.8rem;color:#333;background-size:3vw;background-position: 40%;text-indent:15%;}
+        .container form .form_btn input[type="submit"]{text-align:center;color:#fff;font-size:.9rem;background:#007BFF;}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="timer" style="color: blue;text-align: center;position:fixed;height:35px;background-color:#fff;top: 0;left: 50%;transform: translateX(-50%);width: 100%;z-index: 999"></div>
+        <div id="warring"></div>
+        <form target="frameFile" onsubmit="return false;">
+
+            <ul style="margin-top: 30px">
+                <h5 style="text-align: center;color: red">试卷评分<span id="fenshu">（    &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;）</span></h5>
+                @for(item in mapList){
+
+                @if(item.questions_type == "1"){
+                <span style="color: crimson">第  ${itemLP.index}  单选题</span>
+                @}
+
+                @if(item.questions_type == "2"){
+                <span style="color: crimson">第  ${itemLP.index}  多选题</span>
+                @}
+
+                @if(item.questions_type == "3"){
+                <span style="color: crimson">第  ${itemLP.index}  判断题</span>
+                @}
+
+
+
+                  @if(item.questions_type == "1"){
+
+                        <li>
+                            <h5 style="position:relative;">${item.title}<span id="${itemLP.index}" style="position:absolute;right: 10px;bottom: 10px">（    &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;）</span></h5>
+                            @if(isNotEmpty(item.Asubject_Single)){
+                            <p><label>
+
+                                <input type="radio" name="${itemLP.index}" value="A" id="AsubjectS">
+                                <i>A &nbsp;&nbsp;&nbsp;</i>${item.Asubject_Single}</label>
+
+                            </p>
+                            @}
+                            @if(isNotEmpty(item.Bsubject_Single)){
+                            <p><label>
+                                <input type="radio" name="${itemLP.index}" value="B" id="BsubjectS">
+                               <i>B &nbsp;&nbsp;&nbsp;</i>${item.Bsubject_Single}</label>
+                            </p>
+                            @}
+                            @if(isNotEmpty(item.Csubject_Single)){
+                            <p>
+                                <label>
+                                <input type="radio" name="${itemLP.index}" value="C" id="CsubjectS">
+                                    <i>C &nbsp;&nbsp;&nbsp;</i>${item.Csubject_Single}</label>
+                            </p>
+                            @}
+                            @if(isNotEmpty(item.Dsubject_Single)){
+                            <p><label>
+                                <input type="radio" name="${itemLP.index}" value="D" id="DsubjectS">
+                                <i>D &nbsp;&nbsp;&nbsp;</i>${item.Dsubject_Single}</label>
+                            </p>
+                            @}
+                            @if(isNotEmpty(item.Esubject_Single)){
+                                <p><label>
+                                    <input type="radio" name="${itemLP.index}" value="E" id="EsubjectS">
+                                    <i>E &nbsp;&nbsp;&nbsp;</i>${item.Esubject_Single}</label>
+                                </p>
+                            @}
+                            @if(isNotEmpty(item.Fsubject_Single)){
+                            <p><label>
+                                <input type="radio" name="${itemLP.index}" value="F" id="FsubjectS">
+                                <i>F &nbsp;&nbsp;&nbsp;</i>${item.Fsubject_Single}</label>
+                            </p>
+                            @}
+                        </li>
+                   @}
+                    @if(item.questions_type == "2"){
+                    <li>
+                        <h5 style="position:relative;">${item.title}<span id="${itemLP.index}" style="position:absolute;right: 10px;bottom: 10px">（    &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;）</span></h5>
+                        @if(isNotEmpty(item.Asubject_Multiple)){
+                        <p><label>
+
+                            <input type="checkbox" name="${itemLP.index}" value="A" id="AsubjectM">
+                            <i>A &nbsp;&nbsp;&nbsp;</i>${item.Asubject_Multiple}</label>
+
+                        </p>
+                        @}
+                        @if(isNotEmpty(item.Bsubject_Multiple)){
+                        <p><label >
+                            <input type="checkbox" name="${itemLP.index}" value="B" id="BsubjectM">
+                            <i>B &nbsp;&nbsp;&nbsp;</i>${item.Bsubject_Multiple}</label>
+                        </p>
+                        @}
+                        @if(isNotEmpty(item.Csubject_Multiple)){
+                        <p><label>
+                            <input type="checkbox" name="${itemLP.index}" value="C" id="CsubjectM">
+                            <i>C &nbsp;&nbsp;&nbsp;</i>${item.Csubject_Multiple}</label>
+                        </p>
+                        @}
+                        @if(isNotEmpty(item.Dsubject_Multiple)){
+                        <p><label>
+                            <input type="checkbox" name="${itemLP.index}" value="D" id="DsubjectM">
+                            <i>D &nbsp;&nbsp;&nbsp;</i>${item.Dsubject_Multiple}</label>
+                        </p>
+                        @}
+                        @if(isNotEmpty(item.Esubject_Multiple)){
+                        <p><label>
+                            <input type="checkbox" name="${itemLP.index}" value="E" id="EsubjectM">
+                            <i>E &nbsp;&nbsp;&nbsp;</i>${item.Esubject_Multiple}</label>
+                        </p>
+                        @}
+                        @if(isNotEmpty(item.Fsubject_Multiple)){
+                        <p>
+                            <label>
+                            <input type="checkbox" name="${itemLP.index}" value="F" id="FsubjectM">
+                            <i>F &nbsp;&nbsp;&nbsp;</i>${item.Fsubject_Multiple}</label>
+                        </p>
+                        @}
+                    </li>
+                    @}
+                    @if(item.questions_type == "3"){
+                    <li>
+                        <h5 style="position:relative;">${item.title} <span id="${itemLP.index}" style="position:absolute;right: 10px;bottom: 10px">（    &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;）</span></h5>
+                        <p><label >
+                            <input type="radio" name="${itemLP.index}" value="1" id="flagA">
+                            <i>1</i>对</label>
+                        </p>
+                        <p><label>
+                            <input type="radio" name="${itemLP.index}" value="2" id="flagB">
+                            <i>2</i>错</label>
+
+                        </p>
+
+                    </li>
+                    @}
+                @}
+            </ul>
+
+            <div class="form_btn" id="formSumit">
+                <input type="hidden" value="${danxtValue}" id="danxtValue">
+                <input type="hidden" value="${time}" id="time">
+                <input type="hidden" value="${etime}" id="etime">
+                <input type="hidden" value="${duoxtValue}" id="duoxtValue">
+                <input type="hidden" value="${pdtValue}" id="pdtValue">
+                <input type="hidden" value="${id}" id="paperId">
+                <input type="hidden" value="${string}" id="str">
+                <input type="hidden" value="${role}" id="role">
+                <input type="hidden" value="${major}" id="major">
+                <input type="hidden" value="${area}" id="area">
+                <input type="hidden" value="${mapListSize}" id="mapListSize">
+                <input id="formSumits" type="submit" value="提交" onclick="submitMei1()">
+            </div>
+        </form>
+    </div>
+</body>
+
+<script >
+    var maxtime = $("#time").val(); //
+    $(function(){
+        timer = setInterval("CountDown()", 1000);
+    });
+    function CountDown() {
+        if (maxtime >= 0) {
+            minutes = Math.floor(maxtime / 60);
+            seconds = Math.floor(maxtime % 60);
+            msg = "距离结束还有" + minutes + "分" + seconds + "秒,将会自动提交试卷";
+            document.all["timer"].innerHTML = msg;
+            if (maxtime == 300)alert("距离结束仅剩5分钟");
+            --maxtime;
+        } else{
+            clearInterval(timer);
+            submitMei();
+        }
+    }
+    function submitMei1() {
+        maxtime=0;
+    }
+    function submitMei() {
+        var mapListSize=$("#mapListSize").val()
+        var role=$("#role").val()
+        var major=$("#major").val()
+        var area=$("#area").val()
+        var etime=$("#etime").val()
+        var paperId=$("#paperId").val()
+        var danxtValue=$("#danxtValue").val()
+        var duoxtValue=$("#duoxtValue").val()
+        var pdtValue=$("#pdtValue").val()
+        var total=0;
+        for (let i = 1; i <mapListSize ; i++) {
+            var one=$("input[name="+i+"]:checked").length;
+            var str=$("#str").val().split(".");
+            if (one==0){
+                var fieldFlag=document.getElementById(i)
+                fieldFlag.innerHTML='<i style="width: 12px;height: 15px;display: inline-block"><img  src="${ctxPath}/assets/e365/images/realnamecer/err_close.png"></i>（    &nbsp;  &nbsp; '+str[i-1]+' &nbsp; &nbsp; ）'
+            }else {
+                if (one==1){
+                    one=$("input[name="+i+"]:checked").val()
+                }else {
+                    one=$("input[name="+i+"]:checked")
+                    var thisLength = one.length;
+                    //使用字符串数组，用于存放选择好了的数据
+                    var str = new Array();
+                    for(var j = 0;j < thisLength;j++) {
+                        if (one[j].checked == true) {
+                            str.push(one[j].value);//这个是获取多选框中的值
+                        }
+                    }
+                    one=str.join(",");
+                }
+                var type=$("input[name="+i+"]:checked")[0].type;
+
+                if (str[i-1]==one){
+                    if(type=="radio" && (one=="1" || one=="2")){
+                        total=parseInt(total)+parseInt(pdtValue)
+                    }else if (type=="radio"){
+                        total=parseInt(total)+parseInt(danxtValue)
+                    }else if (type=="checkbox"){
+                        total=parseInt(total)+parseInt(duoxtValue)
+                    }
+                    var fieldFlag=document.getElementById(i)
+                    fieldFlag.innerHTML='<i style="width: 12px;height: 15px;display: inline-block"><img  src="${ctxPath}/assets/e365/images/casereport/deduct-checked.png"></i>（   正确 &nbsp;  &nbsp;  &nbsp; &nbsp; ）'
+                }else {
+                    var fieldFlag=document.getElementById(i)
+                    fieldFlag.innerHTML='<i style="width: 12px;height: 15px;display: inline-block"><img  src="${ctxPath}/assets/e365/images/realnamecer/err_close.png"></i>（    &nbsp;  &nbsp; '+str[i-1]+' &nbsp; &nbsp; ）'
+                }
+            }
+
+        }
+        var fieldFlag=document.getElementById("fenshu")
+        fieldFlag.innerHTML='<i style="width: 12px;height: 15px;display: inline-block"></i>（'+total+'分 &nbsp;  &nbsp;  &nbsp; &nbsp; ）'
+        $.ajax({
+            type: 'POST',
+            url: '/gasStation/meiyueAudit',
+            data: {"score":total,
+                "paperId":paperId,
+                "role":role,
+                "area":area,
+                "major":major,
+                "etime":etime},
+            success: function (data) {
+                if (data.success) {
+                    alert("已提交！")
+                     $('#formSumit').removeClass();
+                    document.getElementById('formSumit').style.display= 'none';
+                } else {
+                    alert(data.message)
+                }
+            }
+        });
+    }
+
+</script>
+</html>
