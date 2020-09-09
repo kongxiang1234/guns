@@ -3,9 +3,9 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://47.101.194.218:3306/guns_advanced?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=CTT&allowMultiQueries=true
+    url: jdbc:mysql://101.132.192.111:3306/guns_advanced?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=CTT&allowMultiQueries=true
     username: root
-    password: 123@Abcd
+    password: 123456
     filters: wall,mergeStat
 
     # 连接池大小根据实际情况调整
