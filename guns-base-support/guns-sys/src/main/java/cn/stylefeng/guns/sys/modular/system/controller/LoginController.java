@@ -75,6 +75,26 @@ public class LoginController extends BaseController {
      * @Date 2018/12/23 5:41 PM
      */
     @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String indexLogin(Model model) {
+
+        //判断用户是否登录
+        if (LoginContextHolder.getContext().hasLogin()) {
+            Map<String, Object> userIndexInfo = userService.getUserIndexInfo();
+
+            //用户信息为空，提示账号没分配角色登录不进去
+            if (userIndexInfo == null) {
+                model.addAttribute("tips", "该用户没有角色，无法登陆");
+                return "/login.html";
+            } else {
+                model.addAllAttributes(userIndexInfo);
+                return "/indexLogin.html";
+            }
+
+        } else {
+            return "/login.html";
+        }
+    }
+    @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String index(Model model) {
 
         //判断用户是否登录
@@ -94,7 +114,6 @@ public class LoginController extends BaseController {
             return "/login.html";
         }
     }
-
     /**
      * 跳转到登录页面
      *

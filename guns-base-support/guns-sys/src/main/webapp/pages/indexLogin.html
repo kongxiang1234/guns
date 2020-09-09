@@ -1,0 +1,304 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>首页</title>
+    <link href="${ctxPath}/assets/xct/css/reset.css" rel="stylesheet" />
+    <link href="${ctxPath}/assets/xct/css/home.css" rel="stylesheet" />
+    <script src="${ctxPath}/assets/xct/js/jquery-1.11.1.min.js"></script>
+    <script src="${ctxPath}/assets/xct/js/echarts.min.js"></script>
+</head>
+<script type="text/javascript">
+    var Feng = {
+        ctxPath: "${ctxPath}",
+        version: '${constants.getReleaseVersion()}'
+    };
+</script>
+<script type="text/javascript" src="${ctxPath}/assets/common/libs/layui/layui.js?v=${constants.getReleaseVersion()}"></script>
+<script type="text/javascript" src="${ctxPath}/assets/common/js/common.js?v=${constants.getReleaseVersion()}"></script>
+<script>
+    layui.use(['layer', 'element', 'admin', 'index', 'ax'], function () {
+        var $ = layui.jquery;
+        var layer = layui.layer;
+        var admin = layui.admin;
+        var index = layui.index;
+        var $ax = layui.ax;
+        // 退出登录点击事件
+        $('#btnLogout').click(function () {
+            layer.confirm('真的退出吗', function(index){
+                var ajax = new $ax(Feng.ctxPath + "/logout", function (data) {
+                    Feng.success("退出成功!");
+                    window.location.href = Feng.ctxPath + "/";
+                }, function (data) {
+                    layer.msg("退出失败！" + data.responseJSON.message, {icon: 5, anim: 6});
+                });
+                ajax.start();
+                layer.close(index);
+            });
+
+        });
+    });
+</script>
+<script>
+
+
+
+</script>
+<body class="bodybg">
+<div class="header">
+    <img src="${ctxPath}/assets/xct/img/logo.png" />
+    <div class="rheader">
+        <span><img src="${ctxPath}/assets/xct/img/icon01.png" />系统管理员</span>
+        <span ><img src="${ctxPath}/assets/xct/img/icon02.png" /> <a id="btnLogout">退出</a></span>
+    </div>
+</div>
+<ul class="modeule">
+    <li class="lmoudule lmoudulebig">
+        <div>
+            <h1>协查申请地区分布</h1>
+            <div id="bar"></div>
+        </div>
+    </li>
+    <li class="lmoudule">
+        <div>
+            <h1 class="moduletype"><span class="sel">待办<label>5</label></span><span>已办<label></label></span></h1>
+            <ul class="typebox">
+                <li>
+                    <h1>宿监协字[2020]001号</h1>
+                    <p>2020-07-22<span>待审核</span></p>
+                </li>
+                <li>
+                    <h1>宿监协字[2020]001号</h1>
+                    <p>2020-07-22<span>待审核</span></p>
+                </li>
+                <li>
+                    <h1>宿监协字[2020]001号</h1>
+                    <p>2020-07-22<span>待审核</span></p>
+                </li>
+            </ul>
+            <ul class="typebox" style="display: none;">
+                <li>
+                    <h1>宿监协字[2020]001号</h1>
+                    <p>2020-07-22<span>待审核</span></p>
+                </li>
+                <li>
+                    <h1>宿监协字[2020]001号</h1>
+                    <p>2020-07-22<span>待审核</span></p>
+                </li>
+                <li>
+                    <h1>宿监协字[2020]001号</h1>
+                    <p>2020-07-22<span>待审核</span></p>
+                </li>
+            </ul>
+        </div>
+    </li>
+    <li class="lmoudule">
+        <div class="lmoudulemin">
+            <h1>消息提醒</h1>
+            <span class="mess"><img src="${ctxPath}/assets/xct/img/icon03.png" />
+                    <label>8</label></span>
+        </div>
+        <div class="lmoudulemin">
+            <h1>发起申请</h1>
+            <span class="mess"><img src="${ctxPath}/assets/xct/img/icon04.png" /></span>
+        </div>
+    </li>
+    <li class="lmoudule">
+        <div class="lmoudulemin">
+            <h1>我的申请</h1>
+            <span class="mess"><img src="${ctxPath}/assets/xct/img/icon05.png" />
+                    <label></label></span>
+        </div>
+    </li>
+    <li class="lmoudule">
+        <div class="lmoudulemin">
+            <h1>协查审批</h1>
+            <span class="mess"><img src="${ctxPath}/assets/xct/img/icon06.png" />
+                    <label></label></span>
+        </div>
+    </li>
+    <li class="lmoudule" style="width:50%;">
+        <div class="lmoudulemin lmoudulepic">
+                <span class="mess" style="font-size: 1.5rem;color: #fff;margin-top: 3.8rem;line-height: 3rem;">
+                <img src="${ctxPath}/assets/xct/img/icon07.png" style="float: left;margin-right: 1rem;"/>统计分析
+                    <label></label></span>
+        </div>
+    </li>
+    <li class="lmoudule">
+        <div class="lmoudulemin">
+            <h1>数据中心</h1>
+            <span class="mess"><img src="${ctxPath}/assets/xct/img/icon10.png" /></span>
+        </div>
+    </li>
+    <li class="lmoudule">
+        <div class="lmoudulemin">
+            <h1>短信管理</h1>
+            <span class="mess"><img src="${ctxPath}/assets/xct/img/icon11.png" /></span>
+        </div>
+    </li>
+    <li class="lmoudule">
+        <div class="lmoudulemin">
+            <h1>外部单位</h1>
+            <span class="mess"><img src="${ctxPath}/assets/xct/img/icon12.png" /></span>
+        </div>
+    </li>
+    <li class="lmoudule" onclick="systems()">
+        <div class="lmoudulemin">
+            <h1>系统管理</h1>
+            <span class="mess"><img src="${ctxPath}/assets/xct/img/icon13.png" /></span>
+        </div>
+    </li>
+
+</ul>
+<div class="footer">版权所有：宿迁市纪委监委&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;技术支持：苏州凌旭信息科技有限公司&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;服务热线：0512-62717553</div>
+</body>
+<script type="text/javascript">
+    function systems() {
+        window.location.href = Feng.ctxPath + "/index";
+    }
+    var barChart = echarts.init(document.getElementById('bar'));
+    var baroption = {
+        grid: {
+            left: '3%',
+            right: '2%',
+            bottom: '4%',
+            top: '8%',
+            containLabel: true
+        },
+        xAxis: {
+            data: ["宿迁市", "宿城区", "宿豫区", "沭阳县", "泗阳县", "泗洪县"],
+            axisLine: {
+                onZero: false,
+                lineStyle: {
+                    color: '#4655c0'
+                }
+            },
+            axisTick: {
+                show: false,
+            },
+            axisLabel: {
+                color: '#fff',
+                margin: 20
+            }
+        },
+        yAxis: {
+            axisLine: {
+                onZero: false,
+                show: false,
+                lineStyle: {
+                    color: 'rgba(255, 255, 255, 0.3)'
+                }
+            },
+            axisTick: {
+                show: false,
+            },
+            splitLine: {
+                show: true,
+                lineStyle: {
+                    color: 'rgba(34, 48, 125, 0.3)'
+                }
+            },
+            axisLabel: {
+                color: 'rgba(255, 255, 255, 0.3)'
+            }
+        },
+        series: [{
+            name: '上边圆',
+            type: 'pictorialBar',
+            symbolSize: [20, 10],
+            symbolOffset: [0, -5],
+            z: 12,
+            itemStyle: {
+                color: new echarts.graphic.LinearGradient(
+                    1, 0, 0, 0,
+                    [
+
+                        { offset: 0, color: '#6594f1' },
+                        { offset: 1, color: '#d1e1fe' }
+                    ]
+
+                )
+            },
+            data: [{
+                value: 100,
+                symbolPosition: 'end'
+            }, {
+                value: 50,
+                symbolPosition: 'end'
+            }, {
+                value: 20,
+                symbolPosition: 'end'
+            }, {
+                value: 70,
+                symbolPosition: 'end'
+            }, {
+                value: 40,
+                symbolPosition: 'end'
+            }, {
+                value: 60,
+                symbolPosition: 'end'
+            }]
+        }, {
+            name: '下',
+            type: 'pictorialBar',
+            symbolSize: [20, 10],
+            symbolOffset: [0, 5],
+            z: 12,
+            itemStyle: {
+                normal: {
+                    color: new echarts.graphic.LinearGradient(
+                        1, 0, 0, 0,
+                        [
+                            { offset: 0, color: '#5185ef' },
+                            { offset: 1, color: '#85aaf6' }
+                        ]
+                    )
+                }
+            },
+            data: [100, 50, 20, 70, 40, 60]
+        }
+            , {
+                name: '底部内边',
+                type: 'pictorialBar',
+                symbolSize: [50, 30],
+                symbolOffset: [0, 7],
+                z: 20,
+                symbol: '${ctxPath}/assets/xct/img/total/tuoyuan.png',
+                itemStyle: {
+                    normal: {
+                        color: 'transparent',
+                        borderColor: '#1745a1',
+                        borderWidth: 1
+                    }
+                },
+                data: [100, 50, 20, 70, 40, 60]
+            }, {
+                type: 'bar',
+                itemStyle: {
+                    color: new echarts.graphic.LinearGradient(
+                        1, 0, 0, 0,
+                        [
+                            { offset: 0, color: '#5185ef' },
+                            { offset: 1, color: '#85aaf6' }
+                        ]
+                    )
+                },
+                silent: true,
+                barWidth: 20,
+                barGap: '-100%',
+                data: [100, 50, 20, 70, 40, 60, 20, 20]
+            }]
+    };
+    barChart.setOption(baroption);
+
+    $(".moduletype span").click(function(){
+        $(this).addClass("sel").siblings().removeClass("sel");
+        $(".typebox").hide();
+        $(".typebox").eq($(this).index()).show();
+    })
+</script>
+
+</html>
