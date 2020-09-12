@@ -222,6 +222,7 @@
 
     <select id="listUserAndRoleExpectAdmin" resultType="map">
         select
+         user.user_id as user_id,
         user.account as account,
         user.name as name,
         dept.simple_name as simpleName
@@ -231,17 +232,21 @@
 
     <select id="listUserAndRoleExpectAdmin" resultType="map" databaseId="pgsql">
         select
+         user.user_id as user_id,
         user.account as account,
         user.name as name,
+				dept.dept_id as dept_id,
         dept.simple_name as simpleName
         from sys_user user
         left join sys_dept dept on user.dept_id = dept.dept_id
     </select>
 
     <select id="listUserAndRoleExpectAdmin" resultType="map" databaseId="sqlserver">
-        select
+       select
+         user.user_id as user_id,
         user.account as account,
         user.name as name,
+				dept.dept_id as dept_id,
         dept.simple_name as simpleName
         from sys_user user
         left join sys_dept dept on user.dept_id = dept.dept_id
@@ -249,8 +254,21 @@
 
     <select id="listUserAndRoleExpectAdmin" resultType="map" databaseId="oracle">
         select
+         u.user_id as user_id,
         u.account as account,
         u.name as name,
+				dept.dept_id as dept_id,
+        dept.simple_name as simpleName
+        from sys_user u
+        left join sys_dept dept on u.dept_id = dept.dept_id
+    </select>
+
+    <select id="getAllUsers" resultType="map">
+        select
+         u.user_id as user_id,
+        u.account as account,
+        u.name as name,
+				dept.dept_id as dept_id,
         dept.simple_name as simpleName
         from sys_user u
         left join sys_dept dept on u.dept_id = dept.dept_id

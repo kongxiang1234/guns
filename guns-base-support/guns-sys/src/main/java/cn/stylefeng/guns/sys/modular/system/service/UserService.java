@@ -353,4 +353,15 @@ public class UserService extends ServiceImpl<UserMapper, User> {
     public IPage listUserAndRoleExpectAdmin(Page pageContext) {
         return baseMapper.listUserAndRoleExpectAdmin(pageContext);
     }
+
+    /**
+     * 选择办理人
+     *
+     * @author fengshuonan
+     * @Date 2019-08-27 19:07
+     */
+    public List<Map<String,Object>> getAllUsers() {
+        return baseMapper.getAllUsers();
+    }
+
 }
