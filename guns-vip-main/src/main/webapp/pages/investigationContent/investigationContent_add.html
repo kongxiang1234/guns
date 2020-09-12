@@ -1,0 +1,64 @@
+@layout("/common/_form.html",{js:["/assets/investigationContent/investigationContent_add.js"],css:["/assets/expand/module/formSelects/formSelects-v4.css"]}){
+
+<form class="layui-form" id="investigationContentForm" lay-filter="investigationContentForm">
+    <div class="layui-fluid" style="padding-bottom: 75px;">
+        <div class="layui-card">
+            <div class="layui-card-header">基本信息</div>
+            <div class="layui-card-body">
+                <div class="layui-form-item layui-row">
+                    <input name="contentId" type="hidden"/>
+
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">姓名（单位）<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="nameCompany" name="nameCompany" placeholder="请输入姓名（单位）" type="text" class="layui-input" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">身份证号（信用代码，银行卡号） <span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="cardNumber" name="cardNumber" placeholder="请输入身份证号（信用代码，银行卡号） " type="text" class="layui-input" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">备注<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="undertaker" name="undertaker" placeholder="请输入备注" type="text" class="layui-input" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">协查单位id<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="unitId" name="unitId" placeholder="请输入协查单位id" type="text" class="layui-input" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">协查信息表id<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="infoId" name="infoId" placeholder="请输入协查信息表id" type="text" class="layui-input" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">操作人<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="createBy" name="createBy" placeholder="请输入操作人" type="text" class="layui-input" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">更新人<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="updateBy" name="updateBy" placeholder="请输入更新人" type="text" class="layui-input" lay-verify="required" required/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group-bottom text-center">
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit>&emsp;提交&emsp;</button>
+        <button type="reset" class="layui-btn layui-btn-primary" id="cancel">&emsp;取消&emsp;</button>
+    </div>
+
+</form>
+
+@}

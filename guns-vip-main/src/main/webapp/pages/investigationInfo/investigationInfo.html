@@ -1,0 +1,285 @@
+@layout("/common/_container.html",{js:["/assets/investigationInfo/investigationInfo.js"]}){
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>发起协查</title>
+    <link href="/assets/investigationInfo/css/reset.css" rel="stylesheet" />
+    <link href="/assets/investigationInfo/css/home.css" rel="stylesheet" />
+    <script src="/assets/investigationInfo/js/jquery-1.11.1.min.js"></script>
+
+<body class="bodybg bodybgts">
+<div class="container">
+   <!-- <h1 class="xctitle"><span>发起协查</span></h1>-->
+    <div class="containerbody">
+        <h1 class="secondtit"><img src="/assets/investigationInfo/img/icon14.png" />基本信息</h1>
+        <div class="xctablebox">
+            <table class="xctable">
+                <tr>
+                    <td><label>协查文书号：</label><input type="text" id="Documents_number" value="${Documents_number}"/></td>
+                    <td><label>承办人：</label>
+                        <select id="takePersion" id="takePersion" name="takePersion" lay-search>
+                           @for(item in allUsersList) {
+                                @if(item.name==currentUser_name){
+                                    <option selected="selected" value="${currentUser_id}">${currentUser_name}</option>-->
+                                @}
+                                 @else{
+                                 <option value="${item.user_id}">${item.name}</option>
+                                 @}
+                            @}
+                        </select>
+                    </td>
+                    <td><label>最迟反馈时间：</label>
+                        <input id="deadLine" id="deadLine" placeholder="请输入最迟反馈时间" type="text" class="date-icon" autocomplete="off"/>
+                        <!--<input id="deadLine" type="text" placeholder="请输入反馈时间"/>-->
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <h1 class="secondtit"><img src="/assets/investigationInfo/img/icon14.png" />协查内容</h1>
+        <div class="xctype">
+            <div class="lxctype" onmouseover="lxctype(this)" onmouseout="nolxctype(this)" id="object_notice0">
+                <div class="lxctypecont" id="object_notice1">
+                    <div><img src="/assets/investigationInfo/img/icon15.png" /></div>
+                    <h1>导入协查通知书</h1>
+                    <p>请导入协查通知书</p>
+                </div>
+                <div class="xiecont xiecontts" style="display: none;" id="object_notice2">
+                    <div><img src="/assets/investigationInfo/img/icon46.png" /></div>
+                    <h1>导入协查通知书</h1>
+                    <p id="fileBtn0">去导入
+                        <input id="object_notice" name="object_notice" type="hidden" class="layui-input"/>
+
+                    </p>
+                </div>
+                <div class="xiecover" style="display: none;text-align: left;padding: 3rem 1rem;" id="object_notice3">
+                    <h1 id="object_notice4">导入协查通知书</h1>
+                    <!--<img src="/assets/investigationInfo/img/icon43.png" />-->
+                    <span class="layui-inline layui-upload-choose" style="padding: 4px 10px;" id="fileNameTip"></span>
+
+                </div>
+            </div>
+            <div class="lxcrow"><img src="/assets/investigationInfo/img/icon19.png" /></div>
+            <div class="lxctype" onmouseover="lxctype(this)" onmouseout="nolxctype(this)" id="investigation_list0">
+                <div class="lxctypecont" id="investigation_list1">
+                    <div><img src="/assets/investigationInfo/img/icon16.png" /></div>
+                    <h1>导入协查清单</h1>
+                    <p>请导入协查清单</p>
+                </div>
+                <div class="xiecont xiecontts" style="display: none;" id="investigation_list2">
+                    <div><img src="/assets/investigationInfo/img/icon46.png" /></div>
+                    <h1>导入协查清单</h1>
+                    <p id="fileExcel">去导入
+                        <input id="investigation_list" name="investigation_list" type="hidden" class="layui-input"/>
+                    </p>
+                </div>
+                <div class="xiecover" style="display: none;" id="investigation_list3">
+                    <h1>导入协查清单</h1>
+                    <!--<img src="/assets/investigationInfo/img/icon43.png" />-->
+                    <span class="layui-inline layui-upload-choose" style="padding: 4px 10px;" id="investigation_list_file"></span>
+                </div>
+            </div>
+            <div class="lxcrow"><img src="/assets/investigationInfo/img/icon19.png" /></div>
+            <div class="lxctype" onmouseover="lxctype(this)" onmouseout="nolxctype(this)">
+                <div class="lxctypecont">
+                    <div><img src="/assets/investigationInfo/img/icon17.png" /></div>
+                    <h1>选择工作证</h1>
+                    <p>请选择第一个工作证</p>
+                </div>
+                <div class="xiecont xiecontts" style="display: none;">
+                    <div><img src="/assets/investigationInfo/img/icon46.png" /></div>
+                    <h1>选择工作证</h1>
+                    <p >去选择
+                    </p>
+                </div>
+                <div class="xiecover" style="display: none;">
+                    <h1>选择工作证</h1>
+                    <div class="xietxt">
+                        <img src="/assets/investigationInfo/img/icon44.png" />
+                        <h1>谭珊珊</h1>
+                        <h2>210189196311222145</h2>
+                        <div>单位 : 宿迁市纪委监委</div>
+                        <div>部门 : 第X监察室</div>
+                        <div>职务 : 四级主任科员</div>
+                    </div>
+                </div>
+            </div>
+            <div class="lxcrow"><img src="/assets/investigationInfo/img/icon19.png" /></div>
+            <div class="lxctype" onmouseover="lxctype(this)" onmouseout="nolxctype(this)" id="">
+                <div class="lxctypecont">
+                    <div><img src="/assets/investigationInfo/img/icon18.png" /></div>
+                    <h1>选择工作证</h1>
+                    <p>请选择第二个工作证</p>
+                </div>
+                <div class="xiecont xiecontts" style="display: none;">
+                    <div><img src="/assets/investigationInfo/img/icon46.png" /></div>
+                    <h1>选择工作证</h1>
+                    <p id="picBtn">去选择
+                        <input id="employee_card_select" name="employee_card_select" type="hidden" class="layui-input"/>
+                    </p>
+                </div>
+                <div class="xiecover" style="display: none;">
+                    <h1>选择工作证</h1>
+                    <div class="xietxt">
+                        <img src="/assets/investigationInfo/img/icon44.png" />
+                        <!--<img class="layui-upload-img" id="img1" width="92px" height="92px">-->
+                        <h1>谭珊珊</h1>
+                        <h2>210189196311222145</h2>
+                        <div>单位 : 宿迁市纪委监委</div>
+                        <div>部门 : 第X监察室</div>
+                        <div>职务 : 四级主任科员</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="secondtit secondtitts">
+            <img src="/assets/investigationInfo/img/icon14.png" />协查详情
+
+            <span class="editbox editboxts">
+                    <img src="/assets/investigationInfo/img/icon47.png" onmousemove="editbox(this)" onmouseout="noeditbox(this)">
+                    <div class="editcover editcoverts" onmousemove="editcover(this)" onmouseout="noeditcover(this)">
+                        <img src="/assets/investigationInfo/img/icon52.png">
+                        <ul>
+                            <li><span></span>显示所有协查单位</li>
+                            <li><span></span> 显示本次协查单位</li>
+                            <li><span></span> 展开所有</li>
+                            <li><span></span>收起所有</li>
+                        </ul>
+                    </div>
+                </span>
+        </div>
+        <div id="xcdetailDiv">
+            <!--<div class="xcdetail">-->
+                <!--<img src="/assets/investigationInfo/img/icon20.png" />-->
+                <!--<h1>建设银行账单数据协查&nbsp;&nbsp;&nbsp;<span class="span1">材料齐全</span></h1>-->
+                <!--<div class="deltailtxt">-->
+                    <!--<span>被协查对象：<label>4</label></span>-->
+                    <!--<span>法律文书：<label>1</label></span>-->
+                <!--</div>-->
+                <!--<img src="/assets/investigationInfo/img/icon29.png" class="detailpic" />-->
+                <!--<div class="deltailtxtbox">-->
+                    <!--<ul class="dwtype" id="investigation_unit">-->
+                        <!--<li>-->
+                            <!--<div class="dwtypebox">-->
+                                <!--<img src="/assets/investigationInfo/img/icon23.png" />-->
+                                <!--<h1>李红旗</h1>-->
+                                <!--<p>210189301212312145</p>-->
+                                <!--<span class="operate">-->
+                                        <!--<img src="/assets/investigationInfo/img/icon25.png" />-->
+                                        <!--<img src="/assets/investigationInfo/img/icon26.png" />-->
+                                    <!--</span>-->
+                            <!--</div>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<div class="dwtypebox">-->
+                                <!--<img src="/assets/investigationInfo/img/icon23.png" />-->
+                                <!--<h1>李红旗</h1>-->
+                                <!--<p>210189301212312145</p>-->
+                                <!--<span class="operate">-->
+                                        <!--<img src="/assets/investigationInfo/img/icon25.png" />-->
+                                        <!--<img src="/assets/investigationInfo/img/icon26.png" />-->
+                                    <!--</span>-->
+                            <!--</div>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<div class="dwtypebox">-->
+                                <!--<img src="/assets/investigationInfo/img/icon23.png" />-->
+                                <!--<h1>李红旗</h1>-->
+                                <!--<p>210189301212312145</p>-->
+                                <!--<span class="operate">-->
+                                        <!--<img src="/assets/investigationInfo/img/icon25.png" />-->
+                                        <!--<img src="/assets/investigationInfo/img/icon26.png" />-->
+                                    <!--</span>-->
+                            <!--</div>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<div class="dwtypebox">-->
+                                <!--<img src="/assets/investigationInfo/img/icon23.png" />-->
+                                <!--<h1>李红旗</h1>-->
+                                <!--<p>210189301212312145</p>-->
+                                <!--<span class="operate">-->
+                                        <!--<img src="/assets/investigationInfo/img/icon25.png" />-->
+                                        <!--<img src="/assets/investigationInfo/img/icon26.png" />-->
+                                    <!--</span>-->
+                            <!--</div>-->
+                        <!--</li>-->
+                        <!--<li class="add">-->
+                            <!--<img src="/assets/investigationInfo/img/icon24.png" />-->
+                            <!--<div>新增</div>-->
+                        <!--</li>-->
+                    <!--</ul>-->
+                    <!--<ul class="dwtype dwtypets">-->
+                        <!--<li>-->
+                            <!--<div class="dwtypebox">-->
+                                <!--<img src="/assets/investigationInfo/img/icon27.png" />-->
+                                <!--<h1>农业银行协查通知书.pdf</h1>-->
+                                <!--<span class="operate">-->
+                                        <!--<img src="/assets/investigationInfo/img/icon25.png" />-->
+                                        <!--<img src="/assets/investigationInfo/img/icon26.png" />-->
+                                    <!--</span>-->
+                                <!--<span class="operate">-->
+                                        <!--<img src="/assets/investigationInfo/img/icon25.png" />-->
+                                        <!--<img src="/assets/investigationInfo/img/icon26.png" />-->
+                                    <!--</span>-->
+                            <!--</div>-->
+                        <!--</li>-->
+
+                        <!--<li class="add">-->
+                            <!--<img src="/assets/investigationInfo/img/icon28.png" />-->
+                            <!--<div>新增</div>-->
+                        <!--</li>-->
+                    <!--</ul>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="xcdetail">
+                <img src="/assets/investigationInfo/img/icon21.png" />
+                <h1>建设银行账单数据协查&nbsp;&nbsp;&nbsp;<span class="span2">无成员</span></h1>
+                <div class="deltailtxt">
+                    <span>被协查对象：<label>4</label></span>
+                    <span>法律文书：<label>1</label></span>
+                </div>
+            </div>-->
+        </div>
+        <div class="fqbtn" onclick="submit()"><span >发起协查</span></div>
+    </div>
+
+</div>
+<script>
+    // $(".xcdetail").mouseenter(function () {
+    //     $(this).find(".detailpic,.deltailtxtbox").show();
+    // })
+    // $(".xcdetail").mouseleave(function () {
+    //     $(this).find(".detailpic,.deltailtxtbox").hide();
+    // })
+    function lxctype(obj) {
+        $(".xiecover").hide();
+        $(obj).find(".lxctypecont").hide();
+        $(obj).find(".xiecontts").show();
+    }
+    function nolxctype(obj) {
+        $(obj).find(".lxctypecont").show();
+        $(obj).find(".xiecontts").hide();
+    }
+
+    var timer;
+    function editbox(obj) {
+        $(obj).next().show()
+    }
+    function noeditbox(obj) {
+        timer = setTimeout(function () {
+            $(obj).next().hide()
+        }, 300)
+    }
+    function editcover(obj) {
+        clearTimeout(timer);
+    }
+    function noeditcover(obj) {
+        clearTimeout(timer);
+        timer = setTimeout(function () {
+            $(obj).hide()
+        }, 100)
+    }
+
+</script>
+</body>
+@}

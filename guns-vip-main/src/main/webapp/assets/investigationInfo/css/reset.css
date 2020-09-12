@@ -1,0 +1,35 @@
+@charset "utf-8";
+table {
+    border: 0;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+* { 
+    font-family:'Microsoft YaHei'
+}
+h1, p,dl,dt,ul,li,html,body{
+    margin:0;
+    padding:0;
+}
+ul,li{
+   list-style: none; 
+}
+body,html{
+    height: 100%;
+}
+input{
+    outline: none;
+}
+table {
+    border: 0;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+select {
+    border: solid 1px #000;
+    appearance:none;
+    -moz-appearance:none;
+    -webkit-appearance:none;
+    padding-right: 14px;
+    }
+    select::-ms-expand { display: none; }

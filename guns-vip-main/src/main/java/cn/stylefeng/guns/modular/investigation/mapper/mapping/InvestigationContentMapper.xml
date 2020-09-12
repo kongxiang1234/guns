@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.investigation.mapper.InvestigationContentMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.investigation.entity.InvestigationContent">
+        <id column="content_id" property="contentId" />
+        <result column="name_company" property="nameCompany" />
+        <result column="card_number" property="cardNumber" />
+        <result column="undertaker" property="undertaker" />
+        <result column="unit_id" property="unitId" />
+        <result column="info_id" property="infoId" />
+        <result column="create_time" property="createTime" />
+        <result column="create_by" property="createBy" />
+        <result column="update_time" property="updateTime" />
+        <result column="update_by" property="updateBy" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        content_id AS "contentId", name_company AS "nameCompany", card_number AS "cardNumber", undertaker AS "undertaker", unit_id AS "unitId", info_id AS "infoId", create_time AS "createTime", create_by AS "createBy", update_time AS "updateTime", update_by AS "updateBy"
+    </sql>
+
+
+    <select id="customList" resultType="cn.stylefeng.guns.modular.investigation.model.result.InvestigationContentResult" parameterType="cn.stylefeng.guns.modular.investigation.model.params.InvestigationContentParam">
+        select
+        <include refid="Base_Column_List"/>
+        from investigation_content where 1 = 1
+    </select>
+
+    <select id="customMapList" resultType="map" parameterType="cn.stylefeng.guns.modular.investigation.model.params.InvestigationContentParam">
+        select
+        <include refid="Base_Column_List"/>
+        from investigation_content where 1 = 1
+    </select>
+
+    <select id="customPageList" resultType="cn.stylefeng.guns.modular.investigation.model.result.InvestigationContentResult" parameterType="cn.stylefeng.guns.modular.investigation.model.params.InvestigationContentParam">
+        select
+        <include refid="Base_Column_List"/>
+        from investigation_content where 1 = 1
+    </select>
+
+    <select id="customPageMapList" resultType="map" parameterType="cn.stylefeng.guns.modular.investigation.model.params.InvestigationContentParam">
+        select
+        <include refid="Base_Column_List"/>
+        from investigation_content where 1 = 1
+    </select>
+
+</mapper>
