@@ -46,4 +46,11 @@
         from investigation_content where 1 = 1
     </select>
 
+     <select id="investigationInfoList" resultType="map">
+        select a.*,b.* from investigation_info a
+        LEFT JOIN investigation_object b
+        on a.info_id = b.info_id
+    </select>
+
+
 </mapper>

@@ -12,6 +12,39 @@ layui.use(['table', 'admin', 'ax', 'func'], function () {
         tableId: "investigationContentTable"
     };
 
+    jumpToInvestigation = function () {
+        window.location.href = Feng.ctxPath + '/investigationInfo'
+    };
+
+    loadData = function(){
+        alert(1);
+        // var Documents_number= $("#Documents_number").val();
+        // var deadLine= $("#deadLine").val();
+        // var takePerson= $("#takePersion").val();
+        // if(deadLine==""){
+        //     Feng.error("请选择最迟反馈时间!");
+        // }
+
+        // var execldataTemp = [];
+        // for(var i = 0; i < excelData.length; i++) {
+        //     var key = Object.keys(excelData[i])[0];
+        //     execldataTemp.push(excelData[i][key]);
+        // }
+        // var url= "/investigationInfo/addItem";
+        $.ajax({
+            url: "/investigationContent/getinvestigationInfoList",
+            type: "POST",
+            data:{},
+            dataType: "json",
+            success: function(data){
+                alert(JSON.stringify(data));
+            },
+            error:function(err){
+                console.log(err.statusText);
+                console.log('异常');
+            }
+        });
+    };
     /**
      * 初始化表格的列
      */
@@ -60,6 +93,7 @@ layui.use(['table', 'admin', 'ax', 'func'], function () {
         window.location.href = Feng.ctxPath + '/investigationContent/edit?contentId=' + data.contentId
     };
 
+
     /**
      * 导出excel按钮
      */
@@ -90,7 +124,6 @@ layui.use(['table', 'admin', 'ax', 'func'], function () {
         };
         Feng.confirm("是否删除?", operation);
     };
-
     // 渲染表格
     var tableResult = table.render({
         elem: '#' + InvestigationContent.tableId,
@@ -100,6 +133,7 @@ layui.use(['table', 'admin', 'ax', 'func'], function () {
         cellMinWidth: 100,
         cols: InvestigationContent.initColumn()
     });
+
 
     // 搜索按钮点击事件
     $('#btnSearch').click(function () {

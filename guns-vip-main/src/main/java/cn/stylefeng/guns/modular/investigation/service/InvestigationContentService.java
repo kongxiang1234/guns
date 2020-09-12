@@ -7,6 +7,7 @@ import cn.stylefeng.guns.modular.investigation.model.result.InvestigationContent
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -64,5 +65,12 @@ public interface InvestigationContentService extends IService<InvestigationConte
      * @Date 2020-09-09
      */
      LayuiPageInfo findPageBySpec(InvestigationContentParam param);
+
+     /**
+     * 查询数据，Specification模式
+     * @author hujt
+     * @Date 2020-09-09
+     */
+     List<Map<String,Object>> investigationInfoList();
 
 }

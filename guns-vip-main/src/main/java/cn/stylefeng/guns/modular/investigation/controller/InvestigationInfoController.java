@@ -10,6 +10,7 @@ import cn.stylefeng.guns.modular.investigation.model.params.InvestigationInfoPar
 import cn.stylefeng.guns.modular.investigation.model.params.InvestigationObjectParam;
 import cn.stylefeng.guns.modular.investigation.service.InvestigationInfoService;
 import cn.stylefeng.guns.modular.investigation.service.InvestigationObjectService;
+import cn.stylefeng.guns.sys.core.util.DefaultImages;
 import cn.stylefeng.guns.sys.modular.system.service.UserService;
 import cn.stylefeng.roses.core.base.controller.BaseController;
 import cn.stylefeng.roses.kernel.model.response.ResponseData;
@@ -71,6 +72,8 @@ public class InvestigationInfoController extends BaseController {
         currentUser.getDeptId();
         String Documents_number= "宿监协字【2020】"+currentUser.getDeptId()+"0001";
         model.addAttribute("Documents_number",Documents_number);
+
+        model.addAttribute("avatar", DefaultImages.defaultAvatarUrl());
         model.addAttribute("allUsersList",allUsers);
         return PREFIX + "/investigationInfo.html";
     }
