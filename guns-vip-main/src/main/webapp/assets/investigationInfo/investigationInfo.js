@@ -189,6 +189,10 @@ layui.use(['table', 'admin', 'ax', 'func','laydate','form','upload'], function (
         delete excelData.splice(j,1);
         randerInvestingationObj();
     },
+    closeDialog = function(j){
+        $("#pubcover").hide();
+        window.location.href = Feng.ctxPath + '/investigationInfo'
+    },
 
     submit = function(){
        var Documents_number= $("#Documents_number").val();
@@ -197,13 +201,11 @@ layui.use(['table', 'admin', 'ax', 'func','laydate','form','upload'], function (
        if(deadLine==""){
            Feng.error("请选择最迟反馈时间!");
        }
-
        var execldataTemp = [];
         for(var i = 0; i < excelData.length; i++) {
             var key = Object.keys(excelData[i])[0];
             execldataTemp.push(excelData[i][key]);
         }
-        // var url= "/investigationInfo/addItem";
         $.ajax({
             url: "/investigationInfo/addItem",
             type: "POST",
@@ -215,19 +217,13 @@ layui.use(['table', 'admin', 'ax', 'func','laydate','form','upload'], function (
             },
             dataType: "json",
             success: function(data){
-                alert(111);
+                $("#pubcover").show();
             },
             error:function(err){
             console.log(err.statusText);
             console.log('异常');
             }
          });
-        // var ajax = new $ax(Feng.ctxPath + url,excelData, function (data) {
-        //
-        //    alert('这里');
-        // }, function (data) {
-        // });
-        // ajax.start();
     };
     /**
      * 弹出添加对话框
