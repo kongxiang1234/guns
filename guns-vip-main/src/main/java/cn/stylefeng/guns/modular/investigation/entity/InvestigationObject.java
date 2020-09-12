@@ -1,19 +1,16 @@
 package cn.stylefeng.guns.modular.investigation.entity;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.annotation.IdType;
-import java.util.Date;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.*;
+
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <p>
  * 
  * </p>
  *
- * @author hujuntao
+ * @author hujt
  * @since 2020-09-12
  */
 @TableName("investigation_object")
@@ -44,6 +41,12 @@ public class InvestigationObject implements Serializable {
      */
     @TableField("card_number")
     private String cardNumber;
+
+    /**
+     * 备注
+     */
+    @TableField("remarks")
+    private String remarks;
 
     /**
      * 工作证_操作人
@@ -120,6 +123,14 @@ public class InvestigationObject implements Serializable {
         this.cardNumber = cardNumber;
     }
 
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
+
     public String getEmployeeCard() {
         return employeeCard;
     }
@@ -183,6 +194,7 @@ public class InvestigationObject implements Serializable {
         ", objectNotice=" + objectNotice +
         ", nameCompany=" + nameCompany +
         ", cardNumber=" + cardNumber +
+        ", remarks=" + remarks +
         ", employeeCard=" + employeeCard +
         ", employeeCardSelect=" + employeeCardSelect +
         ", infoId=" + infoId +

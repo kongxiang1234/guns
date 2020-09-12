@@ -13,7 +13,7 @@ import java.util.List;
  *  服务类
  * </p>
  *
- * @author hujuntao
+ * @author hujt
  * @since 2020-09-12
  */
 public interface InvestigationObjectService extends IService<InvestigationObject> {
@@ -21,7 +21,7 @@ public interface InvestigationObjectService extends IService<InvestigationObject
     /**
      * 新增
      *
-     * @author hujuntao
+     * @author hujt
      * @Date 2020-09-12
      */
     void add(InvestigationObjectParam param);
@@ -29,7 +29,7 @@ public interface InvestigationObjectService extends IService<InvestigationObject
     /**
      * 删除
      *
-     * @author hujuntao
+     * @author hujt
      * @Date 2020-09-12
      */
     void delete(InvestigationObjectParam param);
@@ -37,7 +37,7 @@ public interface InvestigationObjectService extends IService<InvestigationObject
     /**
      * 更新
      *
-     * @author hujuntao
+     * @author hujt
      * @Date 2020-09-12
      */
     void update(InvestigationObjectParam param);
@@ -45,7 +45,7 @@ public interface InvestigationObjectService extends IService<InvestigationObject
     /**
      * 查询单条数据，Specification模式
      *
-     * @author hujuntao
+     * @author hujt
      * @Date 2020-09-12
      */
     InvestigationObjectResult findBySpec(InvestigationObjectParam param);
@@ -53,7 +53,7 @@ public interface InvestigationObjectService extends IService<InvestigationObject
     /**
      * 查询列表，Specification模式
      *
-     * @author hujuntao
+     * @author hujt
      * @Date 2020-09-12
      */
     List<InvestigationObjectResult> findListBySpec(InvestigationObjectParam param);
@@ -61,7 +61,7 @@ public interface InvestigationObjectService extends IService<InvestigationObject
     /**
      * 查询分页数据，Specification模式
      *
-     * @author hujuntao
+     * @author hujt
      * @Date 2020-09-12
      */
      LayuiPageInfo findPageBySpec(InvestigationObjectParam param);

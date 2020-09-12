@@ -194,12 +194,15 @@ layui.use(['table', 'admin', 'ax', 'func','laydate','form','upload'], function (
        var Documents_number= $("#Documents_number").val();
        var deadLine= $("#deadLine").val();
        var takePerson= $("#takePersion").val();
+       if(deadLine==""){
+           Feng.error("请选择最迟反馈时间!");
+       }
+
        var execldataTemp = [];
         for(var i = 0; i < excelData.length; i++) {
             var key = Object.keys(excelData[i])[0];
             execldataTemp.push(excelData[i][key]);
         }
-        alert(execldataTemp);
         // var url= "/investigationInfo/addItem";
         $.ajax({
             url: "/investigationInfo/addItem",

@@ -7,6 +7,7 @@ var InvestigationObjectInfoDlg = {
         objectNotice: "",
         nameCompany: "",
         cardNumber: "",
+        remarks: "",
         employeeCard: "",
         employeeCardSelect: "",
         infoId: "",
@@ -22,6 +23,9 @@ layui.use(['form', 'admin', 'ax','laydate','upload','formSelects'], function () 
     var $ax = layui.ax;
     var form = layui.form;
     var admin = layui.admin;
+
+
+
 
 
 

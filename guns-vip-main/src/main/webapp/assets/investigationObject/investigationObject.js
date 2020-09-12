@@ -22,6 +22,7 @@ layui.use(['table', 'admin', 'ax', 'func'], function () {
             {field: 'objectNotice', sort: true, title: '协查通知书'},
             {field: 'nameCompany', sort: true, title: '姓名（单位）'},
             {field: 'cardNumber', sort: true, title: '身份证号（信用代码，银行卡号） '},
+            {field: 'remarks', sort: true, title: '备注'},
             {field: 'employeeCard', sort: true, title: '工作证_操作人'},
             {field: 'employeeCardSelect', sort: true, title: '工作证_选择'},
             {field: 'infoId', sort: true, title: '协查信息表id'},

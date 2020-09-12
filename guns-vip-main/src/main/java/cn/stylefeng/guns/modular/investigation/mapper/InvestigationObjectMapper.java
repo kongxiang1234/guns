@@ -16,7 +16,7 @@ import java.util.Map;
  *  Mapper 接口
  * </p>
  *
- * @author hujuntao
+ * @author hujt
  * @since 2020-09-12
  */
 public interface InvestigationObjectMapper extends BaseMapper<InvestigationObject> {
@@ -24,7 +24,7 @@ public interface InvestigationObjectMapper extends BaseMapper<InvestigationObjec
     /**
      * 获取列表
      *
-     * @author hujuntao
+     * @author hujt
      * @Date 2020-09-12
      */
     List<InvestigationObjectResult> customList(@Param("paramCondition") InvestigationObjectParam paramCondition);
@@ -32,7 +32,7 @@ public interface InvestigationObjectMapper extends BaseMapper<InvestigationObjec
     /**
      * 获取map列表
      *
-     * @author hujuntao
+     * @author hujt
      * @Date 2020-09-12
      */
     List<Map<String, Object>> customMapList(@Param("paramCondition") InvestigationObjectParam paramCondition);
@@ -40,7 +40,7 @@ public interface InvestigationObjectMapper extends BaseMapper<InvestigationObjec
     /**
      * 获取分页实体列表
      *
-     * @author hujuntao
+     * @author hujt
      * @Date 2020-09-12
      */
     Page<InvestigationObjectResult> customPageList(@Param("page") Page page, @Param("paramCondition") InvestigationObjectParam paramCondition);
@@ -48,7 +48,7 @@ public interface InvestigationObjectMapper extends BaseMapper<InvestigationObjec
     /**
      * 获取分页map列表
      *
-     * @author hujuntao
+     * @author hujt
      * @Date 2020-09-12
      */
     Page<Map<String, Object>> customPageMapList(@Param("page") Page page, @Param("paramCondition") InvestigationObjectParam paramCondition);

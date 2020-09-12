@@ -10,7 +10,7 @@ import java.math.BigDecimal;
  * 
  * </p>
  *
- * @author hujuntao
+ * @author hujt
  * @since 2020-09-12
  */
 @Data
@@ -38,6 +38,11 @@ public class InvestigationObjectResult implements Serializable {
      * 身份证号（信用代码，银行卡号） 
      */
     private String cardNumber;
+
+    /**
+     * 备注
+     */
+    private String remarks;
 
     /**
      * 工作证_操作人

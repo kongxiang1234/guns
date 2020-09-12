@@ -119,7 +119,7 @@ public class InvestigationInfoController extends BaseController {
         investigationInfoParam.setUserId(currentUser.getUsername());
         investigationInfoParam.setApplyTime(new java.sql.Date(System.currentTimeMillis()));
 
-//        this.investigationInfoService.add(investigationInfoParam);
+        this.investigationInfoService.add(investigationInfoParam);
 
         JSONArray excelData = JSON.parseArray(excelData2);
         List<List<InvestigationObjectParam>> unitObjList = new ArrayList<>();
@@ -130,10 +130,15 @@ public class InvestigationInfoController extends BaseController {
         for (int i = 0; i <unitObjList.size() ; i++) {
             for (int j = 0; j <unitObjList.get(i).size() ; j++) {
                 unitObjList.get(i).get(j).setInfoId(String.valueOf(serialVersionUID));
+                unitObjList.get(i).get(j).setObjectNotice(String.valueOf(serialVersionUID));
+                unitObjList.get(i).get(j).setEmployeeCard(String.valueOf(serialVersionUID));
+                unitObjList.get(i).get(j).setEmployeeCardSelect(String.valueOf(serialVersionUID));
+                unitObjList.get(i).get(j).setCreateTime(new java.sql.Date(System.currentTimeMillis()));
+                unitObjList.get(i).get(j).setUpdateTime(new java.sql.Date(System.currentTimeMillis()));
+                unitObjList.get(i).get(j).setUpdateBy(currentUser.getUsername());
                 this.investigationObjectService.add(unitObjList.get(i).get(j));
             }
         }
-
         System.err.println("id:"+investigationInfoParam.getInfoId());
         return ResponseData.success();
     }
