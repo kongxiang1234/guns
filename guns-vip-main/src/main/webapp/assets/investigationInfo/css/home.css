@@ -764,7 +764,7 @@ box-shadow: 3px 0px 4px rgb(17 194 71 / 64%)
 }
 .menu{
     float: right;
-    margin-right: -2rem;
+    margin-right: -1.2rem;
 }
 .menu li{
     float: left;
