@@ -25,18 +25,7 @@ layui.use(['table', 'admin', 'ax', 'ztree', 'func', 'tree','form'], function () 
             {type: 'checkbox'},
             {field: 'deptId', hide: true, sort: true, title: 'id'},
             {field: 'simpleName', align: "center", sort: true, title: '部门名称'},
-            {field: 'fullName', align: "center", sort: true, title: '部门性质', templet: function (d) {
-                    if (d.fullName == '1') {
-                        return "本部";
-                    } else if (d.fullName == '2') {
-                        return "分部";
-                    }else if (d.fullName == '3') {
-                        return "分公司";
-                    }else if (d.fullName == '4') {
-                        return "部门";
-                    }
-                }
-             },
+            
             {field: 'personCharge', align: "center", sort: true, title: '负责人'},
             {field: 'deptMobile', align: "center", sort: true, title: '部门电话'},
             {field: 'extensionNumber', align: "center", sort: true, title: '分机号'},

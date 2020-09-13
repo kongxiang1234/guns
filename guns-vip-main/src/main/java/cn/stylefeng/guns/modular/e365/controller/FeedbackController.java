@@ -117,14 +117,8 @@ public class FeedbackController extends BaseController {
     @RequestMapping("/detail")
     @ResponseBody
     public ResponseData detail(FeedbackParam feedbackParam) {
-        Feedback detail = this.feedbackService.getById(feedbackParam.getId());
-        List<Dict> dicts = this.dictService.listDictsByName("意见");
-        for (Dict dict:dicts){
-            if(detail.getFeedbackType().equals(dict.getCode())){
-                detail.setFeedbackType(dict.getName());
-            }
-        }
-        return ResponseData.success(detail);
+
+        return ResponseData.success();
     }
 
     /**

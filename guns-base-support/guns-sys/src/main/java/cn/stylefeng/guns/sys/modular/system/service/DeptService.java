@@ -43,7 +43,7 @@ public class DeptService extends ServiceImpl<DeptMapper, Dept> {
     @Transactional(rollbackFor = Exception.class)
     public void addDept(Dept dept) {
 
-        if (ToolUtil.isOneEmpty(dept, dept.getSimpleName(), dept.getFullName(), dept.getPidsV())) {
+        if (ToolUtil.isOneEmpty(dept, dept.getSimpleName(), dept.getPidsV())) {
             throw new ServiceException(BizExceptionEnum.REQUEST_NULL);
         }
 
@@ -62,7 +62,7 @@ public class DeptService extends ServiceImpl<DeptMapper, Dept> {
     @Transactional(rollbackFor = Exception.class)
     public void editDept(Dept dept) {
 
-        if (ToolUtil.isOneEmpty(dept, dept.getDeptId(), dept.getSimpleName(), dept.getFullName(), dept.getPidsV())) {
+        if (ToolUtil.isOneEmpty(dept, dept.getDeptId(), dept.getSimpleName(),  dept.getPidsV())) {
             throw new ServiceException(BizExceptionEnum.REQUEST_NULL);
         }
         //完善pids,根据pid拿到pid的pids

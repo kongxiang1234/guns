@@ -107,7 +107,7 @@
         </if>
         <if test="deptId != null and deptId != ''">
             and (dept_id = #{deptId} or dept_id in ( select dept_id from sys_dept where pids like CONCAT('%$[', #{deptId}, '$]%') escape '$' ))
-        </if> group by simple_name
+        </if> group by dept_id,simple_name
         order by sort ASC
     </select>
 

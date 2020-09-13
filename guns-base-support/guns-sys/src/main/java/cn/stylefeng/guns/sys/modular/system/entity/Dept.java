@@ -52,7 +52,6 @@ public class Dept implements Serializable {
      * 全称
      */
     @TableField("full_name")
-    @NotBlank
     private String fullName;
 
     /**
