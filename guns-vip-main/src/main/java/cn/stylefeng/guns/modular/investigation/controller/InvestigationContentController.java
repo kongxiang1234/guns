@@ -40,27 +40,27 @@ public class InvestigationContentController extends BaseController {
      */
     @RequestMapping("")
     public String index(Model model, HttpServletRequest request, HttpSession session) {
-        List<Map<String, Object>> mapList = investigationContentService.investigationInfoList();
+//        List<Map<String, Object>> mapList = investigationContentService.investigationInfoList();
 
-        Map<String, List<Map<String,Object>>> resultMap = new HashMap<>();
-        for (int i = 0; i < mapList.size(); i++) {
-            if(resultMap.containsKey(mapList.get(i).get("info_id").toString())){//map中异常批次已存在，将该数据存放到同一个key（key存放的是异常批次）的map中
-                resultMap.get(mapList.get(i).get("info_id").toString()).add(mapList.get(i));
-            }else{//map中不存在，新建key，用来存放数据
-                List<Map<String,Object>> tmpList = new ArrayList<>();
-                tmpList.add(mapList.get(i));
-                resultMap.put(mapList.get(i).get("info_id").toString(), tmpList);
-            }
-        }
-        Set<String> keySet = resultMap.keySet();
-        List<Map<String,Object>> list = new ArrayList<>();
-        for (String key : keySet) {
-            Map<String, Object> temp = new HashMap<>();
-            temp.put("info_Id",key);
-            temp.put("infoList",resultMap.get(key));
-            list.add(temp);
-        }
-        model.addAttribute("infoList",list);
+//        Map<String, List<Map<String,Object>>> resultMap = new HashMap<>();
+//        for (int i = 0; i < mapList.size(); i++) {
+//            if(resultMap.containsKey(mapList.get(i).get("info_id").toString())){//map中异常批次已存在，将该数据存放到同一个key（key存放的是异常批次）的map中
+//                resultMap.get(mapList.get(i).get("info_id").toString()).add(mapList.get(i));
+//            }else{//map中不存在，新建key，用来存放数据
+//                List<Map<String,Object>> tmpList = new ArrayList<>();
+//                tmpList.add(mapList.get(i));
+//                resultMap.put(mapList.get(i).get("info_id").toString(), tmpList);
+//            }
+//        }
+//        Set<String> keySet = resultMap.keySet();
+//        List<Map<String,Object>> list = new ArrayList<>();
+//        for (String key : keySet) {
+//            Map<String, Object> temp = new HashMap<>();
+//            temp.put("info_Id",key);
+//            temp.put("infoList",resultMap.get(key));
+//            list.add(temp);
+//        }
+//        model.addAttribute("infoList",list);
         return PREFIX + "/investigationContent.html";
 
     }
@@ -72,7 +72,28 @@ public class InvestigationContentController extends BaseController {
      * @Date 2020-09-09
      */
     @RequestMapping("/add")
-    public String add() {
+    public String add(Model model, HttpServletRequest request, HttpSession session,InvestigationContentParam investigationContentParam) {
+        List<Map<String, Object>> mapList = investigationContentService.getInvestigationInfoByid(investigationContentParam);
+
+        Map<String, List<Map<String,Object>>> resultMap = new HashMap<>();
+        for (int i = 0; i < mapList.size(); i++) {
+            if(resultMap.containsKey(mapList.get(i).get("unit_name").toString())){//map中异常批次已存在，将该数据存放到同一个key（key存放的是异常批次）的map中
+                resultMap.get(mapList.get(i).get("unit_name").toString()).add(mapList.get(i));
+            }else{//map中不存在，新建key，用来存放数据
+                List<Map<String,Object>> tmpList = new ArrayList<>();
+                tmpList.add(mapList.get(i));
+                resultMap.put(mapList.get(i).get("unit_name").toString(), tmpList);
+            }
+        }
+        Set<String> keySet = resultMap.keySet();
+        List<Map<String,Object>> list = new ArrayList<>();
+        for (String key : keySet) {
+            Map<String, Object> temp = new HashMap<>();
+            temp.put("unitName",key);
+            temp.put("infoList",resultMap.get(key));
+            list.add(temp);
+        }
+        model.addAttribute("infoList",list);
         return PREFIX + "/investigationContent_add.html";
     }
 

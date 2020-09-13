@@ -47,9 +47,19 @@
     </select>
 
      <select id="investigationInfoList" resultType="map">
-        select a.*,b.* from investigation_info a
-        LEFT JOIN investigation_object b
-        on a.info_id = b.info_id
+
+        SELECT a.*,b.* ,c.* FROM investigation_info a
+        LEFT JOIN investigation_object b ON a.info_id = b.info_id
+		LEFT JOIN investigation_unit c   ON c.unit_id = b.unit_id
+        WHERE b.info_id != ''
+    </select>
+
+    <select id="getInvestigationInfoByid" resultType="map" parameterType="cn.stylefeng.guns.modular.investigation.model.params.InvestigationContentParam">
+        SELECT a.*,b.* ,c.* FROM investigation_info a
+        LEFT JOIN investigation_object b ON a.info_id = b.info_id
+		LEFT JOIN investigation_unit c   ON c.unit_id = b.unit_id
+
+        where a.info_id=#{unitId}
     </select>
 
 

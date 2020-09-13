@@ -7,6 +7,7 @@ import cn.stylefeng.guns.modular.investigation.model.result.InvestigationUnitRes
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -65,5 +66,10 @@ public interface InvestigationUnitService extends IService<InvestigationUnit> {
      * @Date 2020-09-09
      */
      LayuiPageInfo findPageBySpec(InvestigationUnitParam param);
+    /**
+     * @author hujt
+     * @Date 2020-09-09
+     */
+     Map<String,Object> findInvestigationUnitById(InvestigationUnitParam param);
 
 }

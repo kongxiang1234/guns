@@ -26,7 +26,7 @@ layui.use(['table', 'admin', 'ax', 'func'], function () {
                 var html = "";
                 for (var i = 0; i <data.length ; i++) {
 
-                    html += '<div class="lsqtypebox">' +
+                    html += '<div class="lsqtypebox" onclick="showInvestigationDetail('+data[i].info_Id+');">' +
                         '<div>' +
                         '<div class="typecont">' +
                         '<h1>'+data[i].infoList[0].Documents_number+'&nbsp;&nbsp;<label class="span2">未受理</label></h1>' +
@@ -38,7 +38,10 @@ layui.use(['table', 'admin', 'ax', 'func'], function () {
                         '<tr>' +
                         '<th>协查内容：</th><td>';
                     for (var j = 0; j <data[i].infoList.length ; j++) {
-                        html +=data[i].infoList[j].name_company+",";
+                        html +=data[i].infoList[j].name_company;
+                            if(j<data[i].infoList.length-1){
+                                html += ',';
+                            }
                     }
                     html +='</td>' +
                         '</tr>' +
@@ -114,7 +117,9 @@ layui.use(['table', 'admin', 'ax', 'func'], function () {
     InvestigationContent.jumpAddPage = function () {
         window.location.href = Feng.ctxPath + '/investigationContent/add'
     };
-
+    showInvestigationDetail = function (val) {
+        window.location.href = Feng.ctxPath + '/investigationContent/add?unitId=' + val
+    };
     /**
     * 跳转到编辑页面
     *

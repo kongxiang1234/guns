@@ -12,6 +12,7 @@
         <result column="employee_card" property="employeeCard" />
         <result column="employee_card_select" property="employeeCardSelect" />
         <result column="info_id" property="infoId" />
+        <result column="unit_id" property="unitId" />
         <result column="create_time" property="createTime" />
         <result column="create_by" property="createBy" />
         <result column="update_time" property="updateTime" />
@@ -20,7 +21,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        object_id AS "objectId", object_notice AS "objectNotice", name_company AS "nameCompany", card_number AS "cardNumber", remarks AS "remarks", employee_card AS "employeeCard", employee_card_select AS "employeeCardSelect", info_id AS "infoId", create_time AS "createTime", create_by AS "createBy", update_time AS "updateTime", update_by AS "updateBy"
+        object_id AS "objectId", object_notice AS "objectNotice", name_company AS "nameCompany", card_number AS "cardNumber", remarks AS "remarks", employee_card AS "employeeCard", employee_card_select AS "employeeCardSelect", info_id AS "infoId", unit_id AS "unit_id", create_time AS "createTime", create_by AS "createBy", update_time AS "updateTime", update_by AS "updateBy"
     </sql>
 
 

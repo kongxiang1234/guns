@@ -51,12 +51,16 @@ public interface InvestigationContentMapper extends BaseMapper<InvestigationCont
      * @Date 2020-09-09
      */
     Page<Map<String, Object>> customPageMapList(@Param("page") Page page, @Param("paramCondition") InvestigationContentParam paramCondition);
-/**
+    /**
      * 获取分页map列表
      *
      * @author hujt
      * @Date 2020-09-09
      */
     List<Map<String, Object>> investigationInfoList();
+
+
+    List<Map<String, Object>> getInvestigationInfoByid(InvestigationContentParam investigationContentParam);
+
 
 }

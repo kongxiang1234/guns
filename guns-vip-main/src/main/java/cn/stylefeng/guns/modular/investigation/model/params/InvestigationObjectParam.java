@@ -39,6 +39,10 @@ public class InvestigationObjectParam implements Serializable, BaseValidatingPar
      * 身份证号（信用代码，银行卡号） 
      */
     private String cardNumber;
+    /**
+     * 身份证号（信用代码，银行卡号）
+     */
+    private String unitId;
 
     /**
      * 备注

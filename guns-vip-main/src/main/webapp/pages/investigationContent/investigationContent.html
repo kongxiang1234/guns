@@ -11,7 +11,7 @@
 </head>
 
 <body class="bodybg bodybgts" >
-<div class="container">
+<div class="container" onload="onloadData()">
     <div class="xctitle xctitlets">
         <span>协查申请管理</span>
         <div class="searchbox">
@@ -41,27 +41,27 @@
     </div>
     <div class="">
         <div class="sqtypebox">
-            <div class="lsqtypebox sle">
+            <!-- <div class="lsqtypebox sle">
                 <div>
-                    <div class="typecont">
-                        <h1>宿监协字【2020】001号&nbsp;&nbsp;<label class="span1">反馈完成</label></h1>
-                        <div class="typeview">
-                            <span class="viewnum">申请人：张友文</span>
-                            <span class="pubtime">申请时间：2019-12-02</span>
-                        </div>
-                        <table>
-                            <tr>
-                                <th>协查内容：</th>
-                                <td>张**、李**、赵**</td>
-                            </tr>
-                            <tr>
-                                <th>协查反馈：</th>
-                                <td class="green">
-                                    <div class="process"><span><i></i></span></div>20%
-                                </td>
-                            </tr>
-                        </table>
-                        <span class="editbox">
+                <div class="typecont">
+                    <h1>宿监协字【2020】001号&nbsp;&nbsp;<label class="span1">反馈完成</label></h1>
+                    <div class="typeview">
+                        <span class="viewnum">申请人：张友文</span>
+                        <span class="pubtime">申请时间：2019-12-02</span>
+                    </div>
+                    <table>
+                        <tr>
+                            <th>协查内容：</th>
+                            <td>张**、李**、赵**</td>
+                        </tr>
+                        <tr>
+                            <th>协查反馈：</th>
+                            <td class="green">
+                                <div class="process"><span><i></i></span></div>20%
+                            </td>
+                        </tr>
+                    </table>
+                    <span class="editbox">
                                 <img src="/assets/investigationInfo/img/icon31.png" onmousemove="editbox(this)" onmouseout="noeditbox(this)" />
                                 <div class="editcover" onmousemove="editcover(this)" onmouseout="noeditcover(this)">
                                     <img src="/assets/investigationInfo/img/icon32.png" />
@@ -73,289 +73,290 @@
                                     </ul>
                                 </div>
                             </span>
-                    </div>
                 </div>
             </div>
+            </div>
+
             <div class="lsqtypebox">
-                <div>
-                    <div class="typecont">
-                        <h1>宿监协字【2020】001号&nbsp;&nbsp;<label class="span2">未受理</label></h1>
-                        <div class="typeview">
-                            <span class="viewnum">申请人：张友文</span>
-                            <span class="pubtime">申请时间：2019-12-02</span>
-                        </div>
-                        <table>
-                            <tr>
-                                <th>协查内容：</th>
-                                <td>张**、李**、赵**</td>
-                            </tr>
-                            <tr>
-                                <th>协查反馈：</th>
-                                <td class="red">
-                                    <div class="process"><span><i></i></span></div>100%
-                                </td>
-                            </tr>
-                        </table>
-                        <span class="editbox">
-                                <img src="/assets/investigationInfo/img/icon31.png" onmousemove="editbox(this)" onmouseout="noeditbox(this)" />
-                                <div class="editcover" onmousemove="editcover(this)" onmouseout="noeditcover(this)">
-                                    <img src="/assets/investigationInfo/img/icon32.png" />
-                                    <ul>
-                                        <li><span></span>修改</li>
-                                        <li><span></span>删除</li>
-                                        <li><span></span>下载</li>
-                                        <li><span></span>催办</li>
-                                    </ul>
-                                </div>
-                            </span>
-                    </div>
-                </div>
-            </div>
-            <div class="lsqtypebox">
-                <div>
-                    <div class="typecont">
-                        <h1>宿监协字【2020】001号&nbsp;&nbsp;<label class="span3">查询中</label></h1>
-                        <div class="typeview">
-                            <span class="viewnum">申请人：张友文</span>
-                            <span class="pubtime">申请时间：2019-12-02</span>
-                        </div>
-                        <table>
-                            <tr>
-                                <th>协查内容：</th>
-                                <td>张**、李**、赵**</td>
-                            </tr>
-                            <tr>
-                                <th>协查反馈：</th>
-                                <td class="red">
-                                    <div class="process"><span><i></i></span></div>100%
-                                </td>
-                            </tr>
-                        </table>
-                        <span class="editbox">
-                                <img src="/assets/investigationInfo/img/icon31.png" onmousemove="editbox(this)" onmouseout="noeditbox(this)" />
-                                <div class="editcover" onmousemove="editcover(this)" onmouseout="noeditcover(this)">
-                                    <img src="/assets/investigationInfo/img/icon32.png" />
-                                    <ul>
-                                        <li><span></span>修改</li>
-                                        <li><span></span>删除</li>
-                                        <li><span></span>下载</li>
-                                        <li><span></span>催办</li>
-                                    </ul>
-                                </div>
-                            </span>
-                    </div>
-                </div>
-            </div>
-            <div class="lsqtypebox">
-                <div>
-                    <div class="typecont">
-                        <h1>宿监协字【2020】001号&nbsp;&nbsp;<label class="span2">未受理</label></h1>
-                        <div class="typeview">
-                            <span class="viewnum">申请人：张友文</span>
-                            <span class="pubtime">申请时间：2019-12-02</span>
-                        </div>
-                        <table>
-                            <tr>
-                                <th>协查内容：</th>
-                                <td>张**、李**、赵**</td>
-                            </tr>
-                            <tr>
-                                <th>协查反馈：</th>
-                                <td class="red">
-                                    <div class="process"><span><i></i></span></div>100%
-                                </td>
-                            </tr>
-                        </table>
-                        <span class="editbox">
-                                <img src="/assets/investigationInfo/img/icon31.png" onmousemove="editbox(this)" onmouseout="noeditbox(this)" />
-                                <div class="editcover" onmousemove="editcover(this)" onmouseout="noeditcover(this)">
-                                    <img src="/assets/investigationInfo/img/icon32.png" />
-                                    <ul>
-                                        <li><span></span>修改</li>
-                                        <li><span></span>删除</li>
-                                        <li><span></span>下载</li>
-                                        <li><span></span>催办</li>
-                                    </ul>
-                                </div>
-                            </span>
-                    </div>
-                </div>
-            </div>
-            <div class="lsqtypebox">
-                <div>
-                    <div class="typecont">
-                        <h1>宿监协字【2020】001号&nbsp;&nbsp;<label class="span3">查询中</label></h1>
-                        <div class="typeview">
-                            <span class="viewnum">申请人：张友文</span>
-                            <span class="pubtime">申请时间：2019-12-02</span>
-                        </div>
-                        <table>
-                            <tr>
-                                <th>协查内容：</th>
-                                <td>张**、李**、赵**</td>
-                            </tr>
-                            <tr>
-                                <th>协查反馈：</th>
-                                <td class="red">
-                                    <div class="process"><span><i></i></span></div>100%
-                                </td>
-                            </tr>
-                        </table>
-                        <span class="editbox">
-                                <img src="/assets/investigationInfo/img/icon31.png" onmousemove="editbox(this)" onmouseout="noeditbox(this)" />
-                                <div class="editcover" onmousemove="editcover(this)" onmouseout="noeditcover(this)">
-                                    <img src="/assets/investigationInfo/img/icon32.png" />
-                                    <ul>
-                                        <li><span></span>修改</li>
-                                        <li><span></span>删除</li>
-                                        <li><span></span>下载</li>
-                                        <li><span></span>催办</li>
-                                    </ul>
-                                </div>
-                            </span>
-                    </div>
-                </div>
-            </div>
-            <div class="lsqtypebox">
-                <div>
-                    <div class="typecont">
-                        <h1>宿监协字【2020】001号&nbsp;&nbsp;<label class="span2">未受理</label></h1>
-                        <div class="typeview">
-                            <span class="viewnum">申请人：张友文</span>
-                            <span class="pubtime">申请时间：2019-12-02</span>
-                        </div>
-                        <table>
-                            <tr>
-                                <th>协查内容：</th>
-                                <td>张**、李**、赵**</td>
-                            </tr>
-                            <tr>
-                                <th>协查反馈：</th>
-                                <td class="red">
-                                    <div class="process"><span><i></i></span></div>100%
-                                </td>
-                            </tr>
-                        </table>
-                        <span class="editbox">
-                                <img src="/assets/investigationInfo/img/icon31.png" onmousemove="editbox(this)" onmouseout="noeditbox(this)" />
-                                <div class="editcover" onmousemove="editcover(this)" onmouseout="noeditcover(this)">
-                                    <img src="/assets/investigationInfo/img/icon32.png" />
-                                    <ul>
-                                        <li><span></span>修改</li>
-                                        <li><span></span>删除</li>
-                                        <li><span></span>下载</li>
-                                        <li><span></span>催办</li>
-                                    </ul>
-                                </div>
-                            </span>
-                    </div>
-                </div>
-            </div>
-            <div class="lsqtypebox">
-                <div>
-                    <div class="typecont">
-                        <h1>宿监协字【2020】001号&nbsp;&nbsp;<label class="span3">查询中</label></h1>
-                        <div class="typeview">
-                            <span class="viewnum">申请人：张友文</span>
-                            <span class="pubtime">申请时间：2019-12-02</span>
-                        </div>
-                        <table>
-                            <tr>
-                                <th>协查内容：</th>
-                                <td>张**、李**、赵**</td>
-                            </tr>
-                            <tr>
-                                <th>协查反馈：</th>
-                                <td class="red">
-                                    <div class="process"><span><i></i></span></div>100%
-                                </td>
-                            </tr>
-                        </table>
-                        <span class="editbox">
-                                <img src="/assets/investigationInfo/img/icon31.png" onmousemove="editbox(this)" onmouseout="noeditbox(this)" />
-                                <div class="editcover" onmousemove="editcover(this)" onmouseout="noeditcover(this)">
-                                    <img src="/assets/investigationInfo/img/icon32.png" />
-                                    <ul>
-                                        <li><span></span>修改</li>
-                                        <li><span></span>删除</li>
-                                        <li><span></span>下载</li>
-                                        <li><span></span>催办</li>
-                                    </ul>
-                                </div>
-                            </span>
-                    </div>
-                </div>
-            </div>
-            <div class="lsqtypebox">
-                <div>
-                    <div class="typecont">
-                        <h1>宿监协字【2020】001号&nbsp;&nbsp;<label class="span2">未受理</label></h1>
-                        <div class="typeview">
-                            <span class="viewnum">申请人：张友文</span>
-                            <span class="pubtime">申请时间：2019-12-02</span>
-                        </div>
-                        <table>
-                            <tr>
-                                <th>协查内容：</th>
-                                <td>张**、李**、赵**</td>
-                            </tr>
-                            <tr>
-                                <th>协查反馈：</th>
-                                <td class="red">
-                                    <div class="process"><span><i></i></span></div>100%
-                                </td>
-                            </tr>
-                        </table>
-                        <span class="editbox">
-                                <img src="/assets/investigationInfo/img/icon31.png" onmousemove="editbox(this)" onmouseout="noeditbox(this)" />
-                                <div class="editcover" onmousemove="editcover(this)" onmouseout="noeditcover(this)">
-                                    <img src="/assets/investigationInfo/img/icon32.png" />
-                                    <ul>
-                                        <li><span></span>修改</li>
-                                        <li><span></span>删除</li>
-                                        <li><span></span>下载</li>
-                                        <li><span></span>催办</li>
-                                    </ul>
-                                </div>
-                            </span>
-                    </div>
-                </div>
-            </div>
-            <div class="lsqtypebox">
-                <div>
-                    <div class="typecont">
-                        <h1>宿监协字【2020】001号&nbsp;&nbsp;<label class="span3">查询中</label></h1>
-                        <div class="typeview">
-                            <span class="viewnum">申请人：张友文</span>
-                            <span class="pubtime">申请时间：2019-12-02</span>
-                        </div>
-                        <table>
-                            <tr>
-                                <th>协查内容：</th>
-                                <td>张**、李**、赵**</td>
-                            </tr>
-                            <tr>
-                                <th>协查反馈：</th>
-                                <td class="red">
-                                    <div class="process"><span><i></i></span></div>100%
-                                </td>
-                            </tr>
-                        </table>
-                        <span class="editbox">
-                                <img src="/assets/investigationInfo/img/icon31.png" onmousemove="editbox(this)" onmouseout="noeditbox(this)" />
-                                <div class="editcover" onmousemove="editcover(this)" onmouseout="noeditcover(this)">
-                                    <img src="/assets/investigationInfo/img/icon32.png" />
-                                    <ul>
-                                        <li><span></span>修改</li>
-                                        <li><span></span>删除</li>
-                                        <li><span></span>下载</li>
-                                        <li><span></span>催办</li>
-                                    </ul>
-                                </div>
-                            </span>
-                    </div>
-                </div>
-            </div>
+                 <div>
+                     <div class="typecont">
+                         <h1>宿监协字【2020】001号&nbsp;&nbsp;<label class="span2">未受理</label></h1>
+                         <div class="typeview">
+                             <span class="viewnum">申请人：张友文</span>
+                             <span class="pubtime">申请时间：2019-12-02</span>
+                         </div>
+                         <table>
+                             <tr>
+                                 <th>协查内容：</th>
+                                 <td>张**、李**、赵**</td>
+                             </tr>
+                             <tr>
+                                 <th>协查反馈：</th>
+                                 <td class="red">
+                                     <div class="process"><span><i></i></span></div>100%
+                                 </td>
+                             </tr>
+                         </table>
+                         <span class="editbox">
+                                 <img src="/assets/investigationInfo/img/icon31.png" onmousemove="editbox(this)" onmouseout="noeditbox(this)" />
+                                 <div class="editcover" onmousemove="editcover(this)" onmouseout="noeditcover(this)">
+                                     <img src="/assets/investigationInfo/img/icon32.png" />
+                                     <ul>
+                                         <li><span></span>修改</li>
+                                         <li><span></span>删除</li>
+                                         <li><span></span>下载</li>
+                                         <li><span></span>催办</li>
+                                     </ul>
+                                 </div>
+                             </span>
+                     </div>
+                 </div>
+             </div>
+             <div class="lsqtypebox">
+                 <div>
+                     <div class="typecont">
+                         <h1>宿监协字【2020】001号&nbsp;&nbsp;<label class="span3">查询中</label></h1>
+                         <div class="typeview">
+                             <span class="viewnum">申请人：张友文</span>
+                             <span class="pubtime">申请时间：2019-12-02</span>
+                         </div>
+                         <table>
+                             <tr>
+                                 <th>协查内容：</th>
+                                 <td>张**、李**、赵**</td>
+                             </tr>
+                             <tr>
+                                 <th>协查反馈：</th>
+                                 <td class="red">
+                                     <div class="process"><span><i></i></span></div>100%
+                                 </td>
+                             </tr>
+                         </table>
+                         <span class="editbox">
+                                 <img src="/assets/investigationInfo/img/icon31.png" onmousemove="editbox(this)" onmouseout="noeditbox(this)" />
+                                 <div class="editcover" onmousemove="editcover(this)" onmouseout="noeditcover(this)">
+                                     <img src="/assets/investigationInfo/img/icon32.png" />
+                                     <ul>
+                                         <li><span></span>修改</li>
+                                         <li><span></span>删除</li>
+                                         <li><span></span>下载</li>
+                                         <li><span></span>催办</li>
+                                     </ul>
+                                 </div>
+                             </span>
+                     </div>
+                 </div>
+             </div>
+             <div class="lsqtypebox">
+                 <div>
+                     <div class="typecont">
+                         <h1>宿监协字【2020】001号&nbsp;&nbsp;<label class="span2">未受理</label></h1>
+                         <div class="typeview">
+                             <span class="viewnum">申请人：张友文</span>
+                             <span class="pubtime">申请时间：2019-12-02</span>
+                         </div>
+                         <table>
+                             <tr>
+                                 <th>协查内容：</th>
+                                 <td>张**、李**、赵**</td>
+                             </tr>
+                             <tr>
+                                 <th>协查反馈：</th>
+                                 <td class="red">
+                                     <div class="process"><span><i></i></span></div>100%
+                                 </td>
+                             </tr>
+                         </table>
+                         <span class="editbox">
+                                 <img src="/assets/investigationInfo/img/icon31.png" onmousemove="editbox(this)" onmouseout="noeditbox(this)" />
+                                 <div class="editcover" onmousemove="editcover(this)" onmouseout="noeditcover(this)">
+                                     <img src="/assets/investigationInfo/img/icon32.png" />
+                                     <ul>
+                                         <li><span></span>修改</li>
+                                         <li><span></span>删除</li>
+                                         <li><span></span>下载</li>
+                                         <li><span></span>催办</li>
+                                     </ul>
+                                 </div>
+                             </span>
+                     </div>
+                 </div>
+             </div>
+             <div class="lsqtypebox">
+                 <div>
+                     <div class="typecont">
+                         <h1>宿监协字【2020】001号&nbsp;&nbsp;<label class="span3">查询中</label></h1>
+                         <div class="typeview">
+                             <span class="viewnum">申请人：张友文</span>
+                             <span class="pubtime">申请时间：2019-12-02</span>
+                         </div>
+                         <table>
+                             <tr>
+                                 <th>协查内容：</th>
+                                 <td>张**、李**、赵**</td>
+                             </tr>
+                             <tr>
+                                 <th>协查反馈：</th>
+                                 <td class="red">
+                                     <div class="process"><span><i></i></span></div>100%
+                                 </td>
+                             </tr>
+                         </table>
+                         <span class="editbox">
+                                 <img src="/assets/investigationInfo/img/icon31.png" onmousemove="editbox(this)" onmouseout="noeditbox(this)" />
+                                 <div class="editcover" onmousemove="editcover(this)" onmouseout="noeditcover(this)">
+                                     <img src="/assets/investigationInfo/img/icon32.png" />
+                                     <ul>
+                                         <li><span></span>修改</li>
+                                         <li><span></span>删除</li>
+                                         <li><span></span>下载</li>
+                                         <li><span></span>催办</li>
+                                     </ul>
+                                 </div>
+                             </span>
+                     </div>
+                 </div>
+             </div>
+             <div class="lsqtypebox">
+                 <div>
+                     <div class="typecont">
+                         <h1>宿监协字【2020】001号&nbsp;&nbsp;<label class="span2">未受理</label></h1>
+                         <div class="typeview">
+                             <span class="viewnum">申请人：张友文</span>
+                             <span class="pubtime">申请时间：2019-12-02</span>
+                         </div>
+                         <table>
+                             <tr>
+                                 <th>协查内容：</th>
+                                 <td>张**、李**、赵**</td>
+                             </tr>
+                             <tr>
+                                 <th>协查反馈：</th>
+                                 <td class="red">
+                                     <div class="process"><span><i></i></span></div>100%
+                                 </td>
+                             </tr>
+                         </table>
+                         <span class="editbox">
+                                 <img src="/assets/investigationInfo/img/icon31.png" onmousemove="editbox(this)" onmouseout="noeditbox(this)" />
+                                 <div class="editcover" onmousemove="editcover(this)" onmouseout="noeditcover(this)">
+                                     <img src="/assets/investigationInfo/img/icon32.png" />
+                                     <ul>
+                                         <li><span></span>修改</li>
+                                         <li><span></span>删除</li>
+                                         <li><span></span>下载</li>
+                                         <li><span></span>催办</li>
+                                     </ul>
+                                 </div>
+                             </span>
+                     </div>
+                 </div>
+             </div>
+             <div class="lsqtypebox">
+                 <div>
+                     <div class="typecont">
+                         <h1>宿监协字【2020】001号&nbsp;&nbsp;<label class="span3">查询中</label></h1>
+                         <div class="typeview">
+                             <span class="viewnum">申请人：张友文</span>
+                             <span class="pubtime">申请时间：2019-12-02</span>
+                         </div>
+                         <table>
+                             <tr>
+                                 <th>协查内容：</th>
+                                 <td>张**、李**、赵**</td>
+                             </tr>
+                             <tr>
+                                 <th>协查反馈：</th>
+                                 <td class="red">
+                                     <div class="process"><span><i></i></span></div>100%
+                                 </td>
+                             </tr>
+                         </table>
+                         <span class="editbox">
+                                 <img src="/assets/investigationInfo/img/icon31.png" onmousemove="editbox(this)" onmouseout="noeditbox(this)" />
+                                 <div class="editcover" onmousemove="editcover(this)" onmouseout="noeditcover(this)">
+                                     <img src="/assets/investigationInfo/img/icon32.png" />
+                                     <ul>
+                                         <li><span></span>修改</li>
+                                         <li><span></span>删除</li>
+                                         <li><span></span>下载</li>
+                                         <li><span></span>催办</li>
+                                     </ul>
+                                 </div>
+                             </span>
+                     </div>
+                 </div>
+             </div>
+             <div class="lsqtypebox">
+                 <div>
+                     <div class="typecont">
+                         <h1>宿监协字【2020】001号&nbsp;&nbsp;<label class="span2">未受理</label></h1>
+                         <div class="typeview">
+                             <span class="viewnum">申请人：张友文</span>
+                             <span class="pubtime">申请时间：2019-12-02</span>
+                         </div>
+                         <table>
+                             <tr>
+                                 <th>协查内容：</th>
+                                 <td>张**、李**、赵**</td>
+                             </tr>
+                             <tr>
+                                 <th>协查反馈：</th>
+                                 <td class="red">
+                                     <div class="process"><span><i></i></span></div>100%
+                                 </td>
+                             </tr>
+                         </table>
+                         <span class="editbox">
+                                 <img src="/assets/investigationInfo/img/icon31.png" onmousemove="editbox(this)" onmouseout="noeditbox(this)" />
+                                 <div class="editcover" onmousemove="editcover(this)" onmouseout="noeditcover(this)">
+                                     <img src="/assets/investigationInfo/img/icon32.png" />
+                                     <ul>
+                                         <li><span></span>修改</li>
+                                         <li><span></span>删除</li>
+                                         <li><span></span>下载</li>
+                                         <li><span></span>催办</li>
+                                     </ul>
+                                 </div>
+                             </span>
+                     </div>
+                 </div>
+             </div>
+             <div class="lsqtypebox">
+                 <div>
+                     <div class="typecont">
+                         <h1>宿监协字【2020】001号&nbsp;&nbsp;<label class="span3">查询中</label></h1>
+                         <div class="typeview">
+                             <span class="viewnum">申请人：张友文</span>
+                             <span class="pubtime">申请时间：2019-12-02</span>
+                         </div>
+                         <table>
+                             <tr>
+                                 <th>协查内容：</th>
+                                 <td>张**、李**、赵**</td>
+                             </tr>
+                             <tr>
+                                 <th>协查反馈：</th>
+                                 <td class="red">
+                                     <div class="process"><span><i></i></span></div>100%
+                                 </td>
+                             </tr>
+                         </table>
+                         <span class="editbox">
+                                 <img src="/assets/investigationInfo/img/icon31.png" onmousemove="editbox(this)" onmouseout="noeditbox(this)" />
+                                 <div class="editcover" onmousemove="editcover(this)" onmouseout="noeditcover(this)">
+                                     <img src="/assets/investigationInfo/img/icon32.png" />
+                                     <ul>
+                                         <li><span></span>修改</li>
+                                         <li><span></span>删除</li>
+                                         <li><span></span>下载</li>
+                                         <li><span></span>催办</li>
+                                     </ul>
+                                 </div>
+                             </span>
+                     </div>
+                 </div>
+             </div>-->
         </div>
     </div>
 </div>
@@ -441,22 +442,6 @@
         $(".searchbox").hide();
         $(".menu").show();
     }
-
-    window.onload = function(){
-        $.ajax({
-            url: "/investigationContent/getinvestigationInfoList",
-            type: "POST",
-            data:{},
-            dataType: "json",
-            success: function(data){
-                // alert(JSON.stringify(data));
-            },
-            error:function(err){
-                console.log(err.statusText);
-                console.log('异常');
-            }
-        });
-    };
 
 </script>
 </body>

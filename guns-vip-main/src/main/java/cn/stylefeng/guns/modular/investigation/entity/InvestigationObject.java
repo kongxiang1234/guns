@@ -65,6 +65,11 @@ public class InvestigationObject implements Serializable {
      */
     @TableField("info_id")
     private String infoId;
+    /**
+     * 协查信息表id
+     */
+    @TableField("unit_id")
+    private String unitId;
 
     /**
      * 操作时间
@@ -151,9 +156,13 @@ public class InvestigationObject implements Serializable {
         return infoId;
     }
 
+    public String getUnitId() { return unitId; }
+
     public void setInfoId(String infoId) {
         this.infoId = infoId;
     }
+
+    public void setUnitId(String unitId) { this.unitId = unitId; }
 
     public Date getCreateTime() {
         return createTime;
@@ -198,6 +207,7 @@ public class InvestigationObject implements Serializable {
         ", employeeCard=" + employeeCard +
         ", employeeCardSelect=" + employeeCardSelect +
         ", infoId=" + infoId +
+        ", unitId=" + unitId +
         ", createTime=" + createTime +
         ", createBy=" + createBy +
         ", updateTime=" + updateTime +

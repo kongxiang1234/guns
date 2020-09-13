@@ -96,5 +96,8 @@ public class InvestigationContentServiceImpl extends ServiceImpl<InvestigationCo
 //        currentUser.getName()
         return entity;
     }
-
+    @Override
+    public List<Map<String, Object>> getInvestigationInfoByid(InvestigationContentParam investigationContentParam){
+        return this.baseMapper.getInvestigationInfoByid(investigationContentParam);
+    }
 }

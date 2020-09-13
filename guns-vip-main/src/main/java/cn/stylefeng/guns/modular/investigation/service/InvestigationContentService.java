@@ -71,6 +71,12 @@ public interface InvestigationContentService extends IService<InvestigationConte
      * @author hujt
      * @Date 2020-09-09
      */
-     List<Map<String,Object>> investigationInfoList();
+     List<Map<String,Object>> investigationInfoList(); /**
+
+     * 根据id查询协查申请数据数据
+     * @author hujt
+     * @Date 2020-09-09
+     */
+    List<Map<String, Object>> getInvestigationInfoByid(InvestigationContentParam investigationContentParam);
 
 }

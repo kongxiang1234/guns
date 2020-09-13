@@ -130,13 +130,12 @@ layui.use(['table', 'admin', 'ax', 'func','laydate','form','upload'], function (
             }else {
                 Feng.error( res.message)
             }
-
-
         }
         , error: function () {
             //请求异常回调
         }
     });
+    var pdfData = [];
     randerInvestingationObj = function(){
         // alert(JSON.stringify(excelData));
         var html='';
@@ -172,7 +171,28 @@ layui.use(['table', 'admin', 'ax', 'func','laydate','form','upload'], function (
                     '<img src="/assets/investigationInfo/img/icon24.png" />'+
                     '<div>新增</div>'+
                     '</li>'+
-                    '</ul></div></div>';
+                    '</ul>'+
+                    '<ul class="dwtype dwtypets">'+
+                    '<li>'+
+                        '<div class="dwtypebox">'+
+                            '<img src="/assets/investigationInfo/img/icon27.png" />'+
+                            '<h1>农业银行协查通知书.pdf</h1>'+
+                            '<span class="operate">'+
+                            '<img src="/assets/investigationInfo/img/icon25.png" />'+
+                            '<img src="/assets/investigationInfo/img/icon26.png" />'+
+                            '</span>'+
+                            '<span class="operate">'+
+                            '<img src="/assets/investigationInfo/img/icon25.png" />'+
+                            '<img src="/assets/investigationInfo/img/icon26.png" />'+
+                            '</span>'+
+                        '</div>'+
+                    '</li>'+
+                    '<li class="add">'+
+                    '<img src="/assets/investigationInfo/img/icon28.png" />'+
+                    '<div>新增</div>'+
+                    '</li>'+
+                    '</ul>'+
+                    '</div></div>';
         }
         // debugger
         // $("#investigation_unit").html(html);
@@ -193,7 +213,7 @@ layui.use(['table', 'admin', 'ax', 'func','laydate','form','upload'], function (
         $("#pubcover").hide();
         window.location.href = Feng.ctxPath + '/investigationInfo'
     },
-
+        
     submit = function(){
        var Documents_number= $("#Documents_number").val();
        var deadLine= $("#deadLine").val();
@@ -201,6 +221,7 @@ layui.use(['table', 'admin', 'ax', 'func','laydate','form','upload'], function (
        if(deadLine==""){
            Feng.error("请选择最迟反馈时间!");
        }
+       debugger
        var execldataTemp = [];
         for(var i = 0; i < excelData.length; i++) {
             var key = Object.keys(excelData[i])[0];

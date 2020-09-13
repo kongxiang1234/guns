@@ -51,5 +51,12 @@ public interface InvestigationUnitMapper extends BaseMapper<InvestigationUnit> {
      * @Date 2020-09-09
      */
     Page<Map<String, Object>> customPageMapList(@Param("page") Page page, @Param("paramCondition") InvestigationUnitParam paramCondition);
+/**
+     * 获取分页map列表
+     *
+     * @author hujt
+     * @Date 2020-09-09
+     */
+    Map<String, Object> findInvestigationUnitById(@Param("name") String name);
 
 }

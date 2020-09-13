@@ -8,8 +8,10 @@ import cn.stylefeng.guns.base.pojo.page.LayuiPageInfo;
 import cn.stylefeng.guns.modular.investigation.entity.InvestigationInfo;
 import cn.stylefeng.guns.modular.investigation.model.params.InvestigationInfoParam;
 import cn.stylefeng.guns.modular.investigation.model.params.InvestigationObjectParam;
+import cn.stylefeng.guns.modular.investigation.model.params.InvestigationUnitParam;
 import cn.stylefeng.guns.modular.investigation.service.InvestigationInfoService;
 import cn.stylefeng.guns.modular.investigation.service.InvestigationObjectService;
+import cn.stylefeng.guns.modular.investigation.service.InvestigationUnitService;
 import cn.stylefeng.guns.sys.core.util.DefaultImages;
 import cn.stylefeng.guns.sys.modular.system.service.UserService;
 import cn.stylefeng.roses.core.base.controller.BaseController;
@@ -57,6 +59,8 @@ public class InvestigationInfoController extends BaseController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private InvestigationUnitService investigationUnitService;
     /**
      * 跳转到主页面
      *
@@ -219,15 +223,23 @@ public class InvestigationInfoController extends BaseController {
                     Map<String,List<Map<String,Object>>> unitAllMap = new HashMap<>();
                     Sheet sheet = wb.getSheetAt(j);
                     String unitName = sheet.getRow(0).getCell(0).toString();
+                    InvestigationUnitParam param = new InvestigationUnitParam();
+                    param.setUnitName(unitName.trim());
+                    Map<String, Object> investigationUnit = investigationUnitService.findInvestigationUnitById(param);
+
+                    if (null==investigationUnit || investigationUnit.isEmpty()){
+                        return ResponseData.error("excel的第个"+(j+1)+"sheet中未知的单位："+unitName);
+                    }
+
                     List<Map<String,Object>> unitList = new ArrayList<>();
                     for (int i = 2; i <=sheet.getLastRowNum() ; i++) {
                         Row row = sheet.getRow(i);
                         Map<String,Object> unitMap = new HashMap<>();
-                        int num = row.getLastCellNum();
 
                         unitMap.put("nameCompany",row.getCell(1).toString());
                         unitMap.put("cardNumber",row.getCell(2).toString());
                         unitMap.put("remarks",row.getCell(3).toString());
+                        unitMap.put("unitId",investigationUnit.get("unit_id"));
                         unitList.add(unitMap);
                     }
                     unitAllMap.put(unitName,unitList);
