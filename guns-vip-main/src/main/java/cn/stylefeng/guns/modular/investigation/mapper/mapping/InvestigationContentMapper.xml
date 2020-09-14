@@ -62,7 +62,50 @@
         where a.info_id=#{unitId}
     </select>
 
+<<<<<<< HEAD
     <select id="getUnitByDeptId" resultType="string" parameterType="java.lang.Long">
         select unit_name from investigation_unit where unit_id = #{deptId} limit 1
+=======
+    <!--普通查询搜索  模糊查询-->
+    <select id="getInvestigationInfoListBySearch" resultType="map" parameterType="java.lang.String">
+        SELECT a.*,b.* ,c.* FROM investigation_info a
+        LEFT JOIN investigation_object b ON a.info_id = b.info_id
+		LEFT JOIN investigation_unit c   ON c.unit_id = b.unit_id
+        WHERE b.info_id != '' AND (a.undertaker LIKE CONCAT('%',#{queryParam},'%')
+           OR a.Documents_number LIKE  CONCAT('%',#{queryParam},'%')
+           OR a.user_id LIKE CONCAT('%',#{queryParam},'%')
+           OR b.name_company LIKE CONCAT('%',#{queryParam},'%')
+           OR b.card_number LIKE CONCAT('%',#{queryParam},'%')
+           OR c.unit_name LIKE CONCAT('%',#{queryParam},'%'))
+
+    </select>
+
+    <!--高级查询搜索  高级查询-->
+    <select id="getInvestigationInfoListByHeighSearch" resultType="map" parameterType="cn.stylefeng.guns.modular.investigation.model.params.InvestigationContentParam">
+        SELECT a.*,b.* ,c.* FROM investigation_info a
+        LEFT JOIN investigation_object b ON a.info_id = b.info_id
+		LEFT JOIN investigation_unit c   ON c.unit_id = b.unit_id
+        WHERE b.info_id != ''
+        <if test="paramCondition.undertaker != null and paramCondition.undertaker != ''">
+            AND a.undertaker = #{paramCondition.undertaker}
+        </if>
+        <if test="paramCondition.DocumentsNumber != null and paramCondition.DocumentsNumber != ''">
+            AND a.Documents_number  LIKE CONCAT('%',#{paramCondition.DocumentsNumber},'%')
+        </if>
+        <if test="paramCondition.userId != null and paramCondition.userId != ''">
+            AND a.user_id = #{paramCondition.userId}
+        </if>
+        <if test="paramCondition.stauts != null and paramCondition.stauts != ''">
+            AND a.stauts = #{paramCondition.stauts}
+        </if>
+        <if test="paramCondition.nameCompany != null and paramCondition.nameCompany != ''">
+            AND b.name_company = #{paramCondition.nameCompany}
+        </if>
+
+        <if test="paramCondition.applyTime != null and paramCondition.applyTime != ''">
+            AND a.apply_time = #{paramCondition.applyTime}
+        </if>
+
+>>>>>>> 8a773752c8e6202b81bfac09e7551639826142d9
     </select>
 </mapper>

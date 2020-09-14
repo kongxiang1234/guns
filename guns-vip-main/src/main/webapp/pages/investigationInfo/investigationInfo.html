@@ -21,7 +21,7 @@
                         <select id="takePersion" id="takePersion" name="takePersion" lay-search>
                            @for(item in allUsersList) {
                                 @if(item.name==currentUser_name){
-                                    <option selected="selected" value="${currentUser_id}">${currentUser_name}</option>-->
+                                    <option selected="selected" value="${currentUser_id}">${currentUser_name}</option>
                                 @}
                                  @else{
                                  <option value="${item.user_id}">${item.name}</option>

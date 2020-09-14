@@ -113,7 +113,7 @@ public class InvestigationInfoController extends BaseController {
     @ResponseBody
     public ResponseData addItem(InvestigationInfoParam investigationInfoParam,HttpServletRequest request) {
         Map<String, String[]> parameterMap = request.getParameterMap();
-        investigationInfoParam.setStauts("2");
+        investigationInfoParam.setStauts("1");   //待审核
 
         long serialVersionUID = System.currentTimeMillis();
 
