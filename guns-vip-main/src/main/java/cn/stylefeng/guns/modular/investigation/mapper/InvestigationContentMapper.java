@@ -62,5 +62,5 @@ public interface InvestigationContentMapper extends BaseMapper<InvestigationCont
 
     List<Map<String, Object>> getInvestigationInfoByid(InvestigationContentParam investigationContentParam);
 
-
+    String getUnitByDeptId(Long deptId);
 }

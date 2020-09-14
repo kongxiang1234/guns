@@ -25,13 +25,16 @@
                 <img src="/assets/investigationInfo/img/icon37.png" ew-href="${ctxPath}/investigationInfo"/>
                 <h1>新增</h1>
             </li>
-            <li>
+            <li  onclick="downFiles()">
                 <img src="/assets/investigationInfo/img/icon38.png"/>
                 <h1>下载协查信息</h1>
             </li>
-            <li>
+            <li id="btnUploads">
                 <img src="/assets/investigationInfo/img/icon39.png"/>
-                <h1>导入协查结果</h1>
+                <h1>
+                    导入协查结果
+                </h1>
+                <input id="investigation_result_list" name="investigation_result_list" type="hidden" class="layui-input"/>
             </li>
             <li onclick="clickserach(this)">
                 <img src="/assets/investigationInfo/img/icon40.png"/>

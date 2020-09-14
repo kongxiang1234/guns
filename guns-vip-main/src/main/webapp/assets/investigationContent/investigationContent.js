@@ -1,9 +1,10 @@
-layui.use(['table', 'admin', 'ax', 'func'], function () {
+layui.use(['table', 'admin', 'ax', 'func','upload'], function () {
     var $ = layui.$;
     var table = layui.table;
     var $ax = layui.ax;
     var admin = layui.admin;
     var func = layui.func;
+    var upload = layui.upload;
 
     /**
      * 管理
@@ -200,4 +201,26 @@ layui.use(['table', 'admin', 'ax', 'func'], function () {
             InvestigationContent.onDeleteItem(data);
         }
     });
+
+    //导入协查清单
+    upload.render({
+        elem: '#btnUploads'
+        , url: Feng.ctxPath + '/investigationContent/uploadInvestigationResults'
+        , multiple: true
+        , accept: 'file'
+        , done: function (res) {
+            if (res.success) {
+                Feng.success("导入成功！");
+            } else {
+                Feng.error(res.message)
+            }
+        }
+        , error: function () {
+            Feng.error(res.message)
+        }
+    });
+
+    downFiles = function(){
+        window.location.href = Feng.ctxPath + '/investigationContent/downFiles'
+    }
 });

@@ -62,5 +62,7 @@
         where a.info_id=#{unitId}
     </select>
 
-
+    <select id="getUnitByDeptId" resultType="string" parameterType="java.lang.Long">
+        select unit_name from investigation_unit where unit_id = #{deptId} limit 1
+    </select>
 </mapper>

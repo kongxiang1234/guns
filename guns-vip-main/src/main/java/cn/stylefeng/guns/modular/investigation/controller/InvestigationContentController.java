@@ -10,9 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.*;
 
@@ -215,6 +219,20 @@ public class InvestigationContentController extends BaseController {
          return  list;
     }
 
+    @ResponseBody
+    @RequestMapping(method = RequestMethod.POST, path = "/uploadInvestigationResults")
+    public ResponseData uploadInvs(HttpServletRequest request, @RequestPart("file") MultipartFile file) {
+
+        String fileId = this.investigationContentService.uploadFile(request, file);
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("fileId", fileId);
+        return ResponseData.success(0, "上传成功", map);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, path = "/downFiles")
+    public void downFiles(HttpServletResponse response) {
+        this.investigationContentService.downFiles(response);
+    }
 }
 
 

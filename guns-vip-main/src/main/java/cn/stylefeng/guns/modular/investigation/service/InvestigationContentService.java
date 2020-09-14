@@ -5,7 +5,10 @@ import cn.stylefeng.guns.modular.investigation.entity.InvestigationContent;
 import cn.stylefeng.guns.modular.investigation.model.params.InvestigationContentParam;
 import cn.stylefeng.guns.modular.investigation.model.result.InvestigationContentResult;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
 
@@ -79,4 +82,7 @@ public interface InvestigationContentService extends IService<InvestigationConte
      */
     List<Map<String, Object>> getInvestigationInfoByid(InvestigationContentParam investigationContentParam);
 
+    String uploadFile(HttpServletRequest request, MultipartFile file);
+
+    void downFiles(HttpServletResponse response);
 }
