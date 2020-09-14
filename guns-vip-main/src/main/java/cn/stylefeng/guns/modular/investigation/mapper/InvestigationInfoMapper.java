@@ -4,7 +4,6 @@ import cn.stylefeng.guns.modular.investigation.entity.InvestigationInfo;
 import cn.stylefeng.guns.modular.investigation.model.params.InvestigationInfoParam;
 import cn.stylefeng.guns.modular.investigation.model.result.InvestigationInfoResult;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.apache.ibatis.annotations.Param;
 
@@ -52,5 +51,7 @@ public interface InvestigationInfoMapper extends BaseMapper<InvestigationInfo> {
      * @Date 2020-09-09
      */
     Page<Map<String, Object>> customPageMapList(@Param("page") Page page, @Param("paramCondition") InvestigationInfoParam paramCondition);
+
+    Integer getDocumentNum(@Param("name") String name);
 
 }

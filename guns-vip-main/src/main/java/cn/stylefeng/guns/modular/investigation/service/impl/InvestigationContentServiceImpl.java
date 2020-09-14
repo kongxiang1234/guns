@@ -126,8 +126,6 @@ public class InvestigationContentServiceImpl extends ServiceImpl<InvestigationCo
         return this.baseMapper.getInvestigationInfoByid(investigationContentParam);
     }
 
-<<<<<<< HEAD
-
     /**
      * 上传文件
      *
@@ -162,7 +160,7 @@ public class InvestigationContentServiceImpl extends ServiceImpl<InvestigationCo
         String fileSavePath = ConstantsContext.getFileUploadPath();
         fileSavePath = fileSavePath.endsWith(File.separator) ? fileSavePath : fileSavePath + File.separator;
         fileSavePath = fileSavePath + baseDir + File.separator;
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-mm");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         String date = format.format(new Date());
         fileSavePath = fileSavePath + date + File.separator;
 
@@ -312,7 +310,7 @@ public class InvestigationContentServiceImpl extends ServiceImpl<InvestigationCo
             }
         }
     }
-=======
+
     /**
      * 普通搜索
      * @param
@@ -333,7 +331,4 @@ public class InvestigationContentServiceImpl extends ServiceImpl<InvestigationCo
         return this.baseMapper.getInvestigationInfoListByHeighSearch(param);
     }
 
-
-
->>>>>>> 8a773752c8e6202b81bfac09e7551639826142d9
 }

@@ -63,6 +63,11 @@ public class InvestigationInfoServiceImpl extends ServiceImpl<InvestigationInfoM
         return LayuiPageFactory.createPageInfo(page);
     }
 
+    @Override
+    public Integer getDocumentNum(String name) {
+        return this.baseMapper.getDocumentNum(name);
+    }
+
     private Serializable getKey(InvestigationInfoParam param){
         return param.getInfoId();
     }
@@ -75,6 +80,8 @@ public class InvestigationInfoServiceImpl extends ServiceImpl<InvestigationInfoM
     private InvestigationInfo getOldEntity(InvestigationInfoParam param) {
         return this.getById(getKey(param));
     }
+
+
 
     private InvestigationInfo getEntity(InvestigationInfoParam param) {
         InvestigationInfo entity = new InvestigationInfo();

@@ -1,5 +1,7 @@
 package cn.stylefeng.guns.modular.investigation.controller;
 
+import cn.stylefeng.guns.base.auth.context.LoginContextHolder;
+import cn.stylefeng.guns.base.auth.model.LoginUser;
 import cn.stylefeng.guns.base.pojo.page.LayuiPageInfo;
 import cn.stylefeng.guns.modular.investigation.entity.InvestigationObject;
 import cn.stylefeng.guns.modular.investigation.model.params.InvestigationObjectParam;
@@ -8,8 +10,11 @@ import cn.stylefeng.roses.core.base.controller.BaseController;
 import cn.stylefeng.roses.kernel.model.response.ResponseData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.*;
 
 
 /**
@@ -35,7 +40,42 @@ public class InvestigationObjectController extends BaseController {
      */
     @RequestMapping("")
     public String index() {
+
         return PREFIX + "/investigationObject.html";
+    }
+
+    /**
+     * 跳转到主页面
+     *
+     * @author hujt
+     * @Date 2020-09-12
+     */
+
+    @RequestMapping("/investigationObjectListByCompId")
+    @ResponseBody
+    public List<Map<String,Object>> investigationObjectListByCompId(InvestigationObjectParam param) {
+        LoginUser currentUser = LoginContextHolder.getContext().getUser();
+        List<Map<String, Object>> mapList = investigationObjectService.investigationObjectListByCompId(currentUser.getDeptId().toString());
+
+        Map<String, List<Map<String,Object>>> resultMapTemp = new HashMap<>();
+        for (int i = 0; i < mapList.size(); i++) {
+            if(resultMapTemp.containsKey(mapList.get(i).get("info_id").toString())){ //map中异常批次已存在，将该数据存放到同一个key（key存放的是异常批次）的map中
+                resultMapTemp.get(mapList.get(i).get("info_id").toString()).add(mapList.get(i));
+            }else{//map中不存在，新建key，用来存放数据
+                List<Map<String,Object>> tmpList = new ArrayList<>();
+                tmpList.add(mapList.get(i));
+                resultMapTemp.put(mapList.get(i).get("info_id").toString(), tmpList);
+            }
+        }
+        Set<String> keySet = resultMapTemp.keySet();
+        List<Map<String,Object>> rstlist = new ArrayList<>();
+        for (String key : keySet) {
+            Map<String, Object> temp = new HashMap<>();
+            temp.put("info_id",key);
+            temp.put("infoList",resultMapTemp.get(key));
+            rstlist.add(temp);
+        }
+        return  rstlist;
     }
 
     /**
@@ -45,8 +85,34 @@ public class InvestigationObjectController extends BaseController {
      * @Date 2020-09-12
      */
     @RequestMapping("/add")
-    public String add() {
+    public String add(Model model, InvestigationObjectParam param) {
+        Map<String,Object> map = new HashMap<>();
+        map.put("unitId",param.getUnitId());
+        map.put("infoId",param.getInfoId());
+        List<Map<String, Object>> mapList = investigationObjectService.getInvestigationObjectInfoByid(map);
+
+        Map<String, List<Map<String,Object>>> resultMap = new HashMap<>();
+        for (int i = 0; i < mapList.size(); i++) {
+            if(resultMap.containsKey(mapList.get(i).get("unit_name").toString())){//map中异常批次已存在，将该数据存放到同一个key（key存放的是异常批次）的map中
+                resultMap.get(mapList.get(i).get("unit_name").toString()).add(mapList.get(i));
+            }else{//map中不存在，新建key，用来存放数据
+                List<Map<String,Object>> tmpList = new ArrayList<>();
+                tmpList.add(mapList.get(i));
+                resultMap.put(mapList.get(i).get("unit_name").toString(), tmpList);
+            }
+        }
+        Set<String> keySet = resultMap.keySet();
+        List<Map<String,Object>> list = new ArrayList<>();
+        for (String key : keySet) {
+            Map<String, Object> temp = new HashMap<>();
+            temp.put("unitName",key);
+            temp.put("infoList",resultMap.get(key));
+            list.add(temp);
+        }
+        model.addAttribute("infoList",list);
+
         return PREFIX + "/investigationObject_add.html";
+
     }
 
     /**

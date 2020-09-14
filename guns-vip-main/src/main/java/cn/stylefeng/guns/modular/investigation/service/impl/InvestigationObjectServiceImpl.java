@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -61,6 +62,16 @@ public class InvestigationObjectServiceImpl extends ServiceImpl<InvestigationObj
         Page pageContext = getPageContext();
         IPage page = this.baseMapper.customPageList(pageContext, param);
         return LayuiPageFactory.createPageInfo(page);
+    }
+
+    @Override
+    public List<Map<String,Object>> investigationObjectListByCompId(String param) {
+        return this.baseMapper.investigationObjectListByCompId(param);
+    }
+
+    @Override
+    public List<Map<String, Object>> getInvestigationObjectInfoByid(Map<String,Object> map) {
+        return this.baseMapper.getInvestigationObjectInfoByid(map);
     }
 
     private Serializable getKey(InvestigationObjectParam param){

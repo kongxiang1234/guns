@@ -49,4 +49,17 @@
         from investigation_object where 1 = 1
     </select>
 
+    <select id="investigationObjectListByCompId" resultType="map">
+       SELECT a.*,b.*,c.Documents_number,c.apply_time,c.deadLine FROM investigation_object a
+        LEFT JOIN investigation_unit b ON b.unit_id = a.unit_id
+        LEFT JOIN investigation_info c ON a.info_id = c.info_id
+        where b.unit_id = #{unit_id} ORDER BY c.apply_time
+    </select>
+
+    <select id="getInvestigationObjectInfoByid" resultType="map">
+        select a.*,b.*,c.Documents_number,c.apply_time,c.deadLine from investigation_object a
+        LEFT JOIN investigation_unit b on b.unit_id = a.unit_id
+        LEFT JOIN investigation_info c on a.info_id = c.info_id
+        where a.info_id = #{map.infoId} and a.unit_id=#{map.unitId} order by c.apply_time ASC
+    </select>
 </mapper>

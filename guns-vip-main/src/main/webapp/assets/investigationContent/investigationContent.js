@@ -1,18 +1,12 @@
-<<<<<<< HEAD
-layui.use(['table', 'admin', 'ax', 'func','upload'], function () {
-=======
-layui.use(['table', 'admin', 'laydate','ax', 'func'], function () {
->>>>>>> 8a773752c8e6202b81bfac09e7551639826142d9
+layui.use(['table', 'admin', 'ax','laydate','ax', 'func','upload'], function () {
     var $ = layui.$;
     var table = layui.table;
     var $ax = layui.ax;
     var admin = layui.admin;
     var func = layui.func;
-<<<<<<< HEAD
     var upload = layui.upload;
-=======
     var laydate = layui.laydate;
->>>>>>> 8a773752c8e6202b81bfac09e7551639826142d9
+
 
     laydate.render({
         elem: '#applyTime',

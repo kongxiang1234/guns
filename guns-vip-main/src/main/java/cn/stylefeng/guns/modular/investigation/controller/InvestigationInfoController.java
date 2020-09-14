@@ -32,6 +32,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.*;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -73,8 +74,12 @@ public class InvestigationInfoController extends BaseController {
         LoginUser currentUser = LoginContextHolder.getContext().getUser();
         model.addAttribute("currentUser_name",currentUser.getName());
         model.addAttribute("currentUser_id",currentUser.getId());
-        currentUser.getDeptId();
-        String Documents_number= "宿监协字【2020】"+currentUser.getDeptId()+"0001";
+
+        int count = investigationInfoService.getDocumentNum(currentUser.getName());
+        DecimalFormat df = new DecimalFormat("0000");
+        String countString = df.format(count+1);
+
+        String Documents_number= "宿监协字【2020】"+"00"+countString;
         model.addAttribute("Documents_number",Documents_number);
 
         model.addAttribute("avatar", DefaultImages.defaultAvatarUrl());

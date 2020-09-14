@@ -1,76 +1,137 @@
 @layout("/common/_form.html",{js:["/assets/investigationObject/investigationObject_add.js"],css:["/assets/expand/module/formSelects/formSelects-v4.css"]}){
 
-<form class="layui-form" id="investigationObjectForm" lay-filter="investigationObjectForm">
-    <div class="layui-fluid" style="padding-bottom: 75px;">
-        <div class="layui-card">
-            <div class="layui-card-header">基本信息</div>
-            <div class="layui-card-body">
-                <div class="layui-form-item layui-row">
-                    <input name="objectId" type="hidden"/>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>查询结果反馈</title>
+    <link href="/assets/investigationInfo/css/reset.css" rel="stylesheet" />
+    <link href="/assets/investigationInfo/css/home.css" rel="stylesheet" />
+    <script src="/assets/investigationInfo/js/jquery-1.11.1.min.js"></script>
 
-                    <div class="layui-inline layui-col-md12">
-                        <label class="layui-form-label">协查通知书<span style="color: red;">*</span></label>
-                        <div class="layui-input-block">
-                            <input id="objectNotice" name="objectNotice" placeholder="请输入协查通知书" type="text" class="layui-input" lay-verify="required" required/>
-                        </div>
-                    </div>
-                    <div class="layui-inline layui-col-md12">
-                        <label class="layui-form-label">姓名（单位）<span style="color: red;">*</span></label>
-                        <div class="layui-input-block">
-                            <input id="nameCompany" name="nameCompany" placeholder="请输入姓名（单位）" type="text" class="layui-input" lay-verify="required" required/>
-                        </div>
-                    </div>
-                    <div class="layui-inline layui-col-md12">
-                        <label class="layui-form-label">身份证号（信用代码，银行卡号） <span style="color: red;">*</span></label>
-                        <div class="layui-input-block">
-                            <input id="cardNumber" name="cardNumber" placeholder="请输入身份证号（信用代码，银行卡号） " type="text" class="layui-input" lay-verify="required" required/>
-                        </div>
-                    </div>
-                    <div class="layui-inline layui-col-md12">
-                        <label class="layui-form-label">备注<span style="color: red;">*</span></label>
-                        <div class="layui-input-block">
-                            <input id="remarks" name="remarks" placeholder="请输入备注" type="text" class="layui-input" lay-verify="required" required/>
-                        </div>
-                    </div>
-                    <div class="layui-inline layui-col-md12">
-                        <label class="layui-form-label">工作证_操作人<span style="color: red;">*</span></label>
-                        <div class="layui-input-block">
-                            <input id="employeeCard" name="employeeCard" placeholder="请输入工作证_操作人" type="text" class="layui-input" lay-verify="required" required/>
-                        </div>
-                    </div>
-                    <div class="layui-inline layui-col-md12">
-                        <label class="layui-form-label">工作证_选择<span style="color: red;">*</span></label>
-                        <div class="layui-input-block">
-                            <input id="employeeCardSelect" name="employeeCardSelect" placeholder="请输入工作证_选择" type="text" class="layui-input" lay-verify="required" required/>
-                        </div>
-                    </div>
-                    <div class="layui-inline layui-col-md12">
-                        <label class="layui-form-label">协查信息表id<span style="color: red;">*</span></label>
-                        <div class="layui-input-block">
-                            <input id="infoId" name="infoId" placeholder="请输入协查信息表id" type="text" class="layui-input" lay-verify="required" required/>
-                        </div>
-                    </div>
-                    <div class="layui-inline layui-col-md12">
-                        <label class="layui-form-label">操作人<span style="color: red;">*</span></label>
-                        <div class="layui-input-block">
-                            <input id="createBy" name="createBy" placeholder="请输入操作人" type="text" class="layui-input" lay-verify="required" required/>
-                        </div>
-                    </div>
-                    <div class="layui-inline layui-col-md12">
-                        <label class="layui-form-label">更新人<span style="color: red;">*</span></label>
-                        <div class="layui-input-block">
-                            <input id="updateBy" name="updateBy" placeholder="请输入更新人" type="text" class="layui-input" lay-verify="required" required/>
-                        </div>
-                    </div>
+<body class="bodybg bodybgts">
+<div class="container">
+    <h1 class="xctitle"><span>查询结果反馈</span><button type="reset" class="layui-btn layui-btn-primary" id="cancel" style="float: right;">&emsp;返回&emsp;</button></div></h1>
+    <div class="containerbody">
+        <h1 class="secondtit"><img src="/assets/investigationInfo/img/icon14.png" />基本信息</h1>
+        <div class="xctablebox">
+            <table class="viewxctable" border="1">
+                <tr>
+                    <th>协查文书号</th>
+                    <td>宿监协字【2020】000001号</td>
+                    <th>协查申请人</th>
+                    <td>李四</td>
+                    <th>协查单位</th>
+                    <td>中国银行</td>
+                    <th>最长反馈时间</th>
+                    <td>2020-01-15</td>
+                </tr>
+            </table>
+        </div>
+        <h1 class="secondtit"><img src="/assets/investigationInfo/img/icon55.png" />协查内容
+            <span class="tips">请每个人员/单位上传一个Excel，或者点右侧按钮批量导入。</span>
+            <span class="plbtn"><img src="/assets/investigationInfo/img/icon71.png" />批量导入</span>
+        </h1>
+        <div class="sqbox">
+            <div class="lsqbox">
+                <h1 class="lsqboxtit">张三<img src="/assets/investigationInfo/img/icon57.png" /></h1>
+                <div class="lsqboxnum">身份证号：210189196104061288</div>
+                <div class="lsqboxdw">协查单位：泰州市纪委</div>
+                <span class="status statussel"></span>
+            </div>
+            <div class="lsqbox">
+                <h1 class="lsqboxtit">李思<img src="/assets/investigationInfo/img/icon58.png" /></h1>
+                <div class="lsqboxnum">身份证号：210189196104061288</div>
+                <div class="lsqboxdw">协查单位：泰州市纪委</div>
+                <span class="status"></span>
+            </div>
+            <div class="lsqbox">
+                <h1 class="lsqboxtit">王丽<img src="/assets/investigationInfo/img/icon58.png" /></h1>
+                <div class="lsqboxnum">身份证号：210189196104061288</div>
+                <div class="lsqboxdw">协查单位：泰州市纪委</div>
+                <span class="status"></span>
+            </div>
+            <div class="lsqbox lsqboxts">
+                <h1 class="lsqboxtit">江苏鹏程信息技术有限公司</h1>
+                <div class="lsqboxnum">信用代码：91321311 MA1UXODP34</div>
+                <div class="lsqboxdw">协查单位：泰州市纪委</div>
+                <span class="status"></span>
+            </div>
+            <div class="lsqbox lsqboxts">
+                <h1 class="lsqboxtit">江苏鹏程信息技术有限公司</h1>
+                <div class="lsqboxnum">信用代码：91321311 MA1UXODP34</div>
+                <div class="lsqboxdw">协查单位：泰州市纪委</div>
+                <span class="status"></span>
+            </div>
+            <div class="lsqbox">
+                <h1 class="lsqboxtit">张三<img src="/assets/investigationInfo/img/icon57.png" /></h1>
+                <div class="lsqboxnum">身份证号：210189196104061288</div>
+                <div class="lsqboxdw">协查单位：泰州市纪委</div>
+                <span class="status"></span>
+            </div>
+            <div class="lsqbox">
+                <h1 class="lsqboxtit">李思<img src="/assets/investigationInfo/img/icon58.png" /></h1>
+                <div class="lsqboxnum">身份证号：210189196104061288</div>
+                <div class="lsqboxdw">协查单位：泰州市纪委</div>
+                <span class="status"></span>
+            </div>
+
+        </div>
+        <div class="tzgzbox">
+            <div class="tzbox">
+                <h1 class="secondtit">协查通知书</h1>
+                <div class="tzxont">
+                    <img src="/assets/investigationInfo/img/icon27.png" />
+                    <p>农业银行协查通知书.pdf</p>
                 </div>
             </div>
+            <div class="gzzbox">
+                <h1 class="secondtit">工作证</h1>
+                <div class="xietxt xietxtts gzxietxt">
+                    <img src="/assets/investigationInfo/img/icon44.png">
+                    <h1>谭珊珊</h1>
+                    <h2>210189196311222145</h2>
+                    <div>单位 : 宿迁市纪委监委</div>
+                    <div>部门 : 第X监察室</div>
+                    <div>职务 : 四级主任科员</div>
+                </div>
+                <img src="/assets/investigationInfo/img/icon62.png" class="mark">
+            </div>
+            <div class="gzzbox">
+                <h1 class="secondtit"></h1>
+                <div class="xietxt xietxtts gzxietxt">
+                    <img src="/assets/investigationInfo/img/icon44.png">
+                    <h1>谭珊珊</h1>
+                    <h2>210189196311222145</h2>
+                    <div>单位 : 宿迁市纪委监委</div>
+                    <div>部门 : 第X监察室</div>
+                    <div>职务 : 四级主任科员</div>
+                </div>
+                <img src="/assets/investigationInfo/img/icon62.png" class="mark">
+            </div>
         </div>
+        <h1 class="secondtit"><img src="/assets/investigationInfo/img/icon63.png" />决绝原因</h1>
+        <textarea class="refusetxt" placeholder="协查通知书与协查内容不符"></textarea>
+        <div class="fqbtn fqbtnts"><span>完成</span></div>
     </div>
-    <div class="form-group-bottom text-center">
-        <button class="layui-btn" lay-filter="btnSubmit" lay-submit>&emsp;提交&emsp;</button>
-        <button type="reset" class="layui-btn layui-btn-primary" id="cancel">&emsp;取消&emsp;</button>
-    </div>
-
-</form>
+    <div class="footer footerts">版权所有：宿迁市纪委监委&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;技术支持：苏州凌旭信息科技有限公司&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;服务热线：0512-62717553</div>
+</div>
+<script>
+    $(".xcdetail").mouseenter(function () {
+        $(this).find(".detailpic,.deltailtxtbox").show();
+    })
+    $(".xcdetail").mouseleave(function () {
+        $(this).find(".detailpic,.deltailtxtbox").hide();
+    })
+    function lxctype(obj) {
+        $(".xiecover").hide();
+        $(obj).find(".lxctypecont").hide();
+        $(obj).find(".xiecontts").show();
+    }
+    function nolxctype(obj) {
+        $(obj).find(".lxctypecont").show();
+        $(obj).find(".xiecontts").hide();
+    }
+</script>
+</body>
 
 @}

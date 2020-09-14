@@ -47,4 +47,10 @@
         from investigation_info where 1 = 1
     </select>
 
+    <select id="getDocumentNum" resultType="Integer">
+       SELECT COUNT(1) FROM investigation_info WHERE USER_ID=#{name}
+    </select>
+
+
+
 </mapper>

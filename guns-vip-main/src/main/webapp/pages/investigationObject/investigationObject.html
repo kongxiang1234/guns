@@ -1,32 +1,62 @@
 @layout("/common/_container.html",{js:["/assets/investigationObject/investigationObject.js"]}){
 
-<div class="layui-body-header">
-    <span class="layui-body-header-title">管理</span>
-</div>
+<!--任务管理-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>协查申请管理</title>
+    <link href="/assets/investigationInfo/css/reset.css" rel="stylesheet" />
+    <link href="/assets/investigationInfo/css/home.css" rel="stylesheet" />
+    <script src="/assets/investigationInfo/js/jquery-1.11.1.min.js"></script>
+    <script src="/assets/investigationInfo/js/echarts.min.js"></script>
+</head>
 
-<div class="layui-fluid">
-    <div class="layui-row layui-col-space15">
-        <div class="layui-col-sm12 layui-col-md12 layui-col-lg12">
-            <div class="layui-card">
-                <div class="layui-card-body">
-                    <div class="layui-form toolbar">
-                        <div class="layui-form-item">
-                            <div class="layui-inline">
-                                <button id="btnSearch" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>搜索</button>
-                                <button id="btnAdd" class="layui-btn icon-btn"><i class="layui-icon">&#xe654;</i>添加</button>
-                                <button id="btnExp" class="layui-btn icon-btn"><i class="layui-icon">&#xe67d;</i>导出</button>
-                            </div>
-                        </div>
-                    </div>
-                    <table class="layui-table" id="investigationObjectTable" lay-filter="investigationObjectTable"></table>
-                </div>
-            </div>
+<body class="bodybg bodybgts" >
+<div class="container" onload="onloadData()">
+    <div class="xctitle xctitlets">
+        <span>协查受理</span>
+    </div>
+    <div class="">
+        <div class="sqtypebox">
         </div>
     </div>
 </div>
 
-<script type="text/html" id="tableBar">
-    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="edit">修改</a>
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+<div class="footer">版权所有：宿迁市纪委监委&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;技术支持：苏州凌旭信息科技有限公司&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;服务热线：0512-62717553</div>
+<script>
+
+    var timer;
+    function editbox(obj) {
+        $(obj).next().show()
+    }
+    function noeditbox(obj) {
+        timer = setTimeout(function () {
+            $(obj).next().hide()
+        }, 300)
+    }
+    function editcover(obj) {
+        clearTimeout(timer);
+    }
+    function noeditcover(obj) {
+        clearTimeout(timer);
+        timer = setTimeout(function () {
+            $(obj).hide()
+        }, 100)
+    }
+
+    function clickserach(obj){
+        $(obj).parent().hide();
+        $(".searchbox").show();
+    }
+    function clickadvance(obj){
+        $(".aside").css("right", '0');
+    }
+    function back(){
+        $(".aside").css("right", '-620px');
+        $(".searchbox").hide();
+        $(".menu").show();
+    }
+
 </script>
+</body>
 @}

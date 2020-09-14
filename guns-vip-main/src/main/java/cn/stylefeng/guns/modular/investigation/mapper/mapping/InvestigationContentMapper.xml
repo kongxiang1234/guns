@@ -62,10 +62,10 @@
         where a.info_id=#{unitId}
     </select>
 
-<<<<<<< HEAD
+
     <select id="getUnitByDeptId" resultType="string" parameterType="java.lang.Long">
         select unit_name from investigation_unit where unit_id = #{deptId} limit 1
-=======
+    </select>
     <!--普通查询搜索  模糊查询-->
     <select id="getInvestigationInfoListBySearch" resultType="map" parameterType="java.lang.String">
         SELECT a.*,b.* ,c.* FROM investigation_info a
@@ -106,6 +106,5 @@
             AND a.apply_time = #{paramCondition.applyTime}
         </if>
 
->>>>>>> 8a773752c8e6202b81bfac09e7551639826142d9
     </select>
 </mapper>
