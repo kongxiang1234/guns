@@ -60,7 +60,25 @@ public interface InvestigationContentMapper extends BaseMapper<InvestigationCont
     List<Map<String, Object>> investigationInfoList();
 
 
+    /**
+     * 协查申请根据id获取详情
+     * @param investigationContentParam
+     * @return
+     */
     List<Map<String, Object>> getInvestigationInfoByid(InvestigationContentParam investigationContentParam);
+    /**
+     * 协查申请普通搜索
+     * @param investigationContentParam
+     * @return
+     */
+    List<Map<String, Object>> getInvestigationInfoListBySearch(@Param("queryParam")String param);
+
+    /**
+     * 协查申请普通搜索
+     * @param investigationContentParam
+     * @return
+     */
+    List<Map<String, Object>> getInvestigationInfoListByHeighSearch(@Param("paramCondition")InvestigationContentParam param);
 
 
 }

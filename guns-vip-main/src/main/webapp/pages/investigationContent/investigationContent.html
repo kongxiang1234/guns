@@ -15,9 +15,8 @@
     <div class="xctitle xctitlets">
         <span>协查申请管理</span>
         <div class="searchbox">
-            <label>协查 |</label>
-            <input type="text"/>
-            <img src="/assets/investigationInfo/img/icon41.png"/>
+            <input type="text" id="normalSearchval" placeholder="请输入查询关键字"/>
+            <img src="/assets/investigationInfo/img/icon41.png" onclick="normalSearch();"/>
             <span class="adv" onclick="clickadvance(this)">高级查询</span>
         </div>
         <ul class="menu">
@@ -367,45 +366,59 @@
         <tbody>
         <tr>
             <th>协查编号</th>
-            <td><input placeholder="请输入" type="text"/></td>
+            <td><input id="Documents_number" placeholder="请输入" type="text"/></td>
         </tr>
         <tr>
             <th>协查状态</th>
             <td>
-                <select>
-                    <option>请选择</option>
+                <select id="stauts" style="background-color: rgba(3, 16, 64, 0.9);">
+                    <option value=""></option>
+                    <option value="1">待审核</option>
+                    <option value="2">审核未通过</option>
+                    <option value="3">待受理</option>
+                    <option value="4">查询中</option>
+                    <option value="5">反馈完成</option>
+                    <option value="6">待发送</option>
                 </select>
             </td>
         </tr>
-        <tr>
+        <tr >
             <th>申请人</th>
             <td>
-                <select>
-                    <option>请选择</option>
+                <select id="user_id"  name="user_id" style="background-color: rgba(3, 16, 64, 0.9);">
+                    <option  value=""></option>
+                    @for(item in allUsersList) {
+                    @if(item.name==currentUser_name){
+                    <option selected="selected" value="${currentUser_name}">${currentUser_name}</option>
+                    @}
+                    @else{
+                    <option value="${item.user_id}">${item.name}</option>
+                    @}
+                    @}
                 </select>
             </td>
         </tr>
         <tr>
             <th>协查人</th>
-            <td><input placeholder="请输入" type="text"/></td>
+            <td><input id="undertaker" placeholder="请输入协查人" type="text"/></td>
         </tr>
         <tr>
             <th>申请日期</th>
             <td>
-                <input type="date"  class="time"/>
+                <input type="text" id="applyTime" class="date-icon"  placeholder="请选择申请日期" autocomplete="off"/>
             </td>
         </tr>
         <tr>
             <th>查询内容</th>
             <td>
-                <input placeholder="请输入" type="text"/>
+                <input id="nameCompany" placeholder="请输入查询内容" type="text"/>
             </td>
         </tr>
         </tbody>
     </table>
     <div class="btn">
-        <span class="sure">搜索</span>
-        <span class="resize">重置</span>
+        <span class="sure" onclick="heightLevelSearch()">搜索</span>
+        <span class="resize" onclick="heightLevelSearchReset()">重置</span>
     </div>
 </div>
 <div class="footer">版权所有：宿迁市纪委监委&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;技术支持：苏州凌旭信息科技有限公司&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;服务热线：0512-62717553</div>

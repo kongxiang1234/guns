@@ -32,15 +32,7 @@ public class InvestigationContentServiceImpl extends ServiceImpl<InvestigationCo
         InvestigationContent entity = getEntity(param);
         this.save(entity);
         entity.getInfoId();
-
-
     }
-
-//    alt ins
-//    @Override
-//    public void add1(InvestigationContentParam param) {
-//
-//    }
 
     @Override
     public void delete(InvestigationContentParam param){
@@ -100,4 +92,27 @@ public class InvestigationContentServiceImpl extends ServiceImpl<InvestigationCo
     public List<Map<String, Object>> getInvestigationInfoByid(InvestigationContentParam investigationContentParam){
         return this.baseMapper.getInvestigationInfoByid(investigationContentParam);
     }
+
+    /**
+     * 普通搜索
+     * @param
+     * @return
+     */
+    @Override
+    public List<Map<String, Object>> getInvestigationInfoListBySearch(String param){
+        return this.baseMapper.getInvestigationInfoListBySearch(param);
+    }
+
+    /**
+     * 高级搜索
+     * @param
+     * @return
+     */
+    @Override
+    public List<Map<String, Object>> getInvestigationInfoListByHeighSearch(InvestigationContentParam param) {
+        return this.baseMapper.getInvestigationInfoListByHeighSearch(param);
+    }
+
+
+
 }

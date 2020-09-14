@@ -1,9 +1,12 @@
 package cn.stylefeng.guns.modular.investigation.controller;
 
+import cn.stylefeng.guns.base.auth.context.LoginContextHolder;
+import cn.stylefeng.guns.base.auth.model.LoginUser;
 import cn.stylefeng.guns.base.pojo.page.LayuiPageInfo;
 import cn.stylefeng.guns.modular.investigation.entity.InvestigationContent;
 import cn.stylefeng.guns.modular.investigation.model.params.InvestigationContentParam;
 import cn.stylefeng.guns.modular.investigation.service.InvestigationContentService;
+import cn.stylefeng.guns.sys.modular.system.service.UserService;
 import cn.stylefeng.roses.core.base.controller.BaseController;
 import cn.stylefeng.roses.kernel.model.response.ResponseData;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +35,8 @@ public class InvestigationContentController extends BaseController {
     @Autowired
     private InvestigationContentService investigationContentService;
 
+    @Autowired
+    private UserService userService;
     /**
      * 跳转到主页面
      *
@@ -61,6 +66,12 @@ public class InvestigationContentController extends BaseController {
 //            list.add(temp);
 //        }
 //        model.addAttribute("infoList",list);
+        List<Map<String,Object>> allUsers = userService.getAllUsers();
+        model.addAttribute("allUsersList",allUsers);
+        LoginUser currentUser = LoginContextHolder.getContext().getUser();
+
+        model.addAttribute("currentUser_name",currentUser.getName());
+        model.addAttribute("currentUser_id",currentUser.getId());
         return PREFIX + "/investigationContent.html";
 
     }
@@ -184,15 +195,81 @@ public class InvestigationContentController extends BaseController {
         return this.investigationContentService.investigationInfoList();
     }
     /**
-     * 查询列表
+     * 协查申请管理列表
      *
      * @author hujt
      * @Date 2020-09-09
      */
     @ResponseBody
     @RequestMapping("/getinvestigationInfoList")
-    public List<Map<String,Object>> getinvestigationInfoList() {
+    public List<Map<String,Object>> getinvestigationInfoList(Model model) {
+
         List<Map<String, Object>> mapList = investigationContentService.investigationInfoList();
+        Map<String, List<Map<String,Object>>> resultMap = new HashMap<>();
+        for (int i = 0; i < mapList.size(); i++) {
+            if(resultMap.containsKey(mapList.get(i).get("info_id").toString())){//map中异常批次已存在，将该数据存放到同一个key（key存放的是异常批次）的map中
+                resultMap.get(mapList.get(i).get("info_id").toString()).add(mapList.get(i));
+            }else{//map中不存在，新建key，用来存放数据
+                List<Map<String,Object>> tmpList = new ArrayList<>();
+                tmpList.add(mapList.get(i));
+                resultMap.put(mapList.get(i).get("info_id").toString(), tmpList);
+            }
+        }
+        Set<String> keySet = resultMap.keySet();
+        List<Map<String,Object>> list = new ArrayList<>();
+        for (String key : keySet) {
+            Map<String, Object> temp = new HashMap<>();
+            temp.put("info_Id",key);
+            temp.put("infoList",resultMap.get(key));
+            list.add(temp);
+        }
+
+        return  list;
+    }
+
+    /**
+     * 协查申请管理 页面普通搜索
+     * @author hujt
+     * @Date 2020-09-09
+     */
+
+    @ResponseBody
+    @RequestMapping("/getInvestigationInfoListBySearch")
+    public List<Map<String,Object>> getInvestigationInfoListBySearch(InvestigationContentParam param) {
+//        List<Map<String, Object>> mapList = investigationContentService.investigationInfoList();
+        List<Map<String, Object>> mapList = investigationContentService.getInvestigationInfoListBySearch(param.getNameCompany());
+
+        Map<String, List<Map<String,Object>>> resultMap = new HashMap<>();
+        for (int i = 0; i < mapList.size(); i++) {
+            if(resultMap.containsKey(mapList.get(i).get("info_id").toString())){//map中异常批次已存在，将该数据存放到同一个key（key存放的是异常批次）的map中
+                resultMap.get(mapList.get(i).get("info_id").toString()).add(mapList.get(i));
+            }else{//map中不存在，新建key，用来存放数据
+                List<Map<String,Object>> tmpList = new ArrayList<>();
+                tmpList.add(mapList.get(i));
+                resultMap.put(mapList.get(i).get("info_id").toString(), tmpList);
+            }
+        }
+        Set<String> keySet = resultMap.keySet();
+        List<Map<String,Object>> list = new ArrayList<>();
+        for (String key : keySet) {
+            Map<String, Object> temp = new HashMap<>();
+            temp.put("info_Id",key);
+            temp.put("infoList",resultMap.get(key));
+            list.add(temp);
+        }
+         return  list;
+    }
+/**
+     * 协查申请管理 页面高级搜索
+     * @author hujt
+     * @Date 2020-09-09
+     */
+
+    @ResponseBody
+    @RequestMapping("/getInvestigationInfoListByHeighSearch")
+    public List<Map<String,Object>> getInvestigationInfoListByHeighSearch(InvestigationContentParam param) {
+//        List<Map<String, Object>> mapList = investigationContentService.investigationInfoList();
+        List<Map<String, Object>> mapList = investigationContentService.getInvestigationInfoListByHeighSearch(param);
 
         Map<String, List<Map<String,Object>>> resultMap = new HashMap<>();
         for (int i = 0; i < mapList.size(); i++) {

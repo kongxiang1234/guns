@@ -471,7 +471,7 @@ background-color: #287af4;
 .lsqtypebox>div{
     margin: 1.6vh;
     background-color: #fff;
-    height: 20vh;
+    height: 22vh;
     position: relative;
     cursor: pointer;
     border-radius: 3px;
@@ -789,20 +789,11 @@ box-shadow: 3px 0px 4px rgb(17 194 71 / 64%)
     height: 2.55rem;
     background-color: #fff;
     border-radius: 2rem;
-    padding-left: 4rem;
+    padding-left: 2rem;
     box-sizing: border-box;
     line-height: 2.55rem;
 }
-.searchbox>label{
-    position: absolute;
-    left: 0;
-    top: 0;
-    font-size: 0.93rem;
-    color: #333333;
-    height: 2.5rem;
-    line-height: 2.5rem;
-    padding: 0 1rem;
-}
+
 .searchbox>img{
     position: absolute;
     left: 16.5rem;
