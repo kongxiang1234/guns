@@ -1,10 +1,16 @@
-layui.use(['table', 'admin', 'ax', 'func'], function () {
+layui.use(['table', 'admin', 'laydate','ax', 'func'], function () {
     var $ = layui.$;
     var table = layui.table;
     var $ax = layui.ax;
     var admin = layui.admin;
     var func = layui.func;
+    var laydate = layui.laydate;
 
+    laydate.render({
+        elem: '#applyTime',
+        // range: true,
+        // min: Feng.currentDate()
+    });
     /**
      * 管理
      */
@@ -22,63 +28,141 @@ layui.use(['table', 'admin', 'ax', 'func'], function () {
             data:{},
             dataType: "json",
             success: function(data){
-
-                var html = "";
-                for (var i = 0; i <data.length ; i++) {
-
-                    html += '<div class="lsqtypebox" onclick="showInvestigationDetail('+data[i].info_Id+');">' +
-                        '<div>' +
-                        '<div class="typecont">' +
-                        '<h1>'+data[i].infoList[0].Documents_number+'&nbsp;&nbsp;<label class="span2">未受理</label></h1>' +
-                        '<div class="typeview">' +
-                        '<span class="viewnum">申请人：'+data[i].infoList[0].user_id+'</span>'+
-                        '<span class="pubtime">申请时间：'+data[i].infoList[0].apply_time.substring(0,10)+'</span>' +
-                        '</div>' +
-                        '<table>' +
-                        '<tr>' +
-                        '<th>协查内容：</th><td>';
-                    for (var j = 0; j <data[i].infoList.length ; j++) {
-                        html +=data[i].infoList[j].name_company;
-                            if(j<data[i].infoList.length-1){
-                                html += ',';
-                            }
-                    }
-                    html +='</td>' +
-                        '</tr>' +
-                        '<tr>' +
-                        '<th>协查反馈：</th>' +
-                        '<td class="red">' +
-                        '<div class="process"><span><i></i></span></div>100%' +
-                        '</td>' +
-                        '</tr>' +
-                        '</table>' +
-                        '<span class="editbox">' +
-                        '<img src="/assets/investigationInfo/img/icon31.png" onmousemove="editbox(this)" onmouseout="noeditbox(this)" />' +
-                        '<div class="editcover" onmousemove="editcover(this)" onmouseout="noeditcover(this)">' +
-                        '<img src="/assets/investigationInfo/img/icon32.png" />'+
-                        '<ul>' +
-                        '<li><span></span>修改</li>' +
-                        '<li><span></span>删除</li>' +
-                        '<li><span></span>下载</li>' +
-                        '<li><span></span>催办</li>' +
-                        '</ul>' +
-                        '</div>' +
-                        '</span>' +
-                        '</div>' +
-                        '</div>' +
-                        '</div>';
-                }
-                debugger;
-                $(".sqtypebox").html(html);
-                // alert(JSON.stringify(data));
+                searchRequestMethod(data);
             },
             error:function(err){
                 console.log(err.statusText);
-                console.log('异常');
+                console.log('查询出错，请联系管理员');
             }
         });
     });
 
+
+    searchRequestMethod = function(data){
+        var html = "";
+        for (var i = 0; i <data.length ; i++) {
+
+            html += '<div class="lsqtypebox" onclick="showInvestigationDetail('+data[i].info_Id+');">' +
+                '<div>' +
+                '<div class="typecont">' +
+                '<h1>'+data[i].infoList[0].Documents_number+'&nbsp;&nbsp;<label class="span2">未受理</label></h1>' +
+                '<div class="typeview">' +
+                '<span class="viewnum">申请人：'+data[i].infoList[0].user_id+'</span>'+
+                '<span class="pubtime">申请时间：'+data[i].infoList[0].apply_time.substring(0,10)+'</span>' +
+                '</div>' +
+                '<table>' +
+                '<tr>' +
+                '<th>协查内容：</th><td>';
+            for (var j = 0; j <data[i].infoList.length ; j++) {
+                html +=data[i].infoList[j].name_company;
+                if(j<data[i].infoList.length-1){
+                    html += ',';
+                }
+            }
+            html +='</td>' +
+                '</tr>' +
+                '<tr>' +
+                '<th>协查反馈：</th>' +
+                '<td class="red">' +
+                '<div class="process"><span><i></i></span></div>100%' +
+                '</td>' +
+                '</tr>' +
+                '</table>' +
+                '<span class="editbox">' +
+                '<img src="/assets/investigationInfo/img/icon31.png" onmousemove="editbox(this)" onmouseout="noeditbox(this)" />' +
+                '<div class="editcover" onmousemove="editcover(this)" onmouseout="noeditcover(this)">' +
+                '<img src="/assets/investigationInfo/img/icon32.png" />'+
+                '<ul>' +
+                '<li><span></span>修改</li>' +
+                '<li><span></span>删除</li>' +
+                '<li><span></span>下载</li>' +
+                '<li><span></span>催办</li>' +
+                '</ul>' +
+                '</div>' +
+                '</span>' +
+                '</div>' +
+                '</div>' +
+                '</div>';
+        }
+        $(".sqtypebox").html(html);
+        // alert(JSON.stringify(data));
+    };
+    /**
+     * 普通搜索
+     */
+    normalSearch = function(){
+
+        var normalSearchval = $("#normalSearchval").val();
+        debugger
+        $.ajax({
+            url: "/investigationContent/getInvestigationInfoListBySearch",
+            type: "POST",
+            data:{nameCompany:normalSearchval},
+            dataType: "json",
+            success: function(data){
+                searchRequestMethod(data);
+            },
+            error:function(err){
+                console.log('查询出错，请联系管理员');
+            }
+        });
+    };
+    /**
+     * 高级搜索重置
+     */
+    heightLevelSearch = function(){
+        var DocumentsNumber = $("#Documents_number").val();
+        var stauts = $("#stauts").val();
+        var userId = $("#user_id").val();
+        var undertaker = $("#undertaker").val();
+        var applyTime = $("#applyTime").val();
+        var nameCompany = $("#nameCompany").val();
+        var param = {};
+        if(DocumentsNumber!=""){
+            param.DocumentsNumber = DocumentsNumber.trim();
+        }
+        if(stauts!=""){
+            param.stauts = stauts.trim();
+        }
+        if(userId!=""){
+            param.userId = userId.trim();
+        }
+        if(undertaker!=""){
+            param.undertaker = undertaker.trim();
+        }
+        if(applyTime!=""){
+            param.applyTime = applyTime;
+        }
+        if(nameCompany!=""){
+            param.nameCompany = nameCompany.trim();
+        }
+
+        debugger
+        $.ajax({
+            url: "/investigationContent/getInvestigationInfoListByHeighSearch",
+            type: "POST",
+            data:param,
+            dataType: "json",
+            success: function(data){
+                searchRequestMethod(data);
+            },
+            error:function(err){
+                console.log('查询出错，请联系管理员');
+            }
+        });
+    };
+    /**
+     * 高级搜索重置
+     */
+    heightLevelSearchReset = function(){
+        $("#Documents_number").val("");
+        $("#stauts").val('');
+       $("#user_id").val('');
+        $("#undertaker").val('');
+        $("#applyTime").val('');
+        $("#nameCompany").val('');
+
+    };
     /**
      * 初始化表格的列
      */
