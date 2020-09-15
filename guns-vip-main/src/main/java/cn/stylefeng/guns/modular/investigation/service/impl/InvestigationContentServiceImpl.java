@@ -35,7 +35,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.math.BigDecimal;
 import java.nio.ByteBuffer;
+import java.nio.channels.Channels;
 import java.nio.channels.SeekableByteChannel;
+import java.nio.channels.WritableByteChannel;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -231,7 +233,6 @@ public class InvestigationContentServiceImpl extends ServiceImpl<InvestigationCo
 
         if (files.size() == 1) {
             response.setHeader("content-type", contentType);
-
             response.setHeader("Content-Disposition", "attachment; filename=" + URLCoder.encode(fileName));
             try {
                 ByteBuffer byteBuffer = ByteBuffer.allocate(1024);
@@ -268,39 +269,52 @@ public class InvestigationContentServiceImpl extends ServiceImpl<InvestigationCo
             response.setHeader("content-type", "application/zip");
             response.setHeader("Content-Disposition", "attachment; filename=investigations.zip");
             ZipOutputStream zipOutputStream = null;
-
+            WritableByteChannel destChannel = null;
+            
             try {
                 zipOutputStream = new ZipOutputStream(response.getOutputStream());
+                destChannel = Channels.newChannel(zipOutputStream);
+                
                 for (File file : files) {
                     String entryName = file.getAbsolutePath().replace(fileSavePath, "");
                     ZipEntry zipEntry = new ZipEntry(entryName);
                     zipOutputStream.putNextEntry(zipEntry);
 
                     ByteBuffer byteBuffer = ByteBuffer.allocate(1024);
-                    outputStream = new BufferedOutputStream(response.getOutputStream());
-                    seekableByteChannel = Files.newByteChannel(filePath, StandardOpenOption.READ);
+                    seekableByteChannel = Files.newByteChannel(Paths.get(file.getAbsolutePath()), StandardOpenOption.READ);
+                    
                     int len = seekableByteChannel.read(byteBuffer);
                     while (len != -1) {
                         byteBuffer.flip();
                         while (byteBuffer.hasRemaining()) {
-                            outputStream.write(byteBuffer.get());
+                            destChannel.write(byteBuffer);
                         }
                         byteBuffer.clear();
                         len = seekableByteChannel.read(byteBuffer);
                     }
+                    
                     byteBuffer.clear();
+                    seekableByteChannel.close();
                 }
                 zipOutputStream.flush();
             } catch (Exception e) {
                 throw new ServiceException(701, "Download Error!");
             } finally {
+    
                 if (Objects.nonNull(seekableByteChannel)) {
                     try {
                         seekableByteChannel.close();
                     } catch (IOException ignore) {
                     }
                 }
-
+    
+                if (Objects.nonNull(destChannel)) {
+                    try {
+                        destChannel.close();
+                    } catch (IOException ignore) {
+                    }
+                }
+                
                 if (Objects.nonNull(zipOutputStream)) {
                     try {
                         zipOutputStream.close();
