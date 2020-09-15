@@ -74,7 +74,13 @@ public interface InvestigationContentService extends IService<InvestigationConte
      * @author hujt
      * @Date 2020-09-09
      */
-     List<Map<String,Object>> investigationInfoList(); /**
+     List<Map<String,Object>> investigationInfoList();
+     /**
+     * 获取审核数据（非驳回）
+     * @author hujt
+     * @Date 2020-09-15
+     */
+     List<Map<String,Object>> getinvestigationInfoListByStatus();
      /**
      * 普通搜索
      * @author hujt
@@ -93,6 +99,13 @@ public interface InvestigationContentService extends IService<InvestigationConte
      * @Date 2020-09-09
      */
     List<Map<String, Object>> getInvestigationInfoByid(InvestigationContentParam investigationContentParam);
+
+    /**
+     * 协查申请审核
+     * @param param
+     * @return
+     */
+    void editInvestigationContent(InvestigationContentParam param);
 
     String uploadFile(HttpServletRequest request, MultipartFile file);
 

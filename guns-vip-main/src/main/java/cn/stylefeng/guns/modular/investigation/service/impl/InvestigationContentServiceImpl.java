@@ -104,6 +104,11 @@ public class InvestigationContentServiceImpl extends ServiceImpl<InvestigationCo
         return this.baseMapper.investigationInfoList();
     }
 
+    @Override
+    public List<Map<String, Object>> getinvestigationInfoListByStatus() {
+        return this.baseMapper.getinvestigationInfoListByStatus();
+    }
+
     private Serializable getKey(InvestigationContentParam param){
         return param.getContentId();
     }
@@ -126,6 +131,16 @@ public class InvestigationContentServiceImpl extends ServiceImpl<InvestigationCo
     @Override
     public List<Map<String, Object>> getInvestigationInfoByid(InvestigationContentParam investigationContentParam){
         return this.baseMapper.getInvestigationInfoByid(investigationContentParam);
+    }
+
+    /**
+     * 协查申请审核
+     * @param param
+     * @return
+     */
+    @Override
+    public void editInvestigationContent(InvestigationContentParam param) {
+        this.baseMapper.editInvestigationContent(param);
     }
 
     /**

@@ -1,4 +1,4 @@
-@layout("/common/_form.html",{js:["/assets/investigationContent/investigationContent_add.js"],css:["/assets/expand/module/formSelects/formSelects-v4.css"]}){
+@layout("/common/_form.html",{js:["/assets/investigationContent/investigationContent_review_edit.js"],css:["/assets/expand/module/formSelects/formSelects-v4.css"]}){
 
 <head>
     <meta charset="UTF-8">
@@ -22,8 +22,8 @@
                     <th>协查申请人</th>
                     <td style="width: 8rem;">${infoList[0]['infoList'][0].user_id}</td>
                     <th>协查单位</th>
-                    <td>${infoList[0]['infoList'][0].name_company}</td>
-                    <th>最长反馈时间</th>
+                    <td>${infoList[0]['infoList'][0].unit_name}</td>
+                    <th>最迟反馈时间</th>
                     <td>${infoList[0]['infoList'][0].deadLine}</td>
                 </tr>
             </table>
@@ -71,7 +71,7 @@
 
         <div class="xcdetail">
             <img src="/assets/investigationInfo/img/icon20.png" />
-            <h1>${items.unitName}账单数据协查&nbsp;&nbsp;&nbsp;<span class="span3">查询中</span>
+            <h1>${items.unitName}账单数据协查&nbsp;&nbsp;&nbsp;<span class="span2">待审核</span>
             </h1>
             <div class="deltailtxt deltailtxtts">
                 <span>2天前更新</span>
@@ -92,7 +92,11 @@
             </div>
         </div>
         @}
-
+        <h1 class="secondtit"><img src="/assets/investigationInfo/img/icon63.png" />驳回原因</h1>
+        <textarea class="refusetxt" placeholder="如驳回，请输入驳回原因"></textarea>
+        <div style="text-align: center;">
+            <div class="fqbtn fqbtnts"><span onclick="passReview(${infoList[0]['infoList'][0].info_id})">审核通过</span> <span style="background-color: #90111A" onclick="rejectReview(${infoList[0]['infoList'][0].info_id})">驳回</span></div>
+        </div>
     </div>
     <div class="footer footerts">版权所有：宿迁市纪委监委&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;技术支持：苏州凌旭信息科技有限公司&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;服务热线：0512-62717553</div>
 </div>

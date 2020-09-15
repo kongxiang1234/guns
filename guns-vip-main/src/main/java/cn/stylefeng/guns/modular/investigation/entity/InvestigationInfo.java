@@ -53,6 +53,11 @@ public class InvestigationInfo implements Serializable {
      */
     @TableField("user_id")
     private String userId;
+/**
+     * 申请人
+     */
+    @TableField("info_remark")
+    private String infoRemark;
 
     /**
      * 申请时间
@@ -83,11 +88,6 @@ public class InvestigationInfo implements Serializable {
      */
     @TableField("update_by")
     private String updateBy;
-    /**
-     * 状态
-     */
-    @TableField("object_status")
-    private String object_status;
 
     public InvestigationInfo() {
     }
@@ -105,6 +105,10 @@ public class InvestigationInfo implements Serializable {
         return documentsNumber;
     }
 
+    public String getInfoRemark() {
+        return infoRemark;
+    }
+
     public void setDocumentsNumber(String documentsNumber) {
         this.documentsNumber = documentsNumber;
     }
@@ -115,6 +119,10 @@ public class InvestigationInfo implements Serializable {
 
     public void setStauts(String stauts) {
         this.stauts = stauts;
+    }
+
+    public void setInfoRemark(String infoRemark) {
+        this.infoRemark = infoRemark;
     }
 
     public String getUndertaker() {
@@ -137,15 +145,9 @@ public class InvestigationInfo implements Serializable {
         return userId;
     }
 
-    public String getObject_status() {
-            return object_status;
-        }
+
     public void setUserId(String userId) {
         this.userId = userId;
-    }
-
-    public void setObject_status(String object_status) {
-        this.object_status = object_status;
     }
 
     public Date getApplyTime() {
@@ -197,7 +199,7 @@ public class InvestigationInfo implements Serializable {
         ", undertaker=" + undertaker +
         ", deadLine=" + deadLine +
         ", userId=" + userId +
-        ", object_status=" + object_status +
+        ", infoRemark=" + infoRemark +
         ", applyTime=" + applyTime +
         ", createTime=" + createTime +
         ", createBy=" + createBy +

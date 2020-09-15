@@ -61,6 +61,10 @@ public class InvestigationContentParam implements Serializable, BaseValidatingPa
      * 协查信息表id
      */
     private String infoId;
+    /**
+     * 协查信息表驳回原因
+     */
+    private String infoRemark;
 
     /**
      * 操作时间

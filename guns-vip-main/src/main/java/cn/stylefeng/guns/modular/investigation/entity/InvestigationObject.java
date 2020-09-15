@@ -90,6 +90,13 @@ public class InvestigationObject implements Serializable {
     private Date updateTime;
 
     /**
+     * 状态
+     */
+    @TableField("object_status")
+    private String objectStatus;
+
+
+    /**
      * 更新人
      */
     @TableField("update_by")
@@ -104,9 +111,15 @@ public class InvestigationObject implements Serializable {
         this.objectId = objectId;
     }
 
+    public void setObjectStatus(String objectStatus) {
+        this.objectStatus = objectStatus;
+    }
+
     public String getObjectNotice() {
         return objectNotice;
     }
+
+    public String getObjectStatus() { return objectStatus; }
 
     public void setObjectNotice(String objectNotice) {
         this.objectNotice = objectNotice;
@@ -208,6 +221,7 @@ public class InvestigationObject implements Serializable {
         ", employeeCardSelect=" + employeeCardSelect +
         ", infoId=" + infoId +
         ", unitId=" + unitId +
+        ", objectStatus=" + objectStatus +
         ", createTime=" + createTime +
         ", createBy=" + createBy +
         ", updateTime=" + updateTime +

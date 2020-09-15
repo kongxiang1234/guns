@@ -174,6 +174,58 @@ layui.use(['table', 'admin', 'ax','laydate','ax', 'func','upload'], function () 
     };
 
     /**
+     *  审核通过
+     */
+    passReview = function (info_id) {
+
+        $.ajax({
+            url: "/investigationContent/editInvestigationContent",
+            type: "POST",
+            data:{
+                infoId:info_id,
+                stauts : '2',
+            },
+            dataType: "json",
+            success: function(data){
+                window.location.href = Feng.ctxPath + '/investigationContent/review'
+            },
+            error:function(err){
+                Feng.error("审核出错，请联系管理员");
+            }
+        });
+    };
+
+    /**
+     *  驳回（驳回原因必输）
+     */
+    rejectReview = function (info_id) {
+        var refusetxt = $('.refusetxt').val();
+        if(refusetxt==''){
+            Feng.error("请输入驳回原因！");
+            return;
+        }
+        $.ajax({
+            url: "/investigationContent/editInvestigationContent",
+            type: "POST",
+            data:{
+                infoId : info_id,
+                infoRemark:refusetxt,
+                stauts : '2',
+            },
+            dataType: "json",
+            success: function(data){
+                window.location.href = Feng.ctxPath + '/investigationContent/review'
+            },
+            error:function(err){
+                console.log('查询出错，请联系管理员');
+                Feng.error("审核出错，请联系管理员");
+            }
+        });
+
+
+    };
+
+    /**
      * 点击查询按钮
      */
     InvestigationContent.search = function () {
