@@ -53,15 +53,78 @@ layui.use(['table', 'admin', 'ax', 'func','laydate','form','upload'], function (
         });
     };
 
+    let uploadFilesIndex=new Map()
     //导入协查通知书
-    upload.render({
+    var uploadInst = upload.render({
         elem: '#fileBtn0'
+        , bindAction: '#pdfUpload'
         , url: Feng.ctxPath + '/system/upload'
         , accept: 'file'
-        , before: function (obj) {
-            obj.preview(function (index, file, result) {
-                $("#fileNameTip").html(file.name);
+        , multiple: true
+        , exts: "pdf"
+        , auto: false
+        , choose: function (obj) {
+            if(JSON.stringify(excelData) == "{}"){
+                Feng.error("请先导入协查清单")
+                return
+            }
+            var files  = obj.pushFile();
+
+            obj.preview(function(index, file, result){
+                let fileName = file.name.slice(0,-4);
+                let orgFileName = file.name;
+
+                let ok = 0;
+                let parentId = "deltailtxtbox"
+                for(var j = 0; j < excelData.length; j++) {
+                    var key = Object.keys(excelData[j])[0];
+                    if(key === fileName){
+                        if(uploadFilesIndex.get(key) > 0){
+                            Feng.error(orgFileName+"重复，请删除后再重新添加")
+                            delete files[index]
+                            return
+                        }
+                        ok++
+                        uploadFilesIndex.set(fileName,1)
+                        parentId=parentId+j
+                    }
+                }
+
+                if(ok === 0){
+                    Feng.error(orgFileName+"命名非法，请按照协查机构命名后再重新添加")
+                    delete files[index]
+                    return
+                }
+
+                html =
+                    '<div id="pdf_'+index+'"><ul class="dwtype dwtypets">'+
+                    '<li>'+
+                    '<div class="dwtypebox">'+
+                    '<img src="/assets/investigationInfo/img/icon27.png" />'+
+                    '<h1>'+orgFileName+'</h1>'+
+                    '<span class="operate">'+
+                    '<img src="/assets/investigationInfo/img/icon26.png" id="del_'+index+'"/>'+
+                    '</span>'+
+                    '</div>'+
+                    '</li>'+
+                    '<li class="add">'+
+                    '<img src="/assets/investigationInfo/img/icon28.png" />'+
+                    '<div>新增</div>'+
+                    '</li>'+
+                    '</ul></div>'
+
+                $("#"+parentId).append(html);
+
+                $('#del_' + index).bind('click', function () {//双击删除指定预上传图片
+                    delete files[index];
+                    $("#pdf_"+index).remove();
+                })
+
+                Feng.success("协查文件已添加")
             });
+        }
+        , before: function (obj) {
+
         }
         , done: function (res) {
             $("#object_notice").val(res.data.fileId);
@@ -172,26 +235,6 @@ layui.use(['table', 'admin', 'ax', 'func','laydate','form','upload'], function (
                     '<div>新增</div>'+
                     '</li>'+
                     '</ul>'+
-                    '<ul class="dwtype dwtypets">'+
-                    '<li>'+
-                        '<div class="dwtypebox">'+
-                            '<img src="/assets/investigationInfo/img/icon27.png" />'+
-                            '<h1>农业银行协查通知书.pdf</h1>'+
-                            '<span class="operate">'+
-                            '<img src="/assets/investigationInfo/img/icon25.png" />'+
-                            '<img src="/assets/investigationInfo/img/icon26.png" />'+
-                            '</span>'+
-                            '<span class="operate">'+
-                            '<img src="/assets/investigationInfo/img/icon25.png" />'+
-                            '<img src="/assets/investigationInfo/img/icon26.png" />'+
-                            '</span>'+
-                        '</div>'+
-                    '</li>'+
-                    '<li class="add">'+
-                    '<img src="/assets/investigationInfo/img/icon28.png" />'+
-                    '<div>新增</div>'+
-                    '</li>'+
-                    '</ul>'+
                     '</div></div>';
         }
         // debugger
@@ -215,13 +258,28 @@ layui.use(['table', 'admin', 'ax', 'func','laydate','form','upload'], function (
     },
         
     submit = function(){
+
+        if(JSON.stringify(excelData) == "{}"){
+            Feng.error("请导入协查清单")
+            return
+        }
+
+        for(var i = 0; i < excelData.length; i++) {
+            var key = Object.keys(excelData[i])[0];
+            console.log("uploadFilesIndex.get(key) === " + uploadFilesIndex.get(key))
+            if (uploadFilesIndex.get(key) === null || uploadFilesIndex.get(key) ===undefined || uploadFilesIndex.get(key) === "undefined" || uploadFilesIndex.get(key) === 0) {
+                Feng.error(key + "账单数据协查尚未添加协查通知书，请添加后再再尝试发起协查！");
+                return
+            }
+        }
+        //$("#pdfUpload").click()
        var Documents_number= $("#Documents_number").val();
        var deadLine= $("#deadLine").val();
        var takePerson= $("#takePersion").val();
        if(deadLine==""){
            Feng.error("请选择最迟反馈时间!");
        }
-       debugger
+
        var execldataTemp = [];
         for(var i = 0; i < excelData.length; i++) {
             var key = Object.keys(excelData[i])[0];
