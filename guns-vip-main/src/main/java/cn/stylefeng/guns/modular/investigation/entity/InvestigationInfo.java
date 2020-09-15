@@ -1,12 +1,9 @@
 package cn.stylefeng.guns.modular.investigation.entity;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.annotation.IdType;
-import java.util.Date;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.*;
+
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <p>
@@ -86,6 +83,14 @@ public class InvestigationInfo implements Serializable {
      */
     @TableField("update_by")
     private String updateBy;
+    /**
+     * 状态
+     */
+    @TableField("object_status")
+    private String object_status;
+
+    public InvestigationInfo() {
+    }
 
 
     public Long getInfoId() {
@@ -132,8 +137,15 @@ public class InvestigationInfo implements Serializable {
         return userId;
     }
 
+    public String getObject_status() {
+            return object_status;
+        }
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public void setObject_status(String object_status) {
+        this.object_status = object_status;
     }
 
     public Date getApplyTime() {
@@ -185,6 +197,7 @@ public class InvestigationInfo implements Serializable {
         ", undertaker=" + undertaker +
         ", deadLine=" + deadLine +
         ", userId=" + userId +
+        ", object_status=" + object_status +
         ", applyTime=" + applyTime +
         ", createTime=" + createTime +
         ", createBy=" + createBy +

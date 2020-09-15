@@ -47,7 +47,7 @@ layui.use(['table', 'admin', 'ax','laydate','ax', 'func','upload'], function () 
             html += '<div class="lsqtypebox" style="height: 28vh" onclick="showInvestigationDetail('+data[i].info_Id+');">' +
                 '<div>' +
                 '<div class="typecont">' +
-                '<h1>'+data[i].infoList[0].Documents_number+'&nbsp;&nbsp;<label class="span2" style="padding-left: 20px;">未受理</label></h1>' +
+                '<h1>'+data[i].infoList[0].Documents_number+'&nbsp;&nbsp;</h1>' +
                 '<div class="typeview">' +
                 '<span class="viewnum">申请人：'+data[i].infoList[0].user_id+'</span>'+
                 '<span class="pubtime">申请时间：'+data[i].infoList[0].apply_time.substring(0,10)+'</span>' +
@@ -66,22 +66,10 @@ layui.use(['table', 'admin', 'ax','laydate','ax', 'func','upload'], function () 
                 '<tr>' +
                 '<th>协查反馈：</th>' +
                 '<td class="red">' +
-                '<div class="process"><span><i></i></span></div>100%' +
+                '<div class="process"><span><i></i></span></div>0%' +
                 '</td>' +
                 '</tr>' +
                 '</table>' +
-                '<span class="editbox">' +
-                '<img src="/assets/investigationInfo/img/icon31.png" onmousemove="editbox(this)" onmouseout="noeditbox(this)" />' +
-                '<div class="editcover" onmousemove="editcover(this)" onmouseout="noeditcover(this)">' +
-                '<img src="/assets/investigationInfo/img/icon32.png" />'+
-                '<ul>' +
-                '<li><span></span>修改</li>' +
-                '<li><span></span>删除</li>' +
-                '<li><span></span>下载</li>' +
-                '<li><span></span>催办</li>' +
-                '</ul>' +
-                '</div>' +
-                '</span>' +
                 '</div>' +
                 '</div>' +
                 '</div>';

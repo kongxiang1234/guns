@@ -45,7 +45,7 @@ layui.use(['table', 'admin', 'ax', 'func'], function () {
              html +='</div><hr>' +
 
                  '<div>' +
-                '截止时间:'+data[i].infoList[0].deadLine+'<div class="buttonStyle'+i+'" style="display: none;float: right;width:70px;margin-right: 12px;border-radius:8px;border:1px solid #000;text-align: center;background-color: #fff;"><a style="" onclick="showDetail('+data[i].info_id+','+data[i].infoList[0].unit_id+')">受理</a></div>'+
+                '截止时间:'+data[i].infoList[0].deadLine+'<div class="buttonStyle'+i+'" style="display: none;float: right;width:70px;margin-right: 12px;border-radius:8px;border:1px solid #000;text-align: center;background-color: #fff;"><span style="" onclick="showDetail('+data[i].info_id+')">受理</span></div>'+
                 '</div>' +
                  '</div>' +
                 '</div>';
@@ -63,7 +63,7 @@ layui.use(['table', 'admin', 'ax', 'func'], function () {
     };
     showDetail = function (infoId,unitId) {
         debugger
-        window.location.href = Feng.ctxPath + '/investigationObject/add?unitId=' + unitId+"&infoId="+infoId
+        window.location.href = Feng.ctxPath + '/investigationObject/add?infoId='+infoId
     };
     /**
      * 管理

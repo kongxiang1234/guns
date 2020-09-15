@@ -41,6 +41,26 @@ public class InvestigationContentController extends BaseController {
 
     @Autowired
     private UserService userService;
+
+
+
+    /**
+     * 跳转到协查申请审核页
+     *
+     * @author hujt
+     * @Date 2020-09-09
+     */
+    @RequestMapping("/review")
+    public String review(Model model, HttpServletRequest request, HttpSession session) {
+        List<Map<String,Object>> allUsers = userService.getAllUsers();
+        model.addAttribute("allUsersList",allUsers);
+        LoginUser currentUser = LoginContextHolder.getContext().getUser();
+
+        model.addAttribute("currentUser_name",currentUser.getName());
+        model.addAttribute("currentUser_id",currentUser.getId());
+        return PREFIX + "/investigationContent_review.html";
+
+    }
     /**
      * 跳转到主页面
      *
@@ -110,6 +130,38 @@ public class InvestigationContentController extends BaseController {
         }
         model.addAttribute("infoList",list);
         return PREFIX + "/investigationContent_add.html";
+    }
+
+    /**
+     * 新增页面
+     *
+     * @author hujt
+     * @Date 2020-09-09
+     */
+    @RequestMapping("/review_edit")
+    public String review_edit(Model model, HttpServletRequest request, HttpSession session,InvestigationContentParam investigationContentParam) {
+        List<Map<String, Object>> mapList = investigationContentService.getInvestigationInfoByid(investigationContentParam);
+
+        Map<String, List<Map<String,Object>>> resultMap = new HashMap<>();
+        for (int i = 0; i < mapList.size(); i++) {
+            if(resultMap.containsKey(mapList.get(i).get("unit_name").toString())){//map中异常批次已存在，将该数据存放到同一个key（key存放的是异常批次）的map中
+                resultMap.get(mapList.get(i).get("unit_name").toString()).add(mapList.get(i));
+            }else{//map中不存在，新建key，用来存放数据
+                List<Map<String,Object>> tmpList = new ArrayList<>();
+                tmpList.add(mapList.get(i));
+                resultMap.put(mapList.get(i).get("unit_name").toString(), tmpList);
+            }
+        }
+        Set<String> keySet = resultMap.keySet();
+        List<Map<String,Object>> list = new ArrayList<>();
+        for (String key : keySet) {
+            Map<String, Object> temp = new HashMap<>();
+            temp.put("unitName",key);
+            temp.put("infoList",resultMap.get(key));
+            list.add(temp);
+        }
+        model.addAttribute("infoList",list);
+        return PREFIX + "/investigationContent_review_edit.html";
     }
 
     /**

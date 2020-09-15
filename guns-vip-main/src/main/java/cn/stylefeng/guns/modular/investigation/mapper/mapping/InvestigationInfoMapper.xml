@@ -10,6 +10,7 @@
         <result column="undertaker" property="undertaker" />
         <result column="deadLine" property="deadLine" />
         <result column="user_id" property="userId" />
+        <result column="object_status" property="object_status" />
         <result column="apply_time" property="applyTime" />
         <result column="create_time" property="createTime" />
         <result column="create_by" property="createBy" />
@@ -19,7 +20,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        info_id AS "infoId", Documents_number AS "documentsNumber", stauts AS "stauts", undertaker AS "undertaker", deadLine AS "deadLine", user_id AS "userId", apply_time AS "applyTime", create_time AS "createTime", create_by AS "createBy", update_time AS "updateTime", update_by AS "updateBy"
+        info_id AS "infoId", Documents_number AS "documentsNumber", stauts AS "stauts", undertaker AS "undertaker", deadLine AS "deadLine", user_id AS "userId", object_status as "objectStatus",apply_time AS "applyTime", create_time AS "createTime", create_by AS "createBy", update_time AS "updateTime", update_by AS "updateBy"
     </sql>
 
 

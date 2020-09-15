@@ -75,6 +75,10 @@ public class InvestigationInfoParam implements Serializable, BaseValidatingParam
      * 更新人
      */
     private String updateBy;
+    /**
+     * 状态
+     */
+    private String object_status;
 
     /**
      * 数据

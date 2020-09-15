@@ -148,6 +148,7 @@ public class InvestigationInfoController extends BaseController {
                 unitObjList.get(i).get(j).setCreateTime(new java.sql.Date(System.currentTimeMillis()));
                 unitObjList.get(i).get(j).setUpdateTime(new java.sql.Date(System.currentTimeMillis()));
                 unitObjList.get(i).get(j).setUpdateBy(currentUser.getUsername());
+                unitObjList.get(i).get(j).setObjectStatus("0"); // 0 待完成 1 已完成
                 this.investigationObjectService.add(unitObjList.get(i).get(j));
             }
         }

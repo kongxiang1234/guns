@@ -63,6 +63,10 @@ public class InvestigationObjectParam implements Serializable, BaseValidatingPar
      * 协查信息表id
      */
     private String infoId;
+    /**
+     * 状态
+     */
+    private String objectStatus;
 
     /**
      * 操作时间

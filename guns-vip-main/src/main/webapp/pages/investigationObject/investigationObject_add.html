@@ -17,13 +17,13 @@
             <table class="viewxctable" border="1">
                 <tr>
                     <th>协查文书号</th>
-                    <td>宿监协字【2020】000001号</td>
+                    <td>${invesMap.infoList[0].Documents_number}</td>
                     <th>协查申请人</th>
-                    <td>李四</td>
+                    <td>${invesMap.infoList[0].user_id}</td>
                     <th>协查单位</th>
-                    <td>中国银行</td>
+                    <td>${invesMap.infoList[0].unit_name}</td>
                     <th>最长反馈时间</th>
-                    <td>2020-01-15</td>
+                    <td>${invesMap.infoList[0].deadLine}</td>
                 </tr>
             </table>
         </div>
@@ -32,19 +32,21 @@
             <span class="plbtn"><img src="/assets/investigationInfo/img/icon71.png" />批量导入</span>
         </h1>
         <div class="sqbox">
-            <div class="lsqbox">
-                <h1 class="lsqboxtit">张三<img src="/assets/investigationInfo/img/icon57.png" /></h1>
-                <div class="lsqboxnum">身份证号：210189196104061288</div>
-                <div class="lsqboxdw">协查单位：泰州市纪委</div>
-                <span class="status statussel"></span>
-            </div>
-            <div class="lsqbox">
+            @for(item in invesMap.infoList){
+                <div class="lsqbox">
+                    <h1 class="lsqboxtit">${item.name_company}<img src="/assets/investigationInfo/img/icon57.png" /></h1>
+                    <div class="lsqboxnum">身份证号：${item.card_number}</div>
+                    <div class="lsqboxdw">协查单位：${item.unit_name}</div>
+                    <span class="status statussel"></span>
+                </div>
+            @}
+            <!--<div class="lsqbox">
                 <h1 class="lsqboxtit">李思<img src="/assets/investigationInfo/img/icon58.png" /></h1>
                 <div class="lsqboxnum">身份证号：210189196104061288</div>
                 <div class="lsqboxdw">协查单位：泰州市纪委</div>
                 <span class="status"></span>
             </div>
-            <div class="lsqbox">
+            <!--<div class="lsqbox">
                 <h1 class="lsqboxtit">王丽<img src="/assets/investigationInfo/img/icon58.png" /></h1>
                 <div class="lsqboxnum">身份证号：210189196104061288</div>
                 <div class="lsqboxdw">协查单位：泰州市纪委</div>
@@ -73,7 +75,7 @@
                 <div class="lsqboxnum">身份证号：210189196104061288</div>
                 <div class="lsqboxdw">协查单位：泰州市纪委</div>
                 <span class="status"></span>
-            </div>
+            </div>-->
 
         </div>
         <div class="tzgzbox">

@@ -87,7 +87,8 @@ public class InvestigationObjectController extends BaseController {
     @RequestMapping("/add")
     public String add(Model model, InvestigationObjectParam param) {
         Map<String,Object> map = new HashMap<>();
-        map.put("unitId",param.getUnitId());
+        LoginUser currentUser = LoginContextHolder.getContext().getUser();
+        map.put("unitId",currentUser.getDeptId());
         map.put("infoId",param.getInfoId());
         List<Map<String, Object>> mapList = investigationObjectService.getInvestigationObjectInfoByid(map);
 
@@ -102,14 +103,12 @@ public class InvestigationObjectController extends BaseController {
             }
         }
         Set<String> keySet = resultMap.keySet();
-        List<Map<String,Object>> list = new ArrayList<>();
+        Map<String, Object> temp = new HashMap<>();
         for (String key : keySet) {
-            Map<String, Object> temp = new HashMap<>();
             temp.put("unitName",key);
             temp.put("infoList",resultMap.get(key));
-            list.add(temp);
         }
-        model.addAttribute("infoList",list);
+        model.addAttribute("invesMap",temp);
 
         return PREFIX + "/investigationObject_add.html";
 

@@ -274,7 +274,7 @@ margin-bottom: 1.5rem;
 .lxctype{
     float: left;
     box-shadow: 1px 0px 4px rgba(0, 0, 0, 0.2);
-    width: 21.25%;
+    width: 20%;
     text-align: center;
     height:25vh;
     border-radius: 3px;
@@ -282,7 +282,7 @@ margin-bottom: 1.5rem;
 }
 .lxcrow{
     float: left;
-    width: 10%;
+    width: 5%;
     text-align: center;
     line-height:25vh;
     height: 25vh;
