@@ -187,6 +187,7 @@ layui.use(['table', 'admin', 'ax','laydate','ax', 'func','upload'], function () 
             },
             dataType: "json",
             success: function(data){
+                Feng.success("审核成功!");
                 window.location.href = Feng.ctxPath + '/investigationContent/review'
             },
             error:function(err){
@@ -214,6 +215,7 @@ layui.use(['table', 'admin', 'ax','laydate','ax', 'func','upload'], function () 
             },
             dataType: "json",
             success: function(data){
+                Feng.success("驳回成功!");
                 window.location.href = Feng.ctxPath + '/investigationContent/review'
             },
             error:function(err){
