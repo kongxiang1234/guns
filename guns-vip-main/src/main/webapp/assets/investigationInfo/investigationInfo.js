@@ -117,7 +117,9 @@ layui.use(['table', 'admin', 'ax', 'func','laydate','form','upload'], function (
 
                 $('#del_' + index).bind('click', function () {//双击删除指定预上传图片
                     delete files[index];
+                    uploadFilesIndex.delete(fileName)
                     $("#pdf_"+index).remove();
+
                 })
 
                 Feng.success("协查文件已添加")
