@@ -126,7 +126,8 @@ public class InvestigationInfoServiceImpl extends ServiceImpl<InvestigationInfoM
         fileSavePath = fileSavePath.endsWith(File.separator) ? fileSavePath : fileSavePath + File.separator;
         fileSavePath = fileSavePath + basrDir + File.separator + documentId + File.separator;
 
-        Long unitId = this.baseMapper.getUnitIdByName(finalName.substring(0,finalName.length()-4));
+        String filenameWithoutSuffix = finalName.substring(0, finalName.length() - 4);
+        Long unitId = this.baseMapper.getUnitIdByName(filenameWithoutSuffix);
 
         try {
             //保存文件到指定目录
@@ -155,6 +156,7 @@ public class InvestigationInfoServiceImpl extends ServiceImpl<InvestigationInfoM
             investigationPdf.setUnitId(unitId);
             investigationPdf.setInfoId(documentId);
             investigationPdf.setFileId(fileId);
+            investigationPdf.setFileName(filenameWithoutSuffix);
             investigationPdf.setCreateBy(currentUser.getId());
             // 保存协查通知书信息
             investigationPdfService.save(investigationPdf);

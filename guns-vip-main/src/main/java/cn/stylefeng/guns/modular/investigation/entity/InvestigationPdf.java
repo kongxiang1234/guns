@@ -30,6 +30,12 @@ public class InvestigationPdf implements Serializable {
     private String fileId;
 
     /**
+     * 文件名称
+     */
+    @TableField("file_name")
+    private String fileName;
+
+    /**
      * 操作时间
      */
       @TableField(value = "create_time", fill = FieldFill.INSERT)
@@ -96,11 +102,21 @@ public class InvestigationPdf implements Serializable {
     public String toString() {
         return "InvestigationPdf{" +
                 "id=" + id +
-                ", infoId='" + infoId + '\'' +
+                ", infoId=" + infoId +
                 ", unitId=" + unitId +
-                ", fileId=" + fileId +
+                ", fileId='" + fileId + '\'' +
+                ", fileName='" + fileName + '\'' +
                 ", createTime=" + createTime +
-                ", createBy='" + createBy + '\'' +
+                ", createBy=" + createBy +
                 '}';
     }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
 }

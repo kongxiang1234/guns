@@ -62,13 +62,12 @@
     </select>
 
     <select id="getInvestigationInfoByid" resultType="map" parameterType="cn.stylefeng.guns.modular.investigation.model.params.InvestigationContentParam">
-        SELECT a.*,b.* ,c.* FROM investigation_info a
+        SELECT a.*,b.* ,c.*,d.file_name FROM investigation_info a
         LEFT JOIN investigation_object b ON a.info_id = b.info_id
 		LEFT JOIN investigation_unit c   ON c.unit_id = b.unit_id
-
+        LEFT JOIN investigation_pdf d   ON d.info_id = a.info_id and d.unit_id = c.unit_id
         where a.info_id=#{unitId}
     </select>
-
 
     <select id="getUnitByDeptId" resultType="string" parameterType="java.lang.Long">
         select unit_name from investigation_unit where unit_id = #{deptId} limit 1
