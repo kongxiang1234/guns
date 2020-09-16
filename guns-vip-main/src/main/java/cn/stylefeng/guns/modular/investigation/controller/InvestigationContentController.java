@@ -6,12 +6,15 @@ import cn.stylefeng.guns.base.pojo.page.LayuiPageInfo;
 import cn.stylefeng.guns.modular.investigation.entity.InvestigationContent;
 import cn.stylefeng.guns.modular.investigation.model.params.InvestigationContentParam;
 import cn.stylefeng.guns.modular.investigation.service.InvestigationContentService;
+import cn.stylefeng.guns.modular.sms.StringUtil;
 import cn.stylefeng.guns.sys.modular.system.service.UserService;
 import cn.stylefeng.roses.core.base.controller.BaseController;
 import cn.stylefeng.roses.kernel.model.response.ResponseData;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestPart;
@@ -136,22 +139,11 @@ public class InvestigationContentController extends BaseController {
      * @Date 2020-09-15
      */
     @RequestMapping("/editInvestigationContent")
-    @ResponseBody
-    public ResponseData editInvestigationContent(InvestigationContentParam investigationContentParam) {
+    public Map<String,Object> editInvestigationContent(InvestigationContentParam investigationContentParam) {
         investigationContentService.editInvestigationContent(investigationContentParam);
-        return ResponseData.success();
-    }
-
-    /**
-     * 协查申请删除
-     * @param param
-     * @return
-     */
-    @ResponseBody
-    @RequestMapping("/deleteinvestigationInfoById")
-    public ResponseData deleteinvestigationInfoById(InvestigationContentParam param) {
-        this.investigationContentService.deleteinvestigationInfoById(param.getInfoId());
-        return ResponseData.success();
+        Map<String,Object> res = new HashMap<>();
+        res.put("code","0");
+        return res;
     }
 
     /**
@@ -204,14 +196,27 @@ public class InvestigationContentController extends BaseController {
         List<Map<String, Object>> mapList = investigationContentService.getInvestigationInfoByid(investigationContentParam);
 
         Map<String, List<Map<String,Object>>> resultMap = new HashMap<>();
+        Map<String, List<String>> pdfs = new HashMap<>();
         for (int i = 0; i < mapList.size(); i++) {
-            if(resultMap.containsKey(mapList.get(i).get("unit_name").toString())){//map中异常批次已存在，将该数据存放到同一个key（key存放的是异常批次）的map中
-//                String apply_time = mapList.get(i).get("apply_time").toString();
-                resultMap.get(mapList.get(i).get("unit_name").toString()).add(mapList.get(i));
+
+            String unit_name = mapList.get(i).get("unit_name").toString();
+            List<String> pdfNames = pdfs.get(unit_name);
+            if(CollectionUtils.isEmpty(pdfNames)){
+                pdfNames = new ArrayList<>();
+            }
+            if(Objects.nonNull(mapList.get(i).get("file_name"))) {
+                String file_name = mapList.get(i).get("file_name").toString();
+                if (StringUtils.isNotBlank(file_name) && !pdfNames.contains(file_name)) {
+                    pdfNames.add(file_name);
+                    pdfs.put(unit_name, pdfNames);
+                }
+            }
+            if(resultMap.containsKey(unit_name)){//map中异常批次已存在，将该数据存放到同一个key（key存放的是异常批次）的map中
+                resultMap.get(unit_name).add(mapList.get(i));
             }else{//map中不存在，新建key，用来存放数据
                 List<Map<String,Object>> tmpList = new ArrayList<>();
                 tmpList.add(mapList.get(i));
-                resultMap.put(mapList.get(i).get("unit_name").toString(), tmpList);
+                resultMap.put(unit_name, tmpList);
             }
         }
         Set<String> keySet = resultMap.keySet();
@@ -220,10 +225,10 @@ public class InvestigationContentController extends BaseController {
             Map<String, Object> temp = new HashMap<>();
             temp.put("unitName",key);
             temp.put("infoList",resultMap.get(key));
+            temp.put("pdfList",pdfs.get(key));
+
             list.add(temp);
         }
-        model.addAttribute("status",mapList.get(0).get("stauts"));
-        model.addAttribute("infoRemark",mapList.get(0).get("info_remark"));
         model.addAttribute("infoList",list);
         return PREFIX + "/investigationContent_add.html";
     }
@@ -412,7 +417,6 @@ public class InvestigationContentController extends BaseController {
         }
          return  list;
     }
-
 
     @ResponseBody
     @RequestMapping(method = RequestMethod.POST, path = "/uploadInvestigationResults")
