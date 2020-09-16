@@ -113,6 +113,7 @@ public interface InvestigationContentService extends IService<InvestigationConte
      */
     void deleteinvestigationInfoById(String infoId);
 
+
     String uploadFile(HttpServletRequest request, MultipartFile file);
 
     void downFiles(HttpServletResponse response);

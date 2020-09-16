@@ -6,7 +6,6 @@ import cn.stylefeng.guns.base.pojo.page.LayuiPageInfo;
 import cn.stylefeng.guns.modular.investigation.entity.InvestigationContent;
 import cn.stylefeng.guns.modular.investigation.model.params.InvestigationContentParam;
 import cn.stylefeng.guns.modular.investigation.service.InvestigationContentService;
-import cn.stylefeng.guns.modular.sms.StringUtil;
 import cn.stylefeng.guns.sys.modular.system.service.UserService;
 import cn.stylefeng.roses.core.base.controller.BaseController;
 import cn.stylefeng.roses.kernel.model.response.ResponseData;
@@ -132,7 +131,6 @@ public class InvestigationContentController extends BaseController {
         return PREFIX + "/investigationContent_review_edit.html";
     }
 
-
     /**
      * 协查申请审核
      *
@@ -140,11 +138,22 @@ public class InvestigationContentController extends BaseController {
      * @Date 2020-09-15
      */
     @RequestMapping("/editInvestigationContent")
-    public Map<String,Object> editInvestigationContent(InvestigationContentParam investigationContentParam) {
+    @ResponseBody
+    public ResponseData editInvestigationContent(InvestigationContentParam investigationContentParam) {
         investigationContentService.editInvestigationContent(investigationContentParam);
-        Map<String,Object> res = new HashMap<>();
-        res.put("code","0");
-        return res;
+        return ResponseData.success();
+    }
+
+    /**
+     * 协查申请删除
+     * @param param
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/deleteinvestigationInfoById")
+    public ResponseData deleteinvestigationInfoById(InvestigationContentParam param) {
+        this.investigationContentService.deleteinvestigationInfoById(param.getInfoId());
+        return ResponseData.success();
     }
 
     /**
@@ -234,6 +243,8 @@ public class InvestigationContentController extends BaseController {
 
             list.add(temp);
         }
+        model.addAttribute("infoRemark",mapList.get(0).get("info_remark"));
+        model.addAttribute("status",mapList.get(0).get("stauts"));
         model.addAttribute("infoList",list);
         return PREFIX + "/investigationContent_add.html";
     }

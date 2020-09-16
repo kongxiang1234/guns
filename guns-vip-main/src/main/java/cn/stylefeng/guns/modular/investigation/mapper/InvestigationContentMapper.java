@@ -93,11 +93,13 @@ public interface InvestigationContentMapper extends BaseMapper<InvestigationCont
      */
     void editInvestigationContent(@Param("param") InvestigationContentParam param);
     /**
-     * 协查申请删除
+     * 协查申请删除 协查信息表
      * @param param
      * @return
      */
     void deleteinvestigationInfoById(@Param("infoId") String infoId);
+
+    void deleteinvestigationObjectById(@Param("infoId") String infoId);
 
     String getUnitByDeptId(Long deptId);
 }
