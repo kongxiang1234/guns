@@ -10,6 +10,7 @@ import cn.stylefeng.guns.modular.sms.StringUtil;
 import cn.stylefeng.guns.sys.modular.system.service.UserService;
 import cn.stylefeng.roses.core.base.controller.BaseController;
 import cn.stylefeng.roses.kernel.model.response.ResponseData;
+import org.apache.commons.compress.utils.Lists;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -225,7 +226,11 @@ public class InvestigationContentController extends BaseController {
             Map<String, Object> temp = new HashMap<>();
             temp.put("unitName",key);
             temp.put("infoList",resultMap.get(key));
-            temp.put("pdfList",pdfs.get(key));
+            List<String> fileNames = pdfs.get(key);
+            if(CollectionUtils.isEmpty(fileNames)){
+                fileNames = Lists.newArrayList();
+            }
+            temp.put("pdfList", fileNames);
 
             list.add(temp);
         }
