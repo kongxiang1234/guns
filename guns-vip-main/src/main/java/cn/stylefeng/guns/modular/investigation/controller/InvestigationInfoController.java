@@ -216,7 +216,7 @@ public class InvestigationInfoController extends BaseController {
     public ResponseData getUploadData(Model model, HttpServletRequest request, HttpSession session) {
         String name = (String) request.getSession().getAttribute("upFile");
         String fileSavePath = ConstantsContext.getFileUploadPath();
-        fileSavePath="/tmp/";
+
 
         if (name != null) {
             File file = new File(fileSavePath + name);

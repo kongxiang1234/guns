@@ -122,7 +122,6 @@ public class InvestigationInfoServiceImpl extends ServiceImpl<InvestigationInfoM
         //生成文件的最终名称
         String finalName = file.getOriginalFilename();
         String fileSavePath = ConstantsContext.getFileUploadPath();
-        fileSavePath="/tmp/";
 
         fileSavePath = fileSavePath.endsWith(File.separator) ? fileSavePath : fileSavePath + File.separator;
         fileSavePath = fileSavePath + basrDir + File.separator + documentId + File.separator;
