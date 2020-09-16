@@ -149,7 +149,7 @@ layui.use(['table', 'admin', 'ax','laydate','ax', 'func','upload'], function () 
             data:{infoId:info_id},
             dataType: "json",
             success: function(data){
-                searchRequestMethod(data);
+                window.location.href = Feng.ctxPath + '/investigationContent'
             },
             error:function(err){
                 console.log(err.statusText);

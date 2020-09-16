@@ -150,7 +150,9 @@ public class InvestigationContentServiceImpl extends ServiceImpl<InvestigationCo
     @Override
     public void deleteinvestigationInfoById(String infoId) {
         this.baseMapper.deleteinvestigationInfoById(infoId);
+        this.baseMapper.deleteinvestigationObjectById(infoId);
     }
+
 
     /**
      * 上传文件

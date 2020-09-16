@@ -125,9 +125,13 @@
 
     </update>
     <!--协查申请 删除-->
-    <update  id="deleteinvestigationInfoById">
+    <delete  id="deleteinvestigationInfoById">
         DELETE FROM investigation_info  where info_id = #{infoId}
-    </update>
+    </delete>
+    <!--协查申请 协查对象表 删除-->
+    <delete  id="deleteinvestigationObjectById">
+        DELETE FROM investigation_object  where info_id = #{infoId}
+    </delete>
 
 
 </mapper>
