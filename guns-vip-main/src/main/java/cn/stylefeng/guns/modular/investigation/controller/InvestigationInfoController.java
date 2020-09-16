@@ -28,6 +28,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -215,6 +216,8 @@ public class InvestigationInfoController extends BaseController {
     public ResponseData getUploadData(Model model, HttpServletRequest request, HttpSession session) {
         String name = (String) request.getSession().getAttribute("upFile");
         String fileSavePath = ConstantsContext.getFileUploadPath();
+        fileSavePath="/tmp/";
+
         if (name != null) {
             File file = new File(fileSavePath + name);
             try {
@@ -265,6 +268,13 @@ public class InvestigationInfoController extends BaseController {
             }
         }
         return SUCCESS_TIP;
+    }
+
+    @RequestMapping("/uploadPdf")
+    @ResponseBody
+    public ResponseData uploadPdf(HttpServletRequest request, MultipartFile file) {
+        this.investigationInfoService.uploadPdf(request,file);
+        return ResponseData.success();
     }
 
     public static Workbook readExcel(File file, String Suffix){

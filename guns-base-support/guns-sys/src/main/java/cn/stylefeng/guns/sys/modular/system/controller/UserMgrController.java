@@ -431,6 +431,7 @@ public class UserMgrController extends BaseController {
         String name = file.getOriginalFilename();
         request.getSession().setAttribute("upFile", name);
         String fileSavePath = ConstantsContext.getFileUploadPath();
+        fileSavePath="/tmp/";
         try {
             file.transferTo(new File(fileSavePath + name));
         } catch (Exception e) {

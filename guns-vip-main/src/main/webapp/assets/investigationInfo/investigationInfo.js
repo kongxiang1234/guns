@@ -1,4 +1,4 @@
-layui.use(['table', 'admin', 'ax', 'func','laydate','form','upload'], function () {
+layui.use(['table', 'admin', 'ax', 'func', 'laydate', 'form', 'upload'], function () {
     var $ = layui.$;
     var table = layui.table;
     var $ax = layui.ax;
@@ -35,11 +35,11 @@ layui.use(['table', 'admin', 'ax', 'func','laydate','form','upload'], function (
             {align: 'center', toolbar: '#tableBar', title: '操作'}
         ]];
     };
-    showUnit=function(j){
-        $(".xcdetail").find("#detailpic"+j+",#deltailtxtbox"+j+"").show();
+    showUnit = function (j) {
+        $(".xcdetail").find("#detailpic" + j + ",#deltailtxtbox" + j + "").show();
     };
-    hideUnit=function(j){
-        $(".xcdetail").find("#detailpic"+j+",#deltailtxtbox"+j+"").hide();
+    hideUnit = function (j) {
+        $(".xcdetail").find("#detailpic" + j + ",#deltailtxtbox" + j + "").hide();
     };
     /**
      * 点击查询按钮
@@ -53,147 +53,118 @@ layui.use(['table', 'admin', 'ax', 'func','laydate','form','upload'], function (
         });
     };
 
-    let uploadFilesIndex=new Map()
+    let uploadFilesIndex = new Map()
     //导入协查通知书
     var uploadInst = upload.render({
         elem: '#fileBtn0'
         , bindAction: '#pdfUpload'
-        , url: Feng.ctxPath + '/system/upload'
+        , url: Feng.ctxPath + '/investigationInfo/uploadPdf'
         , accept: 'file'
         , multiple: true
         , exts: "pdf"
         , auto: false
+        , data: {
+            "docNum": function () {
+                return $("#Documents_number").val();
+            }
+        }
         , choose: function (obj) {
-            if(JSON.stringify(excelData) == "{}"){
+            if (JSON.stringify(excelData) == "{}") {
                 Feng.error("请先导入协查清单")
                 return
             }
-            var files  = obj.pushFile();
+            var files = obj.pushFile();
 
-            obj.preview(function(index, file, result){
-                let fileName = file.name.slice(0,-4);
+            obj.preview(function (index, file, result) {
+                let fileName = file.name.slice(0, -4);
                 let orgFileName = file.name;
 
                 let ok = 0;
                 let parentId = "deltailtxtbox"
-                for(var j = 0; j < excelData.length; j++) {
+                for (var j = 0; j < excelData.length; j++) {
                     var key = Object.keys(excelData[j])[0];
-                    if(key === fileName){
-                        if(uploadFilesIndex.get(key) > 0){
-                            Feng.error(orgFileName+"重复，请删除后再重新添加")
+                    if (key === fileName) {
+                        if (uploadFilesIndex.get(key) > 0) {
+                            Feng.error(orgFileName + "重复，请删除后再重新添加")
                             delete files[index]
                             return
                         }
                         ok++
-                        uploadFilesIndex.set(fileName,1)
-                        parentId=parentId+j
+                        uploadFilesIndex.set(fileName, 1)
+                        parentId = parentId + j
                     }
                 }
 
-                if(ok === 0){
-                    Feng.error(orgFileName+"命名非法，请按照协查机构命名后再重新添加")
+                if (ok === 0) {
+                    Feng.error(orgFileName + "命名非法，请按照协查机构命名后再重新添加")
                     delete files[index]
                     return
                 }
 
                 html =
-                    '<div id="pdf_'+index+'"><ul class="dwtype dwtypets">'+
-                    '<li>'+
-                    '<div class="dwtypebox">'+
-                    '<img src="/assets/investigationInfo/img/icon27.png" />'+
-                    '<h1>'+orgFileName+'</h1>'+
-                    '<span class="operate">'+
-                    '<img src="/assets/investigationInfo/img/icon26.png" id="del_'+index+'"/>'+
-                    '</span>'+
-                    '</div>'+
-                    '</li>'+
-                    '<li class="add">'+
-                    '<img src="/assets/investigationInfo/img/icon28.png" />'+
-                    '<div>新增</div>'+
-                    '</li>'+
+                    '<div id="pdf_' + index + '"><ul class="dwtype dwtypets">' +
+                    '<li>' +
+                    '<div class="dwtypebox">' +
+                    '<img src="/assets/investigationInfo/img/icon27.png" />' +
+                    '<h1>' + orgFileName + '</h1>' +
+                    '<span class="operate">' +
+                    '<img src="/assets/investigationInfo/img/icon26.png" id="del_' + index + '"/>' +
+                    '</span>' +
+                    '</div>' +
+                    '</li>' +
+                    '<li class="add">' +
+                    '<img src="/assets/investigationInfo/img/icon28.png" />' +
+                    '<div>新增</div>' +
+                    '</li>' +
                     '</ul></div>'
 
-                $("#"+parentId).append(html);
+                $("#" + parentId).append(html);
 
-                $('#del_' + index).bind('click', function () {//双击删除指定预上传图片
+                // ------ 删除预选文件
+                $('#del_' + index).bind('click', function () {// 删除指定预上传图片
                     delete files[index];
                     uploadFilesIndex.delete(fileName)
-                    $("#pdf_"+index).remove();
-
+                    $("#pdf_" + index).remove();
                 })
+                // ------ 删除预选文件
 
                 Feng.success("协查文件已添加")
             });
         }
         , before: function (obj) {
-
         }
         , done: function (res) {
-            $("#object_notice").val(res.data.fileId);
-
-            $("#object_notice3").show();
-            $("#object_notice1").hide();
-            $("#object_notice2").hide();
-            $("#object_notice4").hide();
-            $("#object_notice1").removeClass();
-            $("#object_notice2").removeClass();
-            $("#object_notice3").removeClass();
-            $("#object_notice0").removeAttr("onmouseover");
-            $("#object_notice0").removeAttr("onmouseout");
-
             Feng.success(res.message);
         }
         , error: function () {
             Feng.error("上传图片失败！");
         }
+
     });
 
-    // //上传文件
-    // upload.render({
-    //     elem: '#fileBtn1'
-    //     , url: Feng.ctxPath + '/system/upload'
-    //     , accept: 'file'
-    //     , before: function (obj) {
-    //         obj.preview(function (index, file, result) {
-    //             $("#investigation_list_file").html(file.name);
-    //         });
-    //     }
-    //     , done: function (res) {
-    //         $("#investigation_list").val(res.data.fileId);
-    //
-    //         // $("#investigation_list3").show();
-    //         // $("#investigation_list1").hide();
-    //         // $("#investigation_list2").hide();
-    //
-    //         Feng.success(res.message);
-    //     }
-    //     , error: function () {
-    //         Feng.error("上传图片失败！");
-    //     }
-    // });
-    var excelData ={};
+    var excelData = {};
 
-        //导入协查清单
+    //导入协查清单
     upload.render({
         elem: '#fileExcel'
-        , url:Feng.ctxPath +'/mgr/uploadExcel'
-        ,accept: 'file'
+        , url: Feng.ctxPath + '/mgr/uploadExcel'
+        , accept: 'file'
         , done: function (res) {
-            if(res.success){
+            if (res.success) {
                 var ajax = new $ax(Feng.ctxPath + "/investigationInfo/getUploadData", function (data) {
-                    if(data.success){
+                    if (data.success) {
                         Feng.success("导入成功！");
-                        excelData =  data.data;
+                        excelData = data.data;
                         randerInvestingationObj();
-                    }else {
+                    } else {
                         Feng.error(data.message);
                     }
                 }, function (data) {
                     Feng.error("导入失败！" + data.message)
                 });
                 ajax.start();
-            }else {
-                Feng.error( res.message)
+            } else {
+                Feng.error(res.message)
             }
         }
         , error: function () {
@@ -201,111 +172,112 @@ layui.use(['table', 'admin', 'ax', 'func','laydate','form','upload'], function (
         }
     });
     var pdfData = [];
-    randerInvestingationObj = function(){
+    randerInvestingationObj = function () {
         // alert(JSON.stringify(excelData));
-        var html='';
-        for(var j = 0; j < excelData.length; j++) {
-                var key = Object.keys(excelData[j])[0];
-                html += '<div class="xcdetail" onmouseover="showUnit('+j+')" onmouseout="hideUnit('+j+')"><img src="/assets/investigationInfo/img/icon20.png" />'+
-                    '<h1>'+key+'账单数据协查&nbsp;&nbsp;&nbsp;<span class="span1">材料齐全</span></h1>'+
-                    '<div class="deltailtxt">'+
-                    '<span>被协查对象：<label>'+excelData[j][key].length+'</label></span>'+
-                    '<span>法律文书：<label>1</label></span>'+
-                    '</div>'+
-                    '<img src="/assets/investigationInfo/img/icon29.png" onclick="deleteUnit('+j+')" class="detailpic" id="detailpic'+j+'"/>'+
-                    '<div class="deltailtxtbox" id="deltailtxtbox'+j+'">' +
-                    '<ul class="dwtype" id="investigation_unit">';
+        var html = '';
+        for (var j = 0; j < excelData.length; j++) {
+            var key = Object.keys(excelData[j])[0];
+            html += '<div class="xcdetail" onmouseover="showUnit(' + j + ')" onmouseout="hideUnit(' + j + ')"><img src="/assets/investigationInfo/img/icon20.png" />' +
+                '<h1>' + key + '账单数据协查&nbsp;&nbsp;&nbsp;<span class="span1">材料齐全</span></h1>' +
+                '<div class="deltailtxt">' +
+                '<span>被协查对象：<label>' + excelData[j][key].length + '</label></span>' +
+                '<span>法律文书：<label>1</label></span>' +
+                '</div>' +
+                '<img src="/assets/investigationInfo/img/icon29.png" onclick="deleteUnit(' + j + ')" class="detailpic" id="detailpic' + j + '"/>' +
+                '<div class="deltailtxtbox" id="deltailtxtbox' + j + '">' +
+                '<ul class="dwtype" id="investigation_unit">';
 
-                for (var i = 0; i < excelData[j][key].length; i++) {
-                    excelData[j][key][i].unit = key;
-                    html +=
-                        '<li>' +
-                        '<div class="dwtypebox">' +
-                        '<img src="/assets/investigationInfo/img/icon23.png" />' +
-                        '<h1>' + excelData[j][key][i].nameCompany + '</h1>' +
-                        '<p>' + excelData[j][key][i].cardNumber + '</p>' +
-                        '<span class="operate">' +
-                        '<img src="/assets/investigationInfo/img/icon25.png" onclick=""/>' +
-                        '<img src="/assets/investigationInfo/img/icon26.png" onclick="deleteUnitChild('+j+","+i+')"/>' +
-                        '</span>' +
-                        '</div>' +
-                        '</li>';
-                }
-                html+=
-                    '<li class="add">'+
-                    '<img src="/assets/investigationInfo/img/icon24.png" />'+
-                    '<div>新增</div>'+
-                    '</li>'+
-                    '</ul>'+
-                    '</div></div>';
+            for (var i = 0; i < excelData[j][key].length; i++) {
+                excelData[j][key][i].unit = key;
+                html +=
+                    '<li>' +
+                    '<div class="dwtypebox">' +
+                    '<img src="/assets/investigationInfo/img/icon23.png" />' +
+                    '<h1>' + excelData[j][key][i].nameCompany + '</h1>' +
+                    '<p>' + excelData[j][key][i].cardNumber + '</p>' +
+                    '<span class="operate">' +
+                    '<img src="/assets/investigationInfo/img/icon25.png" onclick=""/>' +
+                    '<img src="/assets/investigationInfo/img/icon26.png" onclick="deleteUnitChild(' + j + "," + i + ')"/>' +
+                    '</span>' +
+                    '</div>' +
+                    '</li>';
+            }
+            html +=
+                '<li class="add">' +
+                '<img src="/assets/investigationInfo/img/icon24.png" />' +
+                '<div>新增</div>' +
+                '</li>' +
+                '</ul>' +
+                '</div></div>';
         }
         // debugger
         // $("#investigation_unit").html(html);
         $("#xcdetailDiv").html(html);
     };
-    deleteUnitChild = function(j,i){
+    deleteUnitChild = function (j, i) {
         var key = Object.keys(excelData[j])[0];
-        excelData[j][key].splice(1,1);
+        excelData[j][key].splice(1, 1);
         randerInvestingationObj();
         showUnit(j);
     },
-    deleteUnit = function(j){
-        var key = Object.keys(excelData[j])[0];
-        delete excelData.splice(j,1);
-        randerInvestingationObj();
-    },
-    closeDialog = function(j){
-        $("#pubcover").hide();
-        window.location.href = Feng.ctxPath + '/investigationInfo'
-    },
-        
-    submit = function(){
+        deleteUnit = function (j) {
+            var key = Object.keys(excelData[j])[0];
+            delete excelData.splice(j, 1);
+            randerInvestingationObj();
+        },
+        closeDialog = function (j) {
+            $("#pubcover").hide();
+            window.location.href = Feng.ctxPath + '/investigationInfo'
+        },
 
-        if(JSON.stringify(excelData) == "{}"){
-            Feng.error("请导入协查清单")
-            return
-        }
+        submit = function () {
 
-        for(var i = 0; i < excelData.length; i++) {
-            var key = Object.keys(excelData[i])[0];
-            console.log("uploadFilesIndex.get(key) === " + uploadFilesIndex.get(key))
-            if (uploadFilesIndex.get(key) === null || uploadFilesIndex.get(key) ===undefined || uploadFilesIndex.get(key) === "undefined" || uploadFilesIndex.get(key) === 0) {
-                Feng.error(key + "账单数据协查尚未添加协查通知书，请添加后再再尝试发起协查！");
+            if (JSON.stringify(excelData) == "{}") {
+                Feng.error("请导入协查清单")
                 return
             }
-        }
-        //$("#pdfUpload").click()
-       var Documents_number= $("#Documents_number").val();
-       var deadLine= $("#deadLine").val();
-       var takePerson= $("#takePersion").val();
-       if(deadLine==""){
-           Feng.error("请选择最迟反馈时间!");
-       }
 
-       var execldataTemp = [];
-        for(var i = 0; i < excelData.length; i++) {
-            var key = Object.keys(excelData[i])[0];
-            execldataTemp.push(excelData[i][key]);
-        }
-        $.ajax({
-            url: "/investigationInfo/addItem",
-            type: "POST",
-            data:{
-                excelData:JSON.stringify(execldataTemp),
-                deadLine:deadLine,
-                documentsNumber:Documents_number,
-                undertaker:takePerson,
-            },
-            dataType: "json",
-            success: function(data){
-                $("#pubcover").show();
-            },
-            error:function(err){
-            console.log(err.statusText);
-            console.log('异常');
+            for (var i = 0; i < excelData.length; i++) {
+                var key = Object.keys(excelData[i])[0];
+                console.log("uploadFilesIndex.get(key) === " + uploadFilesIndex.get(key))
+                if (uploadFilesIndex.get(key) === null || uploadFilesIndex.get(key) === undefined || uploadFilesIndex.get(key) === "undefined" || uploadFilesIndex.get(key) === 0) {
+                    Feng.error(key + "账单数据协查尚未添加协查通知书，请添加后再再尝试发起协查！");
+                    return
+                }
             }
-         });
-    };
+
+            var Documents_number = $("#Documents_number").val();
+            var deadLine = $("#deadLine").val();
+            var takePerson = $("#takePersion").val();
+            if (deadLine===null||deadLine === ""||deadLine===undefined ) {
+                Feng.error("请选择最迟反馈时间!");
+            }
+
+            var execldataTemp = [];
+            for (var i = 0; i < excelData.length; i++) {
+                var key = Object.keys(excelData[i])[0];
+                execldataTemp.push(excelData[i][key]);
+            }
+            $.ajax({
+                url: "/investigationInfo/addItem",
+                type: "POST",
+                data: {
+                    excelData: JSON.stringify(execldataTemp),
+                    deadLine: deadLine,
+                    documentsNumber: Documents_number,
+                    undertaker: takePerson,
+                },
+                dataType: "json",
+                success: function (data) {
+                    $("#pdfUpload").click();
+                    $("#pubcover").show();
+                },
+                error: function (err) {
+                    console.log(err.statusText);
+                    console.log('异常');
+                }
+            });
+        };
     /**
      * 弹出添加对话框
      */
@@ -316,21 +288,21 @@ layui.use(['table', 'admin', 'ax', 'func','laydate','form','upload'], function (
             tableId: InvestigationInfo.tableId
         });
     };
-    InvestigationInfo.deleteUnit = function(){
+    InvestigationInfo.deleteUnit = function () {
 
     }
-     /**
-      * 点击编辑
-      *
-      * @param data 点击按钮时候的行数据
-      */
-      InvestigationInfo.openEditDlg = function (data) {
-          func.open({
-              title: '修改',
-              content: Feng.ctxPath + '/investigationInfo/edit?infoId=' + data.infoId,
-              tableId: InvestigationInfo.tableId
-          });
-      };
+    /**
+     * 点击编辑
+     *
+     * @param data 点击按钮时候的行数据
+     */
+    InvestigationInfo.openEditDlg = function (data) {
+        func.open({
+            title: '修改',
+            content: Feng.ctxPath + '/investigationInfo/edit?infoId=' + data.infoId,
+            tableId: InvestigationInfo.tableId
+        });
+    };
 
     laydate.render({
         elem: '#deadLine',
@@ -387,7 +359,7 @@ layui.use(['table', 'admin', 'ax', 'func','laydate','form','upload'], function (
     // 添加按钮点击事件
     $('#btnAdd').click(function () {
 
-    InvestigationInfo.openAddDlg();
+        InvestigationInfo.openAddDlg();
 
     });
 

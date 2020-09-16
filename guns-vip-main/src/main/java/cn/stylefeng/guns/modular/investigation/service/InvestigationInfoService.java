@@ -5,7 +5,9 @@ import cn.stylefeng.guns.modular.investigation.entity.InvestigationInfo;
 import cn.stylefeng.guns.modular.investigation.model.params.InvestigationInfoParam;
 import cn.stylefeng.guns.modular.investigation.model.result.InvestigationInfoResult;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -69,4 +71,7 @@ public interface InvestigationInfoService extends IService<InvestigationInfo> {
      //获取协查文书号编号
      Integer getDocumentNum(String name);
 
+     /** 上传协查通知书 */
+
+    void uploadPdf(HttpServletRequest request, MultipartFile file);
 }

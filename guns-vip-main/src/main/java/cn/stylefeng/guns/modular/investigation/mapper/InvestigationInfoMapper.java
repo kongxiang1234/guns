@@ -54,4 +54,7 @@ public interface InvestigationInfoMapper extends BaseMapper<InvestigationInfo> {
 
     Integer getDocumentNum(@Param("name") String name);
 
+    Long getIdByDocumentNum(@Param("name") String name);
+
+    Long getUnitIdByName(@Param("name") String name);
 }

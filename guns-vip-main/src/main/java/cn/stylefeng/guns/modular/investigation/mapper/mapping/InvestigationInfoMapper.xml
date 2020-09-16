@@ -52,6 +52,12 @@
        SELECT COUNT(1) FROM investigation_info WHERE USER_ID=#{name}
     </select>
 
+    <select id="getIdByDocumentNum" resultType="Long">
+       SELECT info_id FROM investigation_info WHERE Documents_number=#{name}
+    </select>
 
+    <select id="getUnitIdByName" resultType="Long">
+       SELECT unit_id FROM investigation_unit WHERE unit_name=#{name}
+    </select>
 
 </mapper>
