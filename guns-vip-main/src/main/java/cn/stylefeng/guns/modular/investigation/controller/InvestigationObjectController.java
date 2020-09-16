@@ -45,8 +45,7 @@ public class InvestigationObjectController extends BaseController {
     }
 
     /**
-     * 跳转到主页面
-     *
+     * 跳转到协查受理主页面
      * @author hujt
      * @Date 2020-09-12
      */

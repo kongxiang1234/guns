@@ -183,7 +183,7 @@ layui.use(['table', 'admin', 'ax','laydate','ax', 'func','upload'], function () 
             type: "POST",
             data:{
                 infoId:info_id,
-                stauts : '2',
+                stauts : '3',
             },
             dataType: "json",
             success: function(data){

@@ -144,6 +144,15 @@ public class InvestigationContentServiceImpl extends ServiceImpl<InvestigationCo
     }
 
     /**
+     * 协查申请删除
+     * @param infoId
+     */
+    @Override
+    public void deleteinvestigationInfoById(String infoId) {
+        this.baseMapper.deleteinvestigationInfoById(infoId);
+    }
+
+    /**
      * 上传文件
      *
      * @author fengshuonan

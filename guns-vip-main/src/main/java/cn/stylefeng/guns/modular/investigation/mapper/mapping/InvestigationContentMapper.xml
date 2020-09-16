@@ -124,6 +124,10 @@
         WHERE a.info_id = #{param.infoId}
 
     </update>
+    <!--协查申请 删除-->
+    <update  id="deleteinvestigationInfoById">
+        DELETE FROM investigation_info  where info_id = #{infoId}
+    </update>
 
 
 </mapper>

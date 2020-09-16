@@ -353,7 +353,7 @@ margin-bottom: 1.5rem;
 .span4{
     background-color: #fffbfb;
     font-size: 14px;
-    color: #ee5151;
+    color: orange;
     padding: 0rem 0.5rem 0.1rem 0.5rem;
     position: relative;
     top: -0.1rem;
@@ -1457,8 +1457,8 @@ line-height: 6vh
     background-color: rgba(0, 0, 0, 0.8);
 }
 .pubcovercont{
-    width: 42.5rem;
-    height: 28rem;
+    width: 32.5rem;
+    height: 18rem;
     background-color: #fff;
     border-radius: 0.5rem;
     position: absolute;

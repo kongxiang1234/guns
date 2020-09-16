@@ -8,8 +8,6 @@ layui.use(['table', 'admin', 'ax', 'func'], function () {
 
     $(document).ready(function(){
         $.ajax({
-
-            // url: "/investigationContent/getinvestigationInfoList",
             url: "/investigationObject/investigationObjectListByCompId",
             type: "POST",
             data:{},
@@ -30,12 +28,12 @@ layui.use(['table', 'admin', 'ax', 'func'], function () {
         var html = "";
         for (var i = 0; i <data.length ; i++) {
 
-            html += '<div class="lsqtypebox" style="height: 20vh;" onmouseleave="hideButton('+i+')"  onmouseover="showButton('+i+')">' +
+            html += '<div class="lsqtypebox" onmouseleave="hideButton('+i+')"  onmouseover="showButton('+i+')">' +
 
                 '<div class="typecont">' +
                 '<h3>'+data[i].infoList[0].Documents_number+'&nbsp;&nbsp;&nbsp;&nbsp;<label style="float: right;margin-right: 12px;" class="span2">催办<span>5</span></label></h3>' +
 
-                '<div style="padding-top: 14px;padding-right: 5px;">申请查询：';
+                '<div style="padding-top: 24px;padding-right: 5px;">申请查询：';
                 for (var j = 0; j <data[i].infoList.length ; j++) {
                     html +=data[i].infoList[j].name_company;
                     if(j<data[i].infoList.length-1){
@@ -44,7 +42,7 @@ layui.use(['table', 'admin', 'ax', 'func'], function () {
                 }
              html +='</div><hr>' +
 
-                 '<div>' +
+                 '<div style="padding-top: 20px;">' +
                 '截止时间:'+data[i].infoList[0].deadLine+'<div class="buttonStyle'+i+'" style="display: none;float: right;width:70px;margin-right: 12px;border-radius:8px;border:1px solid #000;text-align: center;background-color: #fff;"><span style="" onclick="showDetail('+data[i].info_id+')">受理</span></div>'+
                 '</div>' +
                  '</div>' +

@@ -16,7 +16,7 @@
         <div class="xctablebox">
             <table class="xctable">
                 <tr>
-                    <td><label>协查文书号：</label><input type="text" id="Documents_number" value="${Documents_number}"/></td>
+                    <td><label>协查文书号：</label><input type="text" id="Documents_number" value="${Documents_number}" readonly/></td>
                     <td><label>承办人：</label>
                         <select id="takePersion" id="takePersion" name="takePersion" lay-search>
                            @for(item in allUsersList) {
@@ -251,7 +251,7 @@
 
     </div>
     <div class="pubcover" style="display: none;" id="pubcover">
-        <div class="pubcovercont">
+        <div class="pubcovercont" style="height: 28rem;">
             <img src="/assets/investigationInfo/img/success.png" class="success"/>
             <h1 class="pctit">申请成功</h1>
             <p class="pctitxt">您已成功发起的协查申请，可前往协查列表查看。</p>

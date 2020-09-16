@@ -105,7 +105,13 @@ public interface InvestigationContentService extends IService<InvestigationConte
      * @param param
      * @return
      */
-    void editInvestigationContent(InvestigationContentParam param);
+        void editInvestigationContent(InvestigationContentParam param);
+/**
+     * 协查申请删除
+     * @param param
+     * @return
+     */
+    void deleteinvestigationInfoById(String infoId);
 
     String uploadFile(HttpServletRequest request, MultipartFile file);
 

@@ -50,11 +50,12 @@
         from investigation_object where 1 = 1
     </select>
 
+    <!--协查受理-->
     <select id="investigationObjectListByCompId" resultType="map">
        SELECT a.*,b.*,c.Documents_number,c.apply_time,c.deadLine FROM investigation_object a
         LEFT JOIN investigation_unit b ON b.unit_id = a.unit_id
         LEFT JOIN investigation_info c ON a.info_id = c.info_id
-        where b.unit_id = #{unit_id} ORDER BY c.apply_time
+        where b.unit_id = #{unit_id} AND c.stauts='3' ORDER BY c.apply_time
     </select>
 
     <select id="getInvestigationObjectInfoByid" resultType="map">

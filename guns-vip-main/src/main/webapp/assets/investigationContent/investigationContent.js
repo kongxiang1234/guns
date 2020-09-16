@@ -44,10 +44,30 @@ layui.use(['table', 'admin', 'ax','laydate','ax', 'func','upload'], function () 
         var html = "";
         for (var i = 0; i <data.length ; i++) {
 
-            html += '<div class="lsqtypebox" style="height: 28vh" onclick="showInvestigationDetail('+data[i].info_Id+');">' +
+            html += '<div class="lsqtypebox" onclick="showInvestigationDetail('+data[i].info_Id+');">' +
                 '<div>' +
                 '<div class="typecont">' +
-                '<h1>'+data[i].infoList[0].Documents_number+'&nbsp;&nbsp;<label class="span2" style="padding-left: 20px;">未受理</label></h1>' +
+                '<div><label style="font-size: 18px;">'+data[i].infoList[0].Documents_number+'&nbsp;&nbsp;</label>';
+            if (data[i].infoList[0].stauts=='1'){
+                html += '<label class="span3" style="float: right;">待审核</label></div>' ;
+            }
+             if (data[i].infoList[0].stauts=='2'){
+                html += '<label class="span2" style="float: right;">审核未通过</label></div>' ;
+            }
+             if (data[i].infoList[0].stauts=='3'){
+                html += '<label class="span3" style="float: right;">待受理</label></div>' ;
+            }
+             if (data[i].infoList[0].stauts=='4'){
+                html += '<label class="span4" style="float: right;">查询中</label></div>' ;
+            }
+             if (data[i].infoList[0].stauts=='5'){
+                html += '<label class="span1" style="float: right;">反馈完成</label></div>' ;
+            }
+             if (data[i].infoList[0].stauts=='6'){
+                html += '<label class="span5" style="float: right;">待发送</label></div>' ;
+            }
+
+            html +=
                 '<div class="typeview">' +
                 '<span class="viewnum">申请人：'+data[i].infoList[0].user_id+'</span>'+
                 '<span class="pubtime">申请时间：'+data[i].infoList[0].apply_time.substring(0,10)+'</span>' +
@@ -74,12 +94,20 @@ layui.use(['table', 'admin', 'ax','laydate','ax', 'func','upload'], function () 
                 '<img src="/assets/investigationInfo/img/icon31.png" onmousemove="editbox(this)" onmouseout="noeditbox(this)" />' +
                 '<div class="editcover" onmousemove="editcover(this)" onmouseout="noeditcover(this)">' +
                 '<img src="/assets/investigationInfo/img/icon32.png" />'+
-                '<ul>' +
-                '<li><span></span>修改</li>' +
-                '<li><span></span>删除</li>' +
-                '<li><span></span>下载</li>' +
-                '<li><span></span>催办</li>' +
-                '</ul>' +
+                '<ul>';
+            if (data[i].infoList[0].stauts=='1' || data[i].infoList[0].stauts=='2'|| data[i].infoList[0].stauts=='3'){
+                html += '<li onclick="updateinvest('+data[i].infoList[0].info_id+')"><span></span>修改</li>' +
+                    '<li onclick="deleteinvest('+
+                    data[i].infoList[0].info_id+')"><span></span>删除</li>';
+            }
+            if (data[i].infoList[0].stauts=='5'){
+                html += '<li onclick="downLoadinvestFiles('+data[i].infoList[0].info_id+')"><span></span>下载</li>';
+            }
+            if (data[i].infoList[0].stauts=='1' || data[i].infoList[0].stauts=='3'|| data[i].infoList[0].stauts=='4'){
+                html += '<li onclick="pressToDoinvest('+data[i].infoList[0].info_id+')"><span></span>催办</li>';
+            }
+
+            html +=  '</ul>'+
                 '</div>' +
                 '</span>' +
                 '</div>' +
@@ -89,6 +117,68 @@ layui.use(['table', 'admin', 'ax','laydate','ax', 'func','upload'], function () 
         $(".sqtypebox").html(html);
         // alert(JSON.stringify(data));
     };
+
+    updateinvest=function (val) {
+
+        var e = getEvent();
+        if (window.event) {
+            e.cancelBubble = true;
+        }else if(e.preventDefault){
+            e.stopPropagation();//阻止冒泡
+        }
+
+
+    };
+    var info_id = "";
+    deleteinvest=function (infoid) {
+        info_id = infoid;
+        var e = getEvent();
+        if (window.event) {
+            e.cancelBubble = true;
+        }else if(e.preventDefault){
+            e.stopPropagation();//阻止冒泡
+        }
+        $('#pubcover').show();
+    };
+
+    //确定删除
+    sureDelete=function(){
+        $.ajax({
+            url: "/investigationContent/deleteinvestigationInfoById",
+            type: "POST",
+            data:{infoId:info_id},
+            dataType: "json",
+            success: function(data){
+                searchRequestMethod(data);
+            },
+            error:function(err){
+                console.log(err.statusText);
+                console.log('查询出错，请联系管理员');
+            }
+        });
+    };
+    //取消删除
+    calcelDelete=function(){
+        $('#pubcover').hide();
+    };
+    //阻止js点击事件冒泡
+    function getEvent(){
+        if(window.event){return window.event;}
+        var func = getEvent.caller;
+        while(func != null){
+            var arg0 = func.arguments[0];
+            if(arg0){
+                if((arg0.constructor == Event || arg0.constructor == MouseEvent
+                    || arg0.constructor == KeyboardEvent)
+                    || (typeof(arg0) == "object" && arg0.preventDefault
+                        && arg0.stopPropagation)){
+                    return arg0;
+                }
+            }
+            func = func.caller;
+        }
+        return null;
+    }
     /**
      * 普通搜索
      */

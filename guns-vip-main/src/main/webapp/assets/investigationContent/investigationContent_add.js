@@ -30,7 +30,24 @@ layui.use(['form', 'admin', 'ax','laydate','upload','formSelects'], function () 
 
 
 
-
+    sendInvestionUpdate = function(){
+        $.ajax({
+            url: "/investigationContent/editInvestigationContent",
+            type: "POST",
+            data:{
+                infoId:info_id,
+                stauts : '2',
+            },
+            dataType: "json",
+            success: function(data){
+                Feng.success("发送成功!");
+                window.location.href = Feng.ctxPath + '/investigationContent'
+            },
+            error:function(err){
+                Feng.error("发送出错，请联系管理员");
+            }
+        });
+    },
 
 
 

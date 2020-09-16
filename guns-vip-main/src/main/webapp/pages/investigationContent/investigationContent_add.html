@@ -88,7 +88,9 @@
         </div>
         <div class="secondtit secondtitts">
             <img src="/assets/investigationInfo/img/icon61.png" />协查进度
-            <span class="cbbtn">一键催办</span>
+            @if(status!='1' && status!='2' && status!='6'){
+                <span class="cbbtn">一键催办</span>
+            @}
             <span class="editbox editboxts">
                     <img src="/assets/investigationInfo/img/icon47.png" onmousemove="editbox(this)" onmouseout="noeditbox(this)">
                     <div class="editcover editcoverts" style="width: 7.87rem;" onmousemove="editcover(this)"
@@ -106,8 +108,11 @@
             <div class="xcdetail">
                 <img src="/assets/investigationInfo/img/icon20.png" />
                 <h1>${items.unitName}账单数据协查&nbsp;&nbsp;&nbsp;<span class="span3">查询中</span>
-                    <span class="cb">催办</span>
-                    <span class="cbjl">催办记录</span>
+                    @if(status!='1' && status!='2' && status!='6'){
+
+                        <span class="cb">催办</span>
+                        <span class="cbjl">催办记录</span>
+                    @}
                 </h1>
                 <div class="deltailtxt deltailtxtts">
                     <span>2天前更新</span>
@@ -182,7 +187,15 @@
                 <span>2天前更新</span>
             </div>
         </div>-->
+        @if(status=='2'){
+            <h1 class="secondtit"><img src="/assets/investigationInfo/img/icon63.png" />驳回原因</h1>
+            <textarea class="refusetxt" readonly>${infoRemark}</textarea>
+        @}
+        @if(status=='6'){
+            <div class="fqbtn fqbtnts" onclick="sendInvestionUpdate(${infoList[0]['infoList'][0].info_id})"><span>完成</span></div>
+        @}
     </div>
+
     <div class="footer footerts">版权所有：宿迁市纪委监委&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;技术支持：苏州凌旭信息科技有限公司&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;服务热线：0512-62717553</div>
 </div>
 <script>
