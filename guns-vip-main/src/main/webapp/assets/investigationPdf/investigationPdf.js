@@ -21,6 +21,7 @@ layui.use(['table', 'admin', 'ax', 'func'], function () {
         return [[
             {type: 'checkbox'},
             {field: 'infoId', hide: true, title: '协查信息ID'},
+            {type: 'numbers', width: 150, sort: true, title: '序号'},
             {field: 'documentName', sort: true, title: '协查文书号'},
             {field: 'undertakerName', sort: true, title: '承办人'},
             {field: 'applyTime', sort: true, title: '协查日期'},
@@ -35,7 +36,7 @@ layui.use(['table', 'admin', 'ax', 'func'], function () {
         page: true,
         height: "full-158",
         cellMinWidth: 100,
-        cols: InvestigationUnit.initColumn()
+        cols: InvestigationPdf.initColumn()
     });
 
 });

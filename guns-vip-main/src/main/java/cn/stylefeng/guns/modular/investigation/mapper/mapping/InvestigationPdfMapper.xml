@@ -37,16 +37,16 @@
         WHERE
         b.info_id = a.info_id
         AND a.undertaker = c.user_id
-        <if test="documentName != null and documentName !=''">
+        <if test="investigationPdfPageParam.documentName != null and investigationPdfPageParam.documentName !=''">
             AND a.Documents_number like concat('%',#{documentName},'%')
         </if>
-        <if test="undertakerName != null and undertakerName !=''">
+        <if test="investigationPdfPageParam.undertakerName != null and investigationPdfPageParam.undertakerName !=''">
             AND c.name like concat('%',#{undertakerName},'%')
         </if>
-        <if test="applyTimeStart != nullnd undertakerName !=''">
+        <if test="investigationPdfPageParam.applyTimeStart != null and investigationPdfPageParam.undertakerName !=''">
             AND a.apply_time <![CDATA[ >= ]]> #{applyTimeStart}
         </if>
-        <if test="applyTimeEnd != nullnd applyTimeEnd !=''">
+        <if test="investigationPdfPageParam.applyTimeEnd != null and investigationPdfPageParam.applyTimeEnd !=''">
             AND a.apply_time <![CDATA[ <= ]]> #{applyTimeEnd}
         </if>
         GROUP BY
