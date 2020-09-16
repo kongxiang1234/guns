@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.investigation.mapper.InvestigationPdfMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.investigation.entity.InvestigationUnit">
+        <id column="unit_id" property="unitId"/>
+        <result column="unit_name" property="unitName"/>
+        <result column="unit_type" property="unitType"/>
+        <result column="unit_addr" property="unitAddr"/>
+        <result column="unit_logo" property="unitLogo"/>
+        <result column="unit_leader_name" property="unitLeaderName"/>
+        <result column="unit_leader_idCard" property="unitLeaderIdcard"/>
+        <result column="unit_leader_position" property="unitLeaderPosition"/>
+        <result column="unit_leader_phoneNum" property="unitLeaderPhonenum"/>
+        <result column="unit_leader_email" property="unitLeaderEmail"/>
+        <result column="create_time" property="createTime"/>
+        <result column="create_by" property="createBy"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="update_by" property="updateBy"/>
+    </resultMap>
+
+    <select id="listPage"
+            resultType="cn.stylefeng.guns.modular.investigation.model.result.InvestigationPdfPageResult"
+            parameterType="cn.stylefeng.guns.modular.investigation.model.params.InvestigationPdfPageParam">
+        SELECT
+        a.info_id as infoId,
+        a.Documents_number as documentName,
+        a.undertaker as undertaker,
+        c.name as undertakerName,
+        date_format(a.apply_time,'%Y-%m-%d') as applyTime,
+        count( b.info_id ) as fileNum
+        FROM
+        investigation_info a,
+        investigation_pdf b,
+        sys_user c
+        WHERE
+        b.info_id = a.info_id
+        AND a.undertaker = c.user_id
+        <if test="documentName != null and documentName !=''">
+            AND a.Documents_number like concat('%',#{documentName},'%')
+        </if>
+        <if test="undertakerName != null and undertakerName !=''">
+            AND c.name like concat('%',#{undertakerName},'%')
+        </if>
+        <if test="applyTimeStart != nullnd undertakerName !=''">
+            AND a.apply_time <![CDATA[ >= ]]> #{applyTimeStart}
+        </if>
+        <if test="applyTimeEnd != nullnd applyTimeEnd !=''">
+            AND a.apply_time <![CDATA[ <= ]]> #{applyTimeEnd}
+        </if>
+        GROUP BY
+        a.info_id
+    </select>
+</mapper>

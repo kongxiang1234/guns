@@ -10,7 +10,9 @@ import cn.stylefeng.guns.modular.investigation.entity.InvestigationPdf;
 import cn.stylefeng.guns.modular.investigation.mapper.InvestigationInfoMapper;
 import cn.stylefeng.guns.modular.investigation.mapper.InvestigationPdfMapper;
 import cn.stylefeng.guns.modular.investigation.model.params.InvestigationInfoParam;
+import cn.stylefeng.guns.modular.investigation.model.params.InvestigationPdfPageParam;
 import cn.stylefeng.guns.modular.investigation.model.result.InvestigationInfoResult;
+import cn.stylefeng.guns.modular.investigation.model.result.InvestigationPdfPageResult;
 import cn.stylefeng.guns.modular.investigation.service.InvestigationInfoService;
 import cn.stylefeng.guns.modular.investigation.service.InvestigationPdfService;
 import cn.stylefeng.guns.sys.core.exception.enums.BizExceptionEnum;
@@ -47,4 +49,10 @@ import java.util.Objects;
 @Service
 public class InvestigationPdfServiceImpl extends ServiceImpl<InvestigationPdfMapper, InvestigationPdf> implements InvestigationPdfService {
 
+    @Override
+    public LayuiPageInfo findPageBySpec(InvestigationPdfPageParam investigationPdfPageParam) {
+        Page pageContext = LayuiPageFactory.defaultPage();;
+        Page<InvestigationPdfPageResult> listPage = this.baseMapper.listPage(pageContext, investigationPdfPageParam);
+        return LayuiPageFactory.createPageInfo(listPage);
+    }
 }
