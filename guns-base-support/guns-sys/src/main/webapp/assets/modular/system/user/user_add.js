@@ -35,8 +35,8 @@ layui.use(['layer', 'form', 'admin', 'laydate', 'ax', 'formSelects','func'], fun
         });
     });
     $(function(){
-        var url= "/dict/listDictsByName?dictTypeName="+'所属';
-        func.initDictSelect(url,"specialty","code","name");
+        var url= "/investigationUnit/listUnit";
+        func.initDictSelect(url,"specialty","unitId","unitName");
     });
     // 添加表单验证方法
     form.verify({

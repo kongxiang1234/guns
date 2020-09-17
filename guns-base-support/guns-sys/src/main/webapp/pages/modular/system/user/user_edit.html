@@ -26,9 +26,9 @@
                         </div>
                     </div>
                     <div class="layui-inline layui-col-md12">
-                        <label class="layui-form-label">所属专业<span style="color: red;">*</span></label>
+                        <label class="layui-form-label">所属单位</label>
                         <div class="layui-input-block">
-                            <select name="specialty" id="specialty" lay-filter="specialty" lay-verify="required" required>
+                            <select name="specialty" id="specialty" lay-filter="specialty" >
 
                             </select>
                         </div>
@@ -46,13 +46,6 @@
                             <input name="phone" placeholder="请输入电话" type="text" class="layui-input"/>
                         </div>
                     </div>
-
-                    <div class="layui-inline layui-col-md12">
-                        <label class="layui-form-label">有效期（年）</label>
-                        <div class="layui-input-block">
-                            <input name="year" placeholder="请输入" type="number" class="layui-input"/>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -61,16 +54,16 @@
             <div class="layui-card-body">
                 <div class="layui-form-item layui-row">
                     <div class="layui-inline layui-col-md12">
-                        <label class="layui-form-label">${lang.get("FIELD_DEPT","部门")}<span style="color: red;">*</span></label>
+                        <label class="layui-form-label">${lang.get("FIELD_DEPT","部门")}</label>
                         <div class="layui-input-block">
                             <input id="deptId" name="deptId" type="hidden">
-                            <input id="deptName" name="deptName" placeholder="请输入部门" type="text" class="layui-input" lay-verify="required" required autocomplete="off"/>
+                            <input id="deptName" name="deptName" placeholder="请输入部门" type="text" class="layui-input"  autocomplete="off"/>
                         </div>
                     </div>
                     <div class="layui-inline layui-col-md12">
-                        <label class="layui-form-label">${lang.get("FIELD_POST","职位")}<span style="color: red;">*</span></label>
+                        <label class="layui-form-label">${lang.get("FIELD_POST","职位")}</label>
                         <div class="layui-input-block">
-                            <select name="position" id="position" xm-select="selPosition" lay-verify="required" required>
+                            <select name="position" id="position" xm-select="selPosition" >
                             </select>
                         </div>
                     </div>

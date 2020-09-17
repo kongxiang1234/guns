@@ -7,10 +7,13 @@ import cn.stylefeng.guns.modular.investigation.mapper.InvestigationUnitMapper;
 import cn.stylefeng.guns.modular.investigation.model.params.InvestigationUnitParam;
 import cn.stylefeng.guns.modular.investigation.model.result.InvestigationUnitResult;
 import  cn.stylefeng.guns.modular.investigation.service.InvestigationUnitService;
+import cn.stylefeng.guns.sys.modular.system.model.UserDto;
+import cn.stylefeng.guns.sys.modular.system.service.UserService;
 import cn.stylefeng.roses.core.util.ToolUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
@@ -27,11 +30,21 @@ import java.util.Map;
  */
 @Service
 public class InvestigationUnitServiceImpl extends ServiceImpl<InvestigationUnitMapper, InvestigationUnit> implements InvestigationUnitService {
-
+    @Autowired
+    UserService userService;
     @Override
     public void add(InvestigationUnitParam param){
         InvestigationUnit entity = getEntity(param);
         this.save(entity);
+        UserDto userDto=new UserDto();
+        userDto.setAccount(entity.getUnitLeaderPhonenum());
+        userDto.setEmail(entity.getUnitLeaderIdcard());
+        userDto.setAvatar(entity.getUnitLogo());
+        userDto.setPassword("123@abcd");
+        userDto.setSpecialty(entity.getUnitId());
+        userDto.setName(param.getUnitName()+"管理员");
+        userDto.setStatus("ENABLE");
+        userService.addUser(userDto);
     }
 
     @Override

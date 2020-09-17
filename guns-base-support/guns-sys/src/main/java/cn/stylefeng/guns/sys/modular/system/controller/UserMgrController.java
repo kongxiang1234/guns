@@ -31,15 +31,9 @@ import cn.stylefeng.guns.sys.core.constant.state.ManagerStatus;
 import cn.stylefeng.guns.sys.core.exception.enums.BizExceptionEnum;
 import cn.stylefeng.guns.sys.core.log.LogObjectHolder;
 import cn.stylefeng.guns.sys.core.util.SaltUtil;
-import cn.stylefeng.guns.sys.modular.system.entity.Dept;
-import cn.stylefeng.guns.sys.modular.system.entity.Position;
-import cn.stylefeng.guns.sys.modular.system.entity.Role;
-import cn.stylefeng.guns.sys.modular.system.entity.User;
+import cn.stylefeng.guns.sys.modular.system.entity.*;
 import cn.stylefeng.guns.sys.modular.system.model.UserDto;
-import cn.stylefeng.guns.sys.modular.system.service.DeptService;
-import cn.stylefeng.guns.sys.modular.system.service.PositionService;
-import cn.stylefeng.guns.sys.modular.system.service.RoleService;
-import cn.stylefeng.guns.sys.modular.system.service.UserService;
+import cn.stylefeng.guns.sys.modular.system.service.*;
 import cn.stylefeng.guns.sys.modular.system.warpper.UserWrapper;
 import cn.stylefeng.roses.core.base.controller.BaseController;
 import cn.stylefeng.roses.core.datascope.DataScope;
@@ -92,6 +86,8 @@ public class UserMgrController extends BaseController {
     private PositionService  positionService;
     @Autowired
     private RoleService roleService;
+
+
     /**
      * 跳转到查看管理员列表的页面
      *
@@ -219,7 +215,7 @@ public class UserMgrController extends BaseController {
     @Permission(Const.ADMIN_NAME)
     @ResponseBody
     public ResponseData add(@Valid UserDto user) {
-        user.setStatus("ENABLE");
+
         this.userService.addUser(user);
         return SUCCESS_TIP;
     }
@@ -351,18 +347,12 @@ public class UserMgrController extends BaseController {
     @BussinessLog(value = "解除冻结用户", key = "userId", dict = UserDict.class)
     @Permission(Const.ADMIN_NAME)
     @ResponseBody
-    public ResponseData unfreeze(@RequestParam Long userId,@RequestParam int year) {
+    public ResponseData unfreeze(@RequestParam Long userId) {
         if (ToolUtil.isEmpty(userId)) {
             throw new ServiceException(BizExceptionEnum.REQUEST_NULL);
         }
         this.userService.assertAuth(userId);
         this.userService.setStatus(userId, ManagerStatus.OK.getCode());
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(new Date()); //获取结束时间参数
-        cal.add(Calendar.YEAR, year);
-        Timer timer = new Timer();
-        User user= userService.getById(userId);
-        timer.schedule(new UserTask(user), cal.getTime());
         return SUCCESS_TIP;
     }
 
@@ -492,9 +482,7 @@ public class UserMgrController extends BaseController {
             if(StringUtils.isBlank(userDto.getDeptName())){
                 return ResponseData.error("部门名称为空请检查");
             }
-            if(StringUtils.isBlank(userDto.getSpecialty())){
-                return ResponseData.error("所属专业为空请检查");
-            }
+
             if(StringUtils.isBlank(userDto.getPosition())){
                 return ResponseData.error("职位名称为空请检查");
             }

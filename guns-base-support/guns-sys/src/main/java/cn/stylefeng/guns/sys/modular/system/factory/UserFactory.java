@@ -54,7 +54,7 @@ public class UserFactory {
             if(userDto.getStatus().equals(ManagerStatus.OK.getCode())){
                 user.setStatus(ManagerStatus.OK.getCode());
             }else {
-                user.setStatus(ManagerStatus.DISABLE.getCode());
+                user.setStatus(userDto.getStatus());
             }
 
             user.setPassword(md5Password);

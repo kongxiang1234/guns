@@ -73,27 +73,7 @@ public class GasStationController extends BaseController {
      */
     @RequestMapping("/meiri")
     public String index(Model model, HttpServletRequest request,HttpSession session,HttpServletResponse response) throws ServletException, IOException {
-        User user=(User)session.getAttribute("user");
-        String str = "";
-        List<String> strings=Arrays.asList(user.getSpecialty().split("、"));
-        if(strings.size()>1){
-            str=strings.get(0);
-        }else {
-            str=user.getSpecialty();
-        }
-        List<Map> mapList= paperService.selectQuary(str);
-        String string = "";
-        for (Map map:mapList){
-            if(map.get("questions_type").toString().equals("1")){
-                string=string+map.get("single").toString()+".";
-            }else if (map.get("questions_type").toString().equals("2")){
-                string=string+map.get("Multiple").toString()+".";
-            }else if (map.get("questions_type").toString().equals("3")){
-                string=string+map.get("flag").toString()+".";
-            }
-        }
-        model.addAttribute("string",string);
-        model.addAttribute("mapList",mapList);
+
         return PREFIX + "/dailyTest.html";
     }
     /**
@@ -350,36 +330,6 @@ public class GasStationController extends BaseController {
      */
     @RequestMapping("/monthly")
     public String monthly(Model model, HttpServletRequest request,HttpSession session,HttpServletResponse response) throws ServletException, IOException {
-        User user=(User)session.getAttribute("user");
-        Dept dept= deptService.getById(user.getDeptId());
-        Role role= roleService.getById(user.getRoleId());
-        List<String> strings=Arrays.asList(user.getSpecialty().split("、"));
-        model.addAttribute("specialty",user.getSpecialty());
-        SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
-        Date d2 = new Date();
-        QueryWrapper<Paper> queryWrapper1=new QueryWrapper();
-        queryWrapper1.eq("date_format(btime, '%Y-%m-%d' )",sdf2.format(d2));
-        queryWrapper1.last("limit 1");
-        queryWrapper1.in("sszy",strings);
-        queryWrapper1.eq("type","2");
-        Paper paper= paperService.getOne(queryWrapper1);
-        List<Map> mapList= paperService.selectYueQuary(paper.getSjbh(),strings,role.getName());
-        model.addAttribute("specialtyValue",user.getSpecialty());
-        model.addAttribute("departId",user.getDeptId());
-        model.addAttribute("roleId",user.getRoleId());
-        model.addAttribute("departName",dept.getSimpleName());
-        model.addAttribute("name",role.getName());
-        model.addAttribute("message","");
-        if(paper==null || mapList.size()==0){
-            model.addAttribute("message","暂无试卷考试");
-        }else {
-            /**
-                 * 1表示大于，返回-1表示小于，返回0表示相等。
-                 */
-            if(paper.getBtime().compareTo(d2)==1){
-                model.addAttribute("message","考试时间还没到，请稍候点击开始考试，开始时间"+sdf.format(paper.getBtime())+"结束时间"+sdf.format(paper.getEtime())+"");
-            }
-        }
 
         return PREFIX + "/monthlyeva.html";
     }

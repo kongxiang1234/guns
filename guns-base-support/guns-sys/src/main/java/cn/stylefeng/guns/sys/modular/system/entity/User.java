@@ -135,7 +135,7 @@ public class User implements Serializable {
      * 乐观锁
      */
     @TableField("specialty")
-    private String specialty;
+    private Long specialty;
 
 
     public String getYear() {
@@ -146,11 +146,11 @@ public class User implements Serializable {
         this.year = year;
     }
 
-    public String getSpecialty() {
+    public Long getSpecialty() {
         return specialty;
     }
 
-    public void setSpecialty(String specialty) {
+    public void setSpecialty(Long specialty) {
         this.specialty = specialty;
     }
 

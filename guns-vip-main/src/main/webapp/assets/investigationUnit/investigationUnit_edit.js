@@ -26,7 +26,24 @@ layui.use(['form', 'admin', 'ax','laydate','upload','formSelects'], function () 
     var form = layui.form;
     var admin = layui.admin;
 
-
+    var upload = layui.upload;
+//普通图片上传
+    upload.render({
+        elem: '#picBtn'
+        , url: Feng.ctxPath + '/system/upload'
+        , before: function (obj) {
+            obj.preview(function (index, file, result) {
+                $('#img1').attr('src', result);
+            });
+        }
+        , done: function (res) {
+            $("#unitLogo").val(res.data.fileId);
+            Feng.success(res.message);
+        }
+        , error: function () {
+            Feng.error("上传图片失败！");
+        }
+    });
 
 
 
@@ -63,6 +80,8 @@ layui.use(['form', 'admin', 'ax','laydate','upload','formSelects'], function () 
     //获取详情信息，填充表单
     var ajax = new $ax(Feng.ctxPath + "/investigationUnit/detail?unitId=" + Feng.getUrlParam("unitId"));
     var result = ajax.start();
+    var url = "/rest/system/preview/"+result.data.unitLogo+"";
+    $('#img1').attr('src', url);
     form.val('investigationUnitForm', result.data);
 
     //表单提交事件

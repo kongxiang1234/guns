@@ -37,9 +37,9 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func', 
             {field: 'name', align: "center", sort: true, title: langs.FIELD_NAME},
             {field: 'email', align: "center", sort: true, title: "身份证号码"},
             {field: 'deptName', align: "center", sort: true, title: langs.FIELD_DEPT},
-            {field: 'specialty', align: "center", sort: true, title: "所属专业"},
+            {field: 'specialtys', align: "center", sort: true, title: "所属单位"},
             {field: 'positionName', align: "center", sort: true, title: langs.FIELD_POST},
-            {field: 'year', align: "center", sort: true, title: "有效期"},
+
             {field: 'phone', align: "center", sort: true, title: langs.FIELD_PHONE, minWidth: 117},
             {field: 'createTime', align: "center", sort: true, title: langs.FIELD_CREATE_TIME, minWidth: 160},
             {field: 'status', align: "center", sort: true, templet: '#statusTpl', title: langs.FIELD_STATUS},
@@ -175,7 +175,8 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func', 
      * @param userId 用户id
      * @param checked 是否选中（true,false），选中就是解锁用户，未选中就是锁定用户
      */
-    MgrUser.changeUserStatus = function (userId, checked,year) {
+    MgrUser.changeUserStatus = function (userId, checked) {
+        debugger
         if (checked) {
             var ajax = new $ax(Feng.ctxPath + "/mgr/unfreeze", function (data) {
                 Feng.success("解除冻结成功!");
@@ -184,7 +185,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func', 
                 table.reload(MgrUser.tableId);
             });
             ajax.set("userId", userId);
-            ajax.set("year", year);
+
             ajax.start();
         } else {
             var ajax = new $ax(Feng.ctxPath + "/mgr/freeze", function (data) {
@@ -265,16 +266,9 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func', 
         var userId = obj.elem.value;
         var checked = obj.elem.checked ? true : false;
         if(checked){
-            layer.prompt({
-                formType: 2,
-                value: 1,
-                title: '请输入有效期（年）',
-            }, function(value, index){
-                MgrUser.changeUserStatus(userId, checked,value);
-                layer.close(index);
-            });
+            MgrUser.changeUserStatus(userId, checked);
         }else {
-            MgrUser.changeUserStatus(userId, checked,0);
+            MgrUser.changeUserStatus(userId, checked);
         }
     });
         upload.render({

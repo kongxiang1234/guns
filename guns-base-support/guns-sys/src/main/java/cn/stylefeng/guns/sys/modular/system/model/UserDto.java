@@ -60,7 +60,6 @@ public class UserDto implements Serializable, BaseValidatingParam {
 
     private String roleId;
 
-    @NotNull
     private Long deptId;
 
     private String status;
@@ -75,7 +74,7 @@ public class UserDto implements Serializable, BaseValidatingParam {
     private String deptName;
 
     @Excel(name = "所属专业")
-    private String specialty;
+    private Long specialty;
     @Excel(name = "有效期(年)")
     private String year;
 

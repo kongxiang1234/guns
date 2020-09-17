@@ -9,6 +9,7 @@ import cn.stylefeng.roses.kernel.model.response.ResponseData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
@@ -99,6 +100,9 @@ public class MessageManagementController extends BaseController {
         return ResponseData.success();
     }
 
+    public static void main(String[] args) {
+
+    }
     /**
      * 查看详情接口
      *
@@ -107,8 +111,8 @@ public class MessageManagementController extends BaseController {
      */
     @RequestMapping("/detail")
     @ResponseBody
-    public ResponseData detail(MessageManagementParam messageManagementParam) {
-        MessageManagement detail = this.messageManagementService.getById(messageManagementParam.getId());
+    public ResponseData detail(@RequestParam String id) {
+        MessageManagement detail = this.messageManagementService.getById(id);
         return ResponseData.success(detail);
     }
 

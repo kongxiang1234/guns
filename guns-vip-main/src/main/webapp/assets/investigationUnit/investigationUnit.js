@@ -24,16 +24,16 @@ layui.use(['table', 'admin', 'ax', 'func'], function () {
             {field: 'unitName', sort: true, title: '单位名称'},
             {field: 'unitType', sort: true, title: '单位类型'},
             {field: 'unitAddr', sort: true, title: '单位地址'},
-            {field: 'unitLogo', sort: true, title: '单位logo'},
+            {field: 'unitLogo', sort: true, title: '图片',width: 100, unresize: true, templet: function (d) {
+                    var url = "/rest/system/preview/"+d.unitLogo+"";
+                    return '<img src="' + url + '" class="tdImg" width="50"/>';
+                }},
             {field: 'unitLeaderName', sort: true, title: '负责人姓名'},
             {field: 'unitLeaderIdcard', sort: true, title: '身份证号'},
-            {field: 'unitLeaderPosition', sort: true, title: '职位'},
+            {field: 'unitLeaderPosition', sort: true, title: '负责人姓名'},
             {field: 'unitLeaderPhonenum', sort: true, title: '手机号码'},
             {field: 'unitLeaderEmail', sort: true, title: '邮箱'},
-            {field: 'createTime', sort: true, title: ''},
-            {field: 'createBy', sort: true, title: ''},
-            {field: 'updateTime', sort: true, title: ''},
-            {field: 'updateBy', sort: true, title: ''},
+            {field: 'createTime', sort: true, title: '创建时间'},
             {align: 'center', toolbar: '#tableBar', title: '操作'}
         ]];
     };

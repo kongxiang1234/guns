@@ -14,6 +14,7 @@ import cn.stylefeng.guns.sys.core.exception.enums.BizExceptionEnum;
 import cn.stylefeng.guns.sys.core.util.DefaultImages;
 import cn.stylefeng.guns.sys.core.util.SaltUtil;
 import cn.stylefeng.guns.sys.modular.system.controller.UserTask;
+import cn.stylefeng.guns.sys.modular.system.entity.AuditUser;
 import cn.stylefeng.guns.sys.modular.system.entity.User;
 import cn.stylefeng.guns.sys.modular.system.entity.UserPos;
 import cn.stylefeng.guns.sys.modular.system.factory.UserFactory;
@@ -50,7 +51,8 @@ public class UserService extends ServiceImpl<UserMapper, User> {
 
     @Autowired
     private UserPosService userPosService;
-
+    @Autowired
+    AuditUserService auditUserService;
     /**
      * 添加用戶
      *
@@ -59,7 +61,12 @@ public class UserService extends ServiceImpl<UserMapper, User> {
      */
     @Transactional(rollbackFor = Exception.class)
     public void addUser(UserDto user) {
+        if(user.getSpecialty()!=null){
+            user.setStatus("DELETED");
 
+        }else {
+            user.setStatus("ENABLE");
+        }
         // 判断账号是否重复
         QueryWrapper<User> queryWrapper=new QueryWrapper();
         queryWrapper.eq("account",user.getAccount());
@@ -68,20 +75,26 @@ public class UserService extends ServiceImpl<UserMapper, User> {
         if (theUser != null) {
             throw new ServiceException(BizExceptionEnum.USER_ALREADY_REG);
         }*/
-
         // 完善账号信息
         String salt = SaltUtil.getRandomSalt();
         String password = SaltUtil.md5Encrypt(user.getPassword(), salt);
 
         User newUser = UserFactory.createUser(user, password, salt);
-
         this.save(newUser);
-        if(StringUtils.isNotBlank(newUser.getYear())){
-            Calendar cal = Calendar.getInstance();
-            cal.setTime(new Date()); //获取结束时间参数
-            cal.add(Calendar.YEAR, Integer.parseInt(newUser.getYear()));
-            Timer timer = new Timer();
-            timer.schedule(new UserTask(newUser), cal.getTime());
+        if(user.getSpecialty()!=null){
+            String account = LoginContextHolder.getContext().getUser().getName();
+            AuditUser auditUser=new AuditUser();
+            auditUser.setCreateBy(account);
+            auditUser.setCreateTime(new Date());
+            auditUser.setMobile(user.getPhone());
+            auditUser.setUnitId(user.getSpecialty());
+            auditUser.setName(user.getName());
+            auditUser.setType("新增审核");
+           // auditUser.setRank(user.getPosition());
+            auditUser.setUserId(newUser.getUserId());
+            auditUser.setAuditStatus("待审核");
+            auditUser.setIsdel("0");
+            auditUserService.save(auditUser);
         }
         //添加职位关联
         addPosition(user.getPosition(), newUser.getUserId());

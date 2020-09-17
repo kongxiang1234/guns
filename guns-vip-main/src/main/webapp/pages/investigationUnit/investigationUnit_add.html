@@ -7,7 +7,6 @@
             <div class="layui-card-body">
                 <div class="layui-form-item layui-row">
                     <input name="unitId" type="hidden"/>
-
                     <div class="layui-inline layui-col-md12">
                         <label class="layui-form-label">单位名称<span style="color: red;">*</span></label>
                         <div class="layui-input-block">
@@ -17,8 +16,14 @@
                     <div class="layui-inline layui-col-md12">
                         <label class="layui-form-label">单位类型<span style="color: red;">*</span></label>
                         <div class="layui-input-block">
-                            <input id="unitType" name="unitType" placeholder="请输入单位类型" type="text" class="layui-input" lay-verify="required" required/>
-                        </div>
+
+                                <select name="unitType"  id="unitType" lay-filter="unitType" lay-verify="required" required>
+                                    <option value="">请选择单位类型</option>
+                                    <option value="1">银行</option>
+                                    <option value="2">通讯运行商</option>
+                                </select>
+
+                          </div>
                     </div>
                     <div class="layui-inline layui-col-md12">
                         <label class="layui-form-label">单位地址<span style="color: red;">*</span></label>
@@ -26,12 +31,17 @@
                             <input id="unitAddr" name="unitAddr" placeholder="请输入单位地址" type="text" class="layui-input" lay-verify="required" required/>
                         </div>
                     </div>
-                    <div class="layui-inline layui-col-md12">
-                        <label class="layui-form-label">单位logo<span style="color: red;">*</span></label>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">单位logo</label>
                         <div class="layui-input-block">
-                            <input id="unitLogo" name="unitLogo" placeholder="请输入单位logo" type="text" class="layui-input" lay-verify="required" required/>
+                            <input id="unitLogo" name="unitLogo" type="hidden" class="layui-input" lay-verify="required" required/>
+                            <button type="button" class="layui-btn layui-btn-sm" id="picBtn"><i class="layui-icon"></i>选择图片</button>
+                            <div class="layui-upload-list">
+                                <img class="layui-upload-img" id="img1" width="92px" height="92px" >
+                            </div>
                         </div>
                     </div>
+
                     <div class="layui-inline layui-col-md12">
                         <label class="layui-form-label">负责人姓名<span style="color: red;">*</span></label>
                         <div class="layui-input-block">
@@ -45,9 +55,9 @@
                         </div>
                     </div>
                     <div class="layui-inline layui-col-md12">
-                        <label class="layui-form-label">职位<span style="color: red;">*</span></label>
+                        <label class="layui-form-label">负责人职务</label>
                         <div class="layui-input-block">
-                            <input id="unitLeaderPosition" name="unitLeaderPosition" placeholder="请输入职位" type="text" class="layui-input" lay-verify="required" required/>
+                            <input id="unitLeaderPosition" name="unitLeaderPosition" placeholder="请输入职位" type="text" class="layui-input"/>
                         </div>
                     </div>
                     <div class="layui-inline layui-col-md12">
@@ -57,23 +67,12 @@
                         </div>
                     </div>
                     <div class="layui-inline layui-col-md12">
-                        <label class="layui-form-label">邮箱<span style="color: red;">*</span></label>
+                        <label class="layui-form-label">邮箱</label>
                         <div class="layui-input-block">
-                            <input id="unitLeaderEmail" name="unitLeaderEmail" placeholder="请输入邮箱" type="text" class="layui-input" lay-verify="required" required/>
+                            <input id="unitLeaderEmail" name="unitLeaderEmail" placeholder="请输入邮箱" type="text" class="layui-input" />
                         </div>
                     </div>
-                    <div class="layui-inline layui-col-md12">
-                        <label class="layui-form-label"><span style="color: red;">*</span></label>
-                        <div class="layui-input-block">
-                            <input id="createBy" name="createBy" placeholder="请输入" type="text" class="layui-input" lay-verify="required" required/>
-                        </div>
-                    </div>
-                    <div class="layui-inline layui-col-md12">
-                        <label class="layui-form-label"><span style="color: red;">*</span></label>
-                        <div class="layui-input-block">
-                            <input id="updateBy" name="updateBy" placeholder="请输入" type="text" class="layui-input" lay-verify="required" required/>
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </div>

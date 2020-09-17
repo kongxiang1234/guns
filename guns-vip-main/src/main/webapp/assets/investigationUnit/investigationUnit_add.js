@@ -20,13 +20,30 @@ var InvestigationUnitInfoDlg = {
     }
 };
 
-layui.use(['form', 'admin', 'ax','laydate','upload','formSelects'], function () {
+layui.use(['form', 'admin', 'ax','laydate','upload','formSelects','func'], function () {
     var $ = layui.jquery;
     var $ax = layui.ax;
     var form = layui.form;
     var admin = layui.admin;
-
-
+    var upload = layui.upload;
+    var func = layui.func;
+//普通图片上传
+    upload.render({
+        elem: '#picBtn'
+        , url: Feng.ctxPath + '/system/upload'
+        , before: function (obj) {
+            obj.preview(function (index, file, result) {
+                $('#img1').attr('src', result);
+            });
+        }
+        , done: function (res) {
+            $("#unitLogo").val(res.data.fileId);
+            Feng.success(res.message);
+        }
+        , error: function () {
+            Feng.error("上传图片失败！");
+        }
+    });
 
 
 
