@@ -101,19 +101,19 @@
             <span class="mess"><img src="${ctxPath}/assets/xct/img/icon03.png" />
                     <label>8</label></span>
         </div>
-        <div class="lmoudulemin">
+        <div class="lmoudulemin" onclick="toInvestigationApply()">
             <h1>发起申请</h1>
-            <span class="mess"><img src="${ctxPath}/assets/xct/img/icon04.png" /></span>
+            <span class="mess"><img  src="${ctxPath}/assets/xct/img/icon04.png" /></span>
         </div>
     </li>
-    <li class="lmoudule">
+    <li class="lmoudule" onclick="toInvestigationManage()">
         <div class="lmoudulemin">
             <h1>我的申请</h1>
             <span class="mess"><img src="${ctxPath}/assets/xct/img/icon05.png" />
                     <label></label></span>
         </div>
     </li>
-    <li class="lmoudule">
+    <li class="lmoudule" onclick="toInvestigationReview()">
         <div class="lmoudulemin">
             <h1>协查审批</h1>
             <span class="mess"><img src="${ctxPath}/assets/xct/img/icon06.png" />
@@ -139,7 +139,7 @@
             <span class="mess"><img src="${ctxPath}/assets/xct/img/icon11.png" /></span>
         </div>
     </li>
-    <li class="lmoudule">
+    <li class="lmoudule" onclick="toInvestigationUnit()">
         <div class="lmoudulemin">
             <h1>外部单位</h1>
             <span class="mess"><img src="${ctxPath}/assets/xct/img/icon12.png" /></span>
@@ -153,12 +153,29 @@
     </li>
 
 </ul>
-<div class="footer">版权所有：宿迁市纪委监委&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;技术支持：苏州凌旭信息科技有限公司&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;服务热线：0512-62717553</div>
 </body>
 <script type="text/javascript">
+    //去主界面
     function systems() {
         window.location.href = Feng.ctxPath + "/index";
     }
+    //去发切协查
+    function toInvestigationApply() {
+        window.location.href = Feng.ctxPath + "/investigationInfo";
+    }
+    //我的申请
+    function toInvestigationManage() {
+        window.location.href = Feng.ctxPath + "/investigationContent";
+    }
+    //去协查审核
+    function toInvestigationReview() {
+        window.location.href =  Feng.ctxPath +"/investigationContent/review";
+    }
+   //去协查审核
+    function toInvestigationUnit() {
+        window.location.href = Feng.ctxPath + "/investigationUnit";
+    }
+
     var barChart = echarts.init(document.getElementById('bar'));
     var baroption = {
         grid: {

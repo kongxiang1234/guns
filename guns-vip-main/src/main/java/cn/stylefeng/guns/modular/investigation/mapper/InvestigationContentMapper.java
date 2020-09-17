@@ -59,6 +59,14 @@ public interface InvestigationContentMapper extends BaseMapper<InvestigationCont
      */
     List<Map<String, Object>> investigationInfoList();
 
+    /**
+     * 我的协查申请列表
+     *
+     * @author hujt
+     * @Date 2020-09-09
+     */
+    List<Map<String, Object>> getinvestigationInfoListByLoginUser(@Param("userName")String userName);
+
 
     /**
      * 协查申请根据id获取详情

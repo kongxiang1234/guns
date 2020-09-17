@@ -69,7 +69,7 @@ public interface InvestigationInfoService extends IService<InvestigationInfo> {
      LayuiPageInfo findPageBySpec(InvestigationInfoParam param);
 
      //获取协查文书号编号
-     Integer getDocumentNum(String name);
+     Integer getDocumentNum();
 
      /** 上传协查通知书 */
 

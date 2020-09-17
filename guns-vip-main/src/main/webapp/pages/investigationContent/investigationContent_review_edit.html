@@ -10,7 +10,7 @@
 
 <body class="bodybg bodybgts">
 <div class="container">
-    <h1 class="xctitle"><span>协查详情</span><div style="float: right;"><button type="reset" class="layui-btn layui-btn-primary" id="cancel">&emsp;返回&emsp;</button></div></h1>
+    <h1 class="xctitle"><span>协查详情</span><div style="float: right;"><button type="reset" class="layui-btn layui-btn-primary" onclick="cancel()">&emsp;返回&emsp;</button></div></h1>
 
     <div class="containerbody">
         <h1 class="secondtit"><img src="/assets/investigationInfo/img/icon14.png" />基本信息</h1>
@@ -98,7 +98,6 @@
             <div class="fqbtn fqbtnts"><span onclick="passReview(${infoList[0]['infoList'][0].info_id})">审核通过</span> <span style="background-color: #90111A" onclick="rejectReview(${infoList[0]['infoList'][0].info_id})">驳回</span></div>
         </div>
     </div>
-    <div class="footer footerts">版权所有：宿迁市纪委监委&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;技术支持：苏州凌旭信息科技有限公司&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;服务热线：0512-62717553</div>
 </div>
 <script>
     $(".xcdetail").mouseenter(function () {

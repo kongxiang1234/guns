@@ -70,6 +70,12 @@ public interface InvestigationContentService extends IService<InvestigationConte
      LayuiPageInfo findPageBySpec(InvestigationContentParam param);
 
      /**
+     * 获取我发出的协查申请（根据登陆用户获取）
+     * @author hujt
+     * @Date 2020-09-09
+     */
+     List<Map<String,Object>> getinvestigationInfoListByLoginUser(String userName);
+     /**
      * 查询数据，Specification模式
      * @author hujt
      * @Date 2020-09-09

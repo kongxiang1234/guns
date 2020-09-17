@@ -7,6 +7,7 @@
         <id column="id" property="id" />
         <result column="title" property="title" />
         <result column="create_user" property="createUser" />
+        <result column="urge_object" property="urgeObject" />
         <result column="create_time" property="createTime" />
         <result column="status" property="status" />
         <result column="type" property="type" />
@@ -14,7 +15,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id AS "id", title AS "title", create_user AS "createUser", create_time AS "createTime", status AS "status", type AS "type"
+        id AS "id", title AS "title", create_user AS "createUser",urge_object As "urgeObject" create_time AS "createTime", status AS "status", type AS "type"
     </sql>
 
 

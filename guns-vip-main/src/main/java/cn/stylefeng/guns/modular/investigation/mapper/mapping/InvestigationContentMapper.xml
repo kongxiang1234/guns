@@ -46,12 +46,22 @@
         from investigation_content where 1 = 1
     </select>
 
+    <!--审核列表-->
      <select id="investigationInfoList" resultType="map">
 
         SELECT a.*,b.* ,c.* FROM investigation_info a
         LEFT JOIN investigation_object b ON a.info_id = b.info_id
 		LEFT JOIN investigation_unit c   ON c.unit_id = b.unit_id
         WHERE b.info_id != ''
+    </select>
+
+    <!--我发起的协查申请（按用户）-->
+    <select id="getinvestigationInfoListByLoginUser" resultType="map">
+
+        SELECT a.*,b.* ,c.* FROM investigation_info a
+        LEFT JOIN investigation_object b ON a.info_id = b.info_id
+		LEFT JOIN investigation_unit c   ON c.unit_id = b.unit_id
+        WHERE b.info_id != '' and a.user_id =#{userName}
     </select>
     <select id="getinvestigationInfoListByStatus" resultType="map">
 
@@ -72,6 +82,8 @@
     <select id="getUnitByDeptId" resultType="string" parameterType="java.lang.Long">
         select unit_name from investigation_unit where unit_id = #{deptId} limit 1
     </select>
+
+
     <!--普通查询搜索  模糊查询-->
     <select id="getInvestigationInfoListBySearch" resultType="map" parameterType="java.lang.String">
         SELECT a.*,b.* ,c.* FROM investigation_info a
@@ -114,7 +126,7 @@
 
     </select>
 
-    <!--普通查询搜索  模糊查询-->
+    <!-- 协查审核 -->
     <update  id="editInvestigationContent"  parameterType="cn.stylefeng.guns.modular.investigation.model.params.InvestigationContentParam">
 
         UPDATE investigation_info a SET a.stauts = #{param.stauts}

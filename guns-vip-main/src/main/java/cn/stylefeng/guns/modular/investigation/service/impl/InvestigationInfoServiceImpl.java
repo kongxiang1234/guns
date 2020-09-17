@@ -94,8 +94,8 @@ public class InvestigationInfoServiceImpl extends ServiceImpl<InvestigationInfoM
     }
 
     @Override
-    public Integer getDocumentNum(String name) {
-        return this.baseMapper.getDocumentNum(name);
+    public Integer getDocumentNum() {
+        return this.baseMapper.getDocumentNum();
     }
 
     @Override

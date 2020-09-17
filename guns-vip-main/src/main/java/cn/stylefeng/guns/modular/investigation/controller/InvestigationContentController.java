@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 
@@ -66,7 +67,7 @@ public class InvestigationContentController extends BaseController {
     }
 
     /**
-     * 协查申请审核列表页获取数据  过滤掉审核不通过的（驳回的）
+     * 协查申请审核列表页获取数据  过滤掉审核不通过的（驳回的） //最高权限
      *
      * @author hujt
      * @Date 2020-09-15
@@ -196,19 +197,24 @@ public class InvestigationContentController extends BaseController {
     }
 
     /**
-     * 新增页面
+     * 协查申请管理明细页面
      *
      * @author hujt
      * @Date 2020-09-09
      */
     @RequestMapping("/add")
-    public String add(Model model, HttpServletRequest request, HttpSession session,InvestigationContentParam investigationContentParam) {
+    public String add(Model model, HttpServletRequest request, HttpSession session,InvestigationContentParam investigationContentParam) throws Exception{
         List<Map<String, Object>> mapList = investigationContentService.getInvestigationInfoByid(investigationContentParam);
 
         Map<String, List<Map<String,Object>>> resultMap = new HashMap<>();
         Map<String, List<String>> pdfs = new HashMap<>();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         for (int i = 0; i < mapList.size(); i++) {
+            Long time1 = sdf.parse(mapList.get(i).get("apply_time").toString()).getTime();
+            long time2 = new Date().getTime();
 
+            Long time = (time2-time1)/(24*60*60*1000);
+            mapList.get(i).put("days",time);
             String unit_name = mapList.get(i).get("unit_name").toString();
             List<String> pdfNames = pdfs.get(unit_name);
             if(CollectionUtils.isEmpty(pdfNames)){
@@ -251,14 +257,81 @@ public class InvestigationContentController extends BaseController {
 
 
     /**
-     * 编辑页面
+     * 协查申请管理修改  跳到发起协查页面
      *
      * @author hujt
      * @Date 2020-09-09
      */
     @RequestMapping("/edit")
-    public String edit() {
-        return PREFIX + "/investigationContent_edit.html";
+    public String edit(Model model, HttpServletRequest request, HttpSession session,InvestigationContentParam investigationContentParam) {
+
+
+        List<Map<String, Object>> mapList = investigationContentService.getInvestigationInfoByid(investigationContentParam);
+
+        Map<String, List<Map<String,Object>>> resultMap = new HashMap<>();
+        Map<String, List<String>> pdfs = new HashMap<>();
+        for (int i = 0; i < mapList.size(); i++) {
+
+            String unit_name = mapList.get(i).get("unit_name").toString();
+            List<String> pdfNames = pdfs.get(unit_name);
+            if(CollectionUtils.isEmpty(pdfNames)){
+                pdfNames = new ArrayList<>();
+            }
+            if(Objects.nonNull(mapList.get(i).get("file_name"))) {
+                String file_name = mapList.get(i).get("file_name").toString();
+                if (StringUtils.isNotBlank(file_name) && !pdfNames.contains(file_name)) {
+                    pdfNames.add(file_name);
+                    pdfs.put(unit_name, pdfNames);
+                }
+            }
+            if(resultMap.containsKey(unit_name)){//map中异常批次已存在，将该数据存放到同一个key（key存放的是异常批次）的map中
+                resultMap.get(unit_name).add(mapList.get(i));
+            }else{//map中不存在，新建key，用来存放数据
+                List<Map<String,Object>> tmpList = new ArrayList<>();
+                tmpList.add(mapList.get(i));
+                resultMap.put(unit_name, tmpList);
+            }
+        }
+        Set<String> keySet = resultMap.keySet();
+        List<Map<String,Object>> list = new ArrayList<>();
+        for (String key : keySet) {
+            Map<String, Object> temp = new HashMap<>();
+            temp.put("unitName",key);
+            temp.put("infoList",resultMap.get(key));
+            List<String> fileNames = pdfs.get(key);
+            if(CollectionUtils.isEmpty(fileNames)){
+                fileNames = Lists.newArrayList();
+            }
+            temp.put("pdfList", fileNames);
+
+            list.add(temp);
+        }
+        model.addAttribute("infoList",list);
+
+        List<Map<String,Object>> allUsers = userService.getAllUsers();
+        LoginUser currentUser = LoginContextHolder.getContext().getUser();
+        model.addAttribute("currentUser_name",currentUser.getName());
+        model.addAttribute("currentUser_id",currentUser.getId());
+        model.addAttribute("allUsersList",allUsers);
+        return  "/investigationInfo/investigationInfo.html";
+    }
+
+    /**
+     * 首页我的申请跳过来，获取当前用户提交的协查申请
+     *
+     * @author hujt
+     * @Date 2020-09-09
+     */
+    @RequestMapping("myApply")
+    public String myApply(Model model, HttpServletRequest request, HttpSession session) {
+        List<Map<String,Object>> allUsers = userService.getAllUsers();
+        model.addAttribute("allUsersList",allUsers);
+        LoginUser currentUser = LoginContextHolder.getContext().getUser();
+
+        model.addAttribute("currentUser_name",currentUser.getName());
+        model.addAttribute("currentUser_id",currentUser.getId());
+        return PREFIX + "/investigationContent_myApply.html";
+
     }
 
     /**
@@ -347,6 +420,40 @@ public class InvestigationContentController extends BaseController {
     public List<Map<String,Object>> getinvestigationInfoList(Model model) {
 
         List<Map<String, Object>> mapList = investigationContentService.investigationInfoList();
+        Map<String, List<Map<String,Object>>> resultMap = new HashMap<>();
+        for (int i = 0; i < mapList.size(); i++) {
+            if(resultMap.containsKey(mapList.get(i).get("info_id").toString())){//map中异常批次已存在，将该数据存放到同一个key（key存放的是异常批次）的map中
+                resultMap.get(mapList.get(i).get("info_id").toString()).add(mapList.get(i));
+            }else{//map中不存在，新建key，用来存放数据
+                List<Map<String,Object>> tmpList = new ArrayList<>();
+                tmpList.add(mapList.get(i));
+                resultMap.put(mapList.get(i).get("info_id").toString(), tmpList);
+            }
+        }
+        Set<String> keySet = resultMap.keySet();
+        List<Map<String,Object>> list = new ArrayList<>();
+        for (String key : keySet) {
+            Map<String, Object> temp = new HashMap<>();
+            temp.put("info_Id",key);
+            temp.put("infoList",resultMap.get(key));
+            list.add(temp);
+        }
+
+        return  list;
+    }
+
+
+    /**
+     * 获取我的协查申请管理列表（根据当前登陆人）
+     *
+     * @author hujt
+     * @Date 2020-09-09
+     */
+    @ResponseBody
+    @RequestMapping("/getinvestigationInfoListByLoginUser")
+    public List<Map<String,Object>> getinvestigationInfoListByLoginUser(Model model) {
+        LoginUser currentUser = LoginContextHolder.getContext().getUser();
+        List<Map<String, Object>> mapList = investigationContentService.getinvestigationInfoListByLoginUser(currentUser.getName());
         Map<String, List<Map<String,Object>>> resultMap = new HashMap<>();
         for (int i = 0; i < mapList.size(); i++) {
             if(resultMap.containsKey(mapList.get(i).get("info_id").toString())){//map中异常批次已存在，将该数据存放到同一个key（key存放的是异常批次）的map中

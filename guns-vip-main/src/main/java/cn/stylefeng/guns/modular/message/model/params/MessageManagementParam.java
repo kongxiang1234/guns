@@ -1,10 +1,10 @@
 package cn.stylefeng.guns.modular.message.model.params;
 
-import lombok.Data;
 import cn.stylefeng.roses.kernel.model.validator.BaseValidatingParam;
-import java.util.Date;
+import lombok.Data;
+
 import java.io.Serializable;
-import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * <p>
@@ -31,6 +31,10 @@ public class MessageManagementParam implements Serializable, BaseValidatingParam
      * 发送人
      */
     private String createUser;
+    /**
+     * 发送对象
+     */
+    private String urgeObject;
 
     /**
      * 发送时间

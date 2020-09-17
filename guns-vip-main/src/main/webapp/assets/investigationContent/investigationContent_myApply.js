@@ -25,7 +25,7 @@ layui.use(['table', 'admin', 'ax','laydate','ax', 'func','upload'], function () 
     };
     $(document).ready(function(){
         $.ajax({
-            url: "/investigationContent/getinvestigationInfoList",
+            url: "/investigationContent/getinvestigationInfoListByLoginUser",
             type: "POST",
             data:{},
             dataType: "json",

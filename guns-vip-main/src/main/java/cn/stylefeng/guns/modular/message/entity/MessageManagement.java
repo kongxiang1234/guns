@@ -1,12 +1,9 @@
 package cn.stylefeng.guns.modular.message.entity;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.annotation.IdType;
-import java.util.Date;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.*;
+
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <p>
@@ -33,8 +30,13 @@ public class MessageManagement implements Serializable {
     /**
      * 发送人
      */
-      @TableField(value = "create_user", fill = FieldFill.INSERT)
+    @TableField(value = "create_user", fill = FieldFill.INSERT)
     private String createUser;
+    /**
+     * 发送对象
+     */
+    @TableField(value = "urge_object", fill = FieldFill.INSERT)
+    private String urgeObject;
 
     /**
      * 发送时间
@@ -73,8 +75,16 @@ public class MessageManagement implements Serializable {
         return id;
     }
 
+    public String getUrgeObject() {
+        return urgeObject;
+    }
+
     public void setId(String id) {
         this.id = id;
+    }
+
+    public void setUrgeObject(String urgeObject) {
+        this.urgeObject = urgeObject;
     }
 
     public String getTitle() {
@@ -124,6 +134,7 @@ public class MessageManagement implements Serializable {
         ", title=" + title +
         ", createUser=" + createUser +
         ", createTime=" + createTime +
+        ", urgeObject=" + urgeObject +
         ", status=" + status +
         ", type=" + type +
         "}";

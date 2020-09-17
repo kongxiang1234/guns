@@ -227,6 +227,11 @@ layui.use(['table', 'admin', 'ax','laydate','ax', 'func','upload'], function () 
 
     };
 
+    cancel = function(){
+        window.location.href = Feng.ctxPath + '/investigationContent/review'
+    };
+
+
     /**
      * 点击查询按钮
      */

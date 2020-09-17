@@ -98,6 +98,15 @@ public class InvestigationContentServiceImpl extends ServiceImpl<InvestigationCo
         IPage page = this.baseMapper.customPageList(pageContext, param);
         return LayuiPageFactory.createPageInfo(page);
     }
+    /**
+     * 获取我发出的协查申请（根据登陆用户获取）
+     * @author hujt
+     * @Date 2020-09-09
+     */
+    @Override
+    public List<Map<String, Object>> getinvestigationInfoListByLoginUser(String userName) {
+        return this.baseMapper.getinvestigationInfoListByLoginUser(userName);
+    }
 
     @Override
     public List<Map<String, Object>> investigationInfoList() {

@@ -52,7 +52,7 @@ public interface InvestigationInfoMapper extends BaseMapper<InvestigationInfo> {
      */
     Page<Map<String, Object>> customPageMapList(@Param("page") Page page, @Param("paramCondition") InvestigationInfoParam paramCondition);
 
-    Integer getDocumentNum(@Param("name") String name);
+    Integer getDocumentNum();
 
     Long getIdByDocumentNum(@Param("name") String name);
 

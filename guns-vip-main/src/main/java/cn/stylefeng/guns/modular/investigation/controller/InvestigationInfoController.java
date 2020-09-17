@@ -34,10 +34,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 /**
@@ -64,23 +61,25 @@ public class InvestigationInfoController extends BaseController {
     @Autowired
     private InvestigationUnitService investigationUnitService;
     /**
-     * 跳转到主页面
+     * 跳转到发起协查主页面
      *
      * @author hujt
      * @Date 2020-09-09
      */
     @RequestMapping("")
-    public String index(Model model, HttpServletRequest request, HttpSession session) {
+    public String index(Model model, HttpServletRequest request, HttpSession session,InvestigationInfoParam investigationInfoParam) {
+
         List<Map<String,Object>> allUsers = userService.getAllUsers();
         LoginUser currentUser = LoginContextHolder.getContext().getUser();
         model.addAttribute("currentUser_name",currentUser.getName());
         model.addAttribute("currentUser_id",currentUser.getId());
 
-        int count = investigationInfoService.getDocumentNum(currentUser.getName());
-        DecimalFormat df = new DecimalFormat("0000");
+        int count = investigationInfoService.getDocumentNum();
+        DecimalFormat df = new DecimalFormat("0000000");
         String countString = df.format(count+1);
 
-        String Documents_number= "宿监协字【2020】"+"00"+countString;
+        Calendar calendar = Calendar.getInstance();
+        String Documents_number= "宿监协字【"+String.valueOf(calendar.get(Calendar.YEAR))+"】"+countString;
         model.addAttribute("Documents_number",Documents_number);
 
         model.addAttribute("avatar", DefaultImages.defaultAvatarUrl());
@@ -118,7 +117,6 @@ public class InvestigationInfoController extends BaseController {
     @RequestMapping("/addItem")
     @ResponseBody
     public ResponseData addItem(InvestigationInfoParam investigationInfoParam,HttpServletRequest request) {
-        Map<String, String[]> parameterMap = request.getParameterMap();
         investigationInfoParam.setStauts("1");   //待审核
 
         long serialVersionUID = System.currentTimeMillis();
