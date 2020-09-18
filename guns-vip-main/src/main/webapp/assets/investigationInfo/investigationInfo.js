@@ -281,7 +281,7 @@ layui.use(['table', 'admin', 'ax', 'func', 'laydate', 'form', 'upload'], functio
             });
         };
     /**
-     * 弹出添加对话框
+     * 弹出添加对话框 （第一个工作证）
      */
     InvestigationInfo.openAddDlg = function () {
         layer.open({
@@ -293,14 +293,24 @@ layui.use(['table', 'admin', 'ax', 'func', 'laydate', 'form', 'upload'], functio
         });
 
     };
+
+    /**
+     * 弹出添加对话框  （第二个工作证）
+     */
+    InvestigationInfo.openAddDlgTwo = function () {
+        layer.open({
+            title: "选择工作证",
+            type: 2,
+            content: Feng.ctxPath + '/investigationInfo/edit',
+            area: ['50%', '70%'],
+            skin: "layui-layer-molv",
+        });
+
+    };
+
     InvestigationInfo.deleteUnit = function () {
 
     }
-    $('#btnAdd').click(function () {
-
-
-
-    });
     /**
      * 点击编辑
      *
@@ -367,12 +377,21 @@ layui.use(['table', 'admin', 'ax', 'func', 'laydate', 'form', 'upload'], functio
         InvestigationInfo.search();
     });
 
-    // 添加按钮点击事件
+
+    // 添加按钮点击事件 第一个工作证
+    $('#pic1Add').click(function () {
+
+        InvestigationInfo.openAddDlgTwo();
+
+    });
+
+    // 添加按钮点击事件  第二个工作证
     $('#btnAdd').click(function () {
 
         InvestigationInfo.openAddDlg();
 
     });
+
 
     // 导出excel
     $('#btnExp').click(function () {

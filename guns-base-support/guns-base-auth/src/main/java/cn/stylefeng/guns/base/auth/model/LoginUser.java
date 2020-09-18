@@ -109,6 +109,10 @@ public class LoginUser implements UserDetails, Serializable {
      * 租户编码
      */
     private String tenantCode;
+    /**
+     * 工作证
+     */
+    private String pic;
 
     /**
      * 租户的数据源名称

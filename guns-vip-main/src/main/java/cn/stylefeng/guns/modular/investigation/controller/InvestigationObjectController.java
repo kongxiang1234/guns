@@ -54,7 +54,7 @@ public class InvestigationObjectController extends BaseController {
     @ResponseBody
     public List<Map<String,Object>> investigationObjectListByCompId(InvestigationObjectParam param) {
         LoginUser currentUser = LoginContextHolder.getContext().getUser();
-        List<Map<String, Object>> mapList = investigationObjectService.investigationObjectListByCompId(currentUser.getDeptId().toString());
+        List<Map<String, Object>> mapList = investigationObjectService.investigationObjectListByCompId(currentUser.getSpecialty().toString());
 
         Map<String, List<Map<String,Object>>> resultMapTemp = new HashMap<>();
         for (int i = 0; i < mapList.size(); i++) {

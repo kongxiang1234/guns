@@ -63,7 +63,8 @@ layui.use(['table', 'admin', 'ax', 'func','laydate','form'], function () {
         var da=layui.table.checkStatus(Content.tableId).data;
         var parent$ = window.parent.layui.jquery;
         var url = "/rest/system/preview/"+da[0].pic+"";
-        parent$("#img1").attr('src', url);
+        parent$("#img2").attr('src', url);
+        parent$("#img2val").val(url);
         admin.closeThisDialog();
         return false;
     });

@@ -136,6 +136,7 @@ public class UserFactory {
         loginUser.setName(user.getName());
         loginUser.setYear(user.getYear());
         loginUser.setSpecialty(user.getSpecialty().toString());
+        loginUser.setPic(user.getPic());
         loginUser.setEmail(user.getEmail());
 
         loginUser.setAvatar("/api/system/preview/" + user.getAvatar());
