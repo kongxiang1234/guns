@@ -320,9 +320,10 @@
         $.ajax({
             url: "/investigationContent/getinvestigationInfoListByStatus",
             type: "POST",
-            data:{},
+            data:{stauts:'1'},
             dataType: "json",
             success: function(data){
+                debugger
                 var html = "";
                 debugger
                 $('#undoNum').html(data.length);
@@ -348,7 +349,7 @@
         $.ajax({
             url: "/investigationContent/getinvestigationInfoListByStatusDone",
             type: "POST",
-            data:{},
+            data:{stauts:3},
             dataType: "json",
             success: function(data){
                 var html = "";
@@ -362,7 +363,7 @@
                     dataList = data;
                 }
                 for (var i = 0; i <dataList.length ; i++) {
-                    html+='<li><h1>'+dataList[i].infoList[0].Documents_number+'</h1><p>'+dataList[i].infoList[0].apply_time+'<span>已审核</span></p></li>';
+                    html+='<li><h1>'+dataList[i].Documents_number+'</h1><p>'+dataList[i].apply_time+'<span>已审核</span></p></li>';
                 }
                 $('#done').html(html);
             },

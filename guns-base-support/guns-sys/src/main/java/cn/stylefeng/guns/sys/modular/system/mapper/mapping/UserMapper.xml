@@ -22,8 +22,6 @@
         <result column="update_time" property="updateTime"/>
         <result column="update_user" property="updateUser"/>
         <result column="version" property="version"/>
-        <result column="specialty" property="specialty"/>
-        <result column="year" property="year"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
@@ -32,20 +30,12 @@
     </sql>
 
     <sql id="Base_Column_List_With_Pwd">
-<<<<<<< Updated upstream
 		 pic AS "pic",specialty AS "specialty",user_id AS "userId", avatar AS "avatar", account AS "account", salt AS "salt", password AS "password", name AS "name", birthday AS "birthday", sex AS "sex", email AS "email", phone AS "phone", role_id AS "roleId", dept_id AS "deptId", status AS "status", create_time AS "createTime", create_user AS "createUser", update_time AS "updateTime", update_user AS "updateUser", version AS "version"
-=======
-		year AS "year",specialty AS "specialty",user_id AS "userId", avatar AS "avatar", account AS "account", salt AS "salt", password AS "password", name AS "name", birthday AS "birthday", sex AS "sex", email AS "email", phone AS "phone", role_id AS "roleId", dept_id AS "deptId", status AS "status", create_time AS "createTime", create_user AS "createUser", update_time AS "updateTime", update_user AS "updateUser", version AS "version"
->>>>>>> Stashed changes
 	</sql>
 
     <select id="selectUsers" resultType="map">
         select
-<<<<<<< Updated upstream
         pic AS "pic",year AS "year",specialty AS "specialty",user_id AS "userId", avatar AS "avatar", account AS "account", salt AS "salt", password AS "password", name AS "name", birthday AS "birthday", sex AS "sex", email AS "email", phone AS "phone", role_id AS "roleId", dept_id AS "deptId", status AS "status", create_time AS "createTime", create_user AS "createUser", update_time AS "updateTime", update_user AS "updateUser", version AS "version"
-=======
-        year AS "year",specialty AS "specialty",user_id AS "userId", avatar AS "avatar", account AS "account", salt AS "salt", password AS "password", name AS "name", birthday AS "birthday", sex AS "sex", email AS "email", phone AS "phone", role_id AS "roleId", dept_id AS "deptId", status AS "status", create_time AS "createTime", create_user AS "createUser", update_time AS "updateTime", update_user AS "updateUser", version AS "version"
->>>>>>> Stashed changes
         ,(select unit_name from investigation_unit where unit_id=specialty) specialtys
         from sys_user
         where status != 'DELETED'
@@ -277,17 +267,6 @@
     <select id="getAllUsers" resultType="map">
         select
          u.user_id as user_id,
-        u.account as account,
-        u.name as name,
-				dept.dept_id as dept_id,
-        dept.simple_name as simpleName
-        from sys_user u
-        left join sys_dept dept on u.dept_id = dept.dept_id
-    </select>
-
-    <select id="getAllUsers" resultType="map">
-        select
-         year as year,
         u.account as account,
         u.name as name,
 				dept.dept_id as dept_id,
