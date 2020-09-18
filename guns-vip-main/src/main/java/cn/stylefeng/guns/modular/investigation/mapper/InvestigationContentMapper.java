@@ -88,11 +88,17 @@ public interface InvestigationContentMapper extends BaseMapper<InvestigationCont
      */
     List<Map<String, Object>> getInvestigationInfoListByHeighSearch(@Param("paramCondition")InvestigationContentParam param);
     /**
-     * 协查申请审核列表（非驳回）
+     * 协查申请审核列表 (待审核)
      * @param
      * @return
      */
     List<Map<String, Object>> getinvestigationInfoListByStatus();
+    /**
+     * 协查申请审 （已审核）
+     * @param
+     * @return
+     */
+    List<Map<String, Object>> getinvestigationInfoListByStatusDone(@Param("status")String status);
 
     /**
      * 协查申请审核

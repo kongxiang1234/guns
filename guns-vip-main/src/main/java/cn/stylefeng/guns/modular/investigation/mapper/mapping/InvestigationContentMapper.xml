@@ -52,7 +52,7 @@
         SELECT a.*,b.* ,c.* FROM investigation_info a
         LEFT JOIN investigation_object b ON a.info_id = b.info_id
 		LEFT JOIN investigation_unit c   ON c.unit_id = b.unit_id
-        WHERE b.info_id != ''
+        WHERE b.info_id != '' order by a.apply_time desc
     </select>
 
     <!--我发起的协查申请（按用户）-->
@@ -63,12 +63,14 @@
 		LEFT JOIN investigation_unit c   ON c.unit_id = b.unit_id
         WHERE b.info_id != '' and a.user_id =#{userName}
     </select>
+
+    <!--协查申请待审核-->
     <select id="getinvestigationInfoListByStatus" resultType="map">
 
         SELECT a.*,b.* ,c.* FROM investigation_info a
         LEFT JOIN investigation_object b ON a.info_id = b.info_id
 		LEFT JOIN investigation_unit c   ON c.unit_id = b.unit_id
-        WHERE b.info_id != '' and a.stauts !='2'
+        WHERE b.info_id != '' and a.stauts ='1' order by a.apply_time desc
     </select>
 
     <select id="getInvestigationInfoByid" resultType="map" parameterType="cn.stylefeng.guns.modular.investigation.model.params.InvestigationContentParam">
@@ -129,7 +131,7 @@
     <!-- 协查审核 -->
     <update  id="editInvestigationContent"  parameterType="cn.stylefeng.guns.modular.investigation.model.params.InvestigationContentParam">
 
-        UPDATE investigation_info a SET a.stauts = #{param.stauts}
+        UPDATE investigation_info a SET a.stauts = #{param.stauts}, a.update_time= #{param.updateTime}
         <if test="param.infoRemark != null and param.infoRemark != ''">
             ,a.info_remark = #{param.infoRemark}
         </if>
@@ -145,5 +147,9 @@
         DELETE FROM investigation_object  where info_id = #{infoId}
     </delete>
 
+    <!--协查申请 已经审核（首页已办理）-->
+    <select id="getinvestigationInfoListByStatusDone" resultType="map">
 
+       SELECT * from investigation_info a where a.stauts ='3' order by a.apply_time desc
+    </select>
 </mapper>

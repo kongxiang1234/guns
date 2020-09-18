@@ -118,6 +118,11 @@ public class InvestigationContentServiceImpl extends ServiceImpl<InvestigationCo
         return this.baseMapper.getinvestigationInfoListByStatus();
     }
 
+    @Override
+    public List<Map<String, Object>> getinvestigationInfoListByStatusDone(String status) {
+        return this.baseMapper.getinvestigationInfoListByStatusDone(status);
+    }
+
     private Serializable getKey(InvestigationContentParam param){
         return param.getContentId();
     }

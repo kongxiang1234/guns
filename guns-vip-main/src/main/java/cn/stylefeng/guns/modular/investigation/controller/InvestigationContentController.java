@@ -67,7 +67,7 @@ public class InvestigationContentController extends BaseController {
     }
 
     /**
-     * 协查申请审核列表页获取数据  过滤掉审核不通过的（驳回的） //最高权限
+     * 协查申请审核列表页获取数据  只看未审核  //最高权限
      *
      * @author hujt
      * @Date 2020-09-15
@@ -99,6 +99,21 @@ public class InvestigationContentController extends BaseController {
 
         return  list;
     }
+
+
+    /**
+     * 协查申请 已经审核（首页已办理）
+     *
+     * @author hujt
+     * @Date 2020-09-15
+     */
+    @ResponseBody
+    @RequestMapping("/getinvestigationInfoListByStatusDone")
+    public List<Map<String,Object>> getinvestigationInfoListByStatusDone(InvestigationContentParam investigationContentParam) {
+        List<Map<String, Object>> mapList = investigationContentService.getinvestigationInfoListByStatusDone(investigationContentParam.getStauts());
+        return  mapList;
+    }
+
 
     /**
      * 跳转到协查申请审核页
@@ -141,6 +156,7 @@ public class InvestigationContentController extends BaseController {
     @RequestMapping("/editInvestigationContent")
     @ResponseBody
     public ResponseData editInvestigationContent(InvestigationContentParam investigationContentParam) {
+        investigationContentParam.setUpdateTime(new Date());
         investigationContentService.editInvestigationContent(investigationContentParam);
         return ResponseData.success();
     }

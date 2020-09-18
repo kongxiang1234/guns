@@ -134,6 +134,8 @@ public class UserFactory {
         loginUser.setDeptId(user.getDeptId());
         loginUser.setDeptName(ConstantFactory.me().getDeptName(user.getDeptId()));
         loginUser.setName(user.getName());
+        loginUser.setYear(user.getYear());
+        loginUser.setSpecialty(user.getSpecialty().toString());
         loginUser.setEmail(user.getEmail());
 
         loginUser.setAvatar("/api/system/preview/" + user.getAvatar());

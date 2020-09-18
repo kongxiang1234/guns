@@ -75,11 +75,11 @@ public class InvestigationInfoController extends BaseController {
         model.addAttribute("currentUser_id",currentUser.getId());
 
         int count = investigationInfoService.getDocumentNum();
-        DecimalFormat df = new DecimalFormat("0000000");
+        DecimalFormat df = new DecimalFormat("00000");
         String countString = df.format(count+1);
 
         Calendar calendar = Calendar.getInstance();
-        String Documents_number= "宿监协字【"+String.valueOf(calendar.get(Calendar.YEAR))+"】"+countString;
+        String Documents_number= "宿监协字【"+String.valueOf(calendar.get(Calendar.YEAR))+"】"+ currentUser.getYear()+countString;
         model.addAttribute("Documents_number",Documents_number);
 
         model.addAttribute("avatar", DefaultImages.defaultAvatarUrl());

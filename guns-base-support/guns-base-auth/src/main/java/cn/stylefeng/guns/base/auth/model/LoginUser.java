@@ -75,6 +75,15 @@ public class LoginUser implements UserDetails, Serializable {
      * 部门名称
      */
     private String deptName;
+    /**
+     * 单位id
+     */
+    private String specialty;
+
+    /**
+     * 地区编号
+     */
+    private String year;
 
     /**
      * 角色名称集

@@ -44,8 +44,6 @@
 </script>
 <script>
 
-
-
 </script>
 <body class="bodybg">
 <div class="header">
@@ -64,9 +62,9 @@
     </li>
     <li class="lmoudule">
         <div>
-            <h1 class="moduletype"><span class="sel">待办<label>5</label></span><span>已办<label></label></span></h1>
-            <ul class="typebox">
-                <li>
+            <h1 class="moduletype"><span class="sel">待办<label id="undoNum">5</label></span><span onclick="doneShow()">已办<label id="doneNum"></label></span></h1>
+            <ul class="typebox" id="undo" onclick="toInvestigationReview()">
+               <!-- <li>
                     <h1>宿监协字[2020]001号</h1>
                     <p>2020-07-22<span>待审核</span></p>
                 </li>
@@ -77,21 +75,23 @@
                 <li>
                     <h1>宿监协字[2020]001号</h1>
                     <p>2020-07-22<span>待审核</span></p>
-                </li>
+                </li>-->
+
             </ul>
-            <ul class="typebox" style="display: none;">
-                <li>
-                    <h1>宿监协字[2020]001号</h1>
-                    <p>2020-07-22<span>待审核</span></p>
-                </li>
-                <li>
-                    <h1>宿监协字[2020]001号</h1>
-                    <p>2020-07-22<span>待审核</span></p>
-                </li>
-                <li>
-                    <h1>宿监协字[2020]001号</h1>
-                    <p>2020-07-22<span>待审核</span></p>
-                </li>
+            <ul class="typebox" id="done" style="display: none;" onclick="toInvestigationApply()">
+                <!-- <li>
+                     <h1>宿监协字[2020]001号</h1>
+                     <p>2020-07-22<span>待审核</span></p>
+                 </li>
+                 <li>
+                     <h1>宿监协字[2020]001号</h1>
+                     <p>2020-07-22<span>待审核</span></p>
+                 </li>
+                 <li>
+                     <h1>宿监协字[2020]001号</h1>
+                     <p>2020-07-22<span>待审核</span></p>
+                 </li>-->
+
             </ul>
         </div>
     </li>
@@ -171,7 +171,7 @@
     function toInvestigationReview() {
         window.location.href =  Feng.ctxPath +"/investigationContent/review";
     }
-   //去协查审核
+   //去外部单位
     function toInvestigationUnit() {
         window.location.href = Feng.ctxPath + "/investigationUnit";
     }
@@ -315,7 +315,73 @@
         $(this).addClass("sel").siblings().removeClass("sel");
         $(".typebox").hide();
         $(".typebox").eq($(this).index()).show();
-    })
+    });
+    $(document).ready(function(){
+        $.ajax({
+            url: "/investigationContent/getinvestigationInfoListByStatus",
+            type: "POST",
+            data:{},
+            dataType: "json",
+            success: function(data){
+                var html = "";
+                debugger
+                $('#undoNum').html(data.length);
+                var dataList = [];
+
+                if(data.length>3){
+                    dataList =  data.splice(0,3);
+                }else{
+                    dataList = data;
+                }
+                for (var i = 0; i <dataList.length ; i++) {
+                    html+='<li><h1>'+dataList[i].infoList[0].Documents_number+'</h1><p>'+dataList[i].infoList[0].apply_time+'<span>待审核</span></p></li>';
+                }
+                $('#undo').html(html);
+            },
+            error:function(err){
+                console.log(err.statusText);
+                console.log('查询出错，请联系管理员');
+            }
+        });
+
+
+        $.ajax({
+            url: "/investigationContent/getinvestigationInfoListByStatusDone",
+            type: "POST",
+            data:{},
+            dataType: "json",
+            success: function(data){
+                var html = "";
+
+                $('#doneNum').html(data.length);
+                var dataList = [];
+
+                if(data.length>3){
+                    dataList =  data.splice(0,3);
+                }else{
+                    dataList = data;
+                }
+                for (var i = 0; i <dataList.length ; i++) {
+                    html+='<li><h1>'+dataList[i].infoList[0].Documents_number+'</h1><p>'+dataList[i].infoList[0].apply_time+'<span>已审核</span></p></li>';
+                }
+                $('#done').html(html);
+            },
+            error:function(err){
+                console.log(err.statusText);
+                console.log('查询出错，请联系管理员');
+            }
+        });
+    });
+
+
+    function doneShow() {
+        $('#done').show();
+        $('#undo').hide();
+    }
+    function undoShow() {
+        $('#done').hide();
+        $('#undo').show();
+    }
 </script>
 
 </html>
