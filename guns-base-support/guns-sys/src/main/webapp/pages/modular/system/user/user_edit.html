@@ -34,6 +34,21 @@
                         </div>
                     </div>
                     <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">所属地区</label>
+                        <div class="layui-input-block">
+                            <select name="year"  id="year" lay-filter="year" lay-verify="required" required>
+                                <option value="">请选择地区</option>
+                                <option value="00">市纪委监委内网</option>
+                                <option value="01">市纪委监委专网</option>
+                                <option value="02">城区纪委监委</option>
+                                <option value="03">豫区纪委监委</option>
+                                <option value="04">阳县纪委监委内网</option>
+                                <option value="05">阳县纪委监委专网</option>
+                                <option value="06">洪县纪委监委</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
                         <label class="layui-form-label">${lang.get("FIELD_SEX","性别")}</label>
                         <div class="layui-input-block">
                             <input type="radio" name="sex" value="M" title="男" checked/>

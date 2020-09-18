@@ -94,6 +94,9 @@ public class UserFactory {
             if (ToolUtil.isNotEmpty(newUser.getSpecialty())) {
                 oldUser.setSpecialty(newUser.getSpecialty());
             }
+            if (ToolUtil.isNotEmpty(newUser.getYear())) {
+                oldUser.setYear(newUser.getYear());
+            }
             return oldUser;
         }
     }
