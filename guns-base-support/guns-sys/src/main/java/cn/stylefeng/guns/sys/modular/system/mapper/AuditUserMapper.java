@@ -53,4 +53,6 @@ public interface AuditUserMapper extends BaseMapper<AuditUser> {
     Page<Map<String, Object>> customPageMapList(@Param("page") Page page, @Param("paramCondition") AuditUserParam paramCondition);
 
     AuditUser getByIdAuditUser(@Param("id")Long id);
+
+    AuditUser getByIdAuditUsers(@Param("id")Long id);
 }

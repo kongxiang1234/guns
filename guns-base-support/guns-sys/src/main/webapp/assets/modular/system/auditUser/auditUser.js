@@ -58,11 +58,19 @@ layui.use(['table', 'admin', 'ax', 'func'], function () {
       * @param data 点击按钮时候的行数据
       */
       AuditUser.openEditDlg = function (data) {
-          func.open({
-              title: '审核',
-              content: Feng.ctxPath + '/auditUser/edit?id=' + data.id,
-              tableId: AuditUser.tableId
-          });
+          if (data.type=="变更审核"){
+              func.open({
+                  title: '审核',
+                  content: Feng.ctxPath + '/auditUser/add?id=' + data.id,
+                  tableId: AuditUser.tableId
+              });
+          }else {
+              func.open({
+                  title: '审核',
+                  content: Feng.ctxPath + '/auditUser/edit?id=' + data.id,
+                  tableId: AuditUser.tableId
+              });
+          }
       };
 
 

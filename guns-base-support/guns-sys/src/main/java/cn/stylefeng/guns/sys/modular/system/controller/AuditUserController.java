@@ -9,12 +9,15 @@ import cn.stylefeng.guns.sys.modular.system.service.AuditUserService;
 import cn.stylefeng.guns.sys.modular.system.service.UserService;
 import cn.stylefeng.roses.core.base.controller.BaseController;
 import cn.stylefeng.roses.kernel.model.response.ResponseData;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -128,7 +131,26 @@ public class AuditUserController extends BaseController {
         AuditUser detail = this.auditUserService.getByIdAuditUser(auditUserParam.getId());
         return ResponseData.success(detail);
     }
-
+    /**
+     * 查看详情接口
+     *
+     * @author Alan
+     * @Date 2020-09-17
+     */
+    @RequestMapping("/details")
+    @ResponseBody
+    public ResponseData details(AuditUserParam auditUserParam) {
+        AuditUser detail = this.auditUserService.getByIdAuditUser(auditUserParam.getId());
+        QueryWrapper<AuditUser> queryWrapper=new QueryWrapper();
+        queryWrapper.eq("userId",  detail.getUserId());
+        queryWrapper.eq("type","新增审核");
+        AuditUser one = auditUserService.getOne(queryWrapper);
+        AuditUser details = this.auditUserService.getByIdAuditUsers(one.getId());
+        Map map=new HashMap();
+        map.put("detail",detail);
+        map.put("details",details);
+        return ResponseData.success(map);
+    }
     /**
      * 查询列表
      *

@@ -86,4 +86,9 @@ public class AuditUserServiceImpl extends ServiceImpl<AuditUserMapper, AuditUser
     public AuditUser getByIdAuditUser(Long id) {
         return this.baseMapper.getByIdAuditUser(id);
     }
+
+    @Override
+    public AuditUser getByIdAuditUsers(Long id) {
+        return this.baseMapper.getByIdAuditUsers(id);
+    }
 }

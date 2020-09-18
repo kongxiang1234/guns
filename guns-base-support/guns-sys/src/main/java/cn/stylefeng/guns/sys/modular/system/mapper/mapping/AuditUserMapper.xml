@@ -55,5 +55,10 @@
        ,(select unit_name from investigation_unit where unit_id=audit_user.unit_id) unitName
         from audit_user where 1 = 1 and id=#{id} and isdel="0"
     </select>
-
+    <select id="getByIdAuditUsers" resultType="cn.stylefeng.guns.sys.modular.system.entity.AuditUser">
+         select
+       userId AS "userId",id AS "id", type AS "type", unit_id AS "unitId", name AS "name", mobile AS "mobile", create_time AS "createTime", create_by AS "createBy", audit_by AS "auditBy", audit_time AS "auditTime", audit_content AS "auditContent", audit_status AS "auditStatus"
+       ,(select unit_name from investigation_unit where unit_id=audit_user.unit_id) unitName
+        from audit_user where 1 = 1 and id=#{id}
+    </select>
 </mapper>

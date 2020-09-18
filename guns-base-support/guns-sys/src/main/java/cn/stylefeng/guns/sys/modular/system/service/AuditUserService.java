@@ -67,4 +67,6 @@ public interface AuditUserService extends IService<AuditUser> {
      LayuiPageInfo findPageBySpec(AuditUserParam param);
 
     AuditUser getByIdAuditUser(Long id);
+
+    AuditUser getByIdAuditUsers(Long id);
 }

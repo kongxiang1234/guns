@@ -71,10 +71,10 @@ public class UserService extends ServiceImpl<UserMapper, User> {
         QueryWrapper<User> queryWrapper=new QueryWrapper();
         queryWrapper.eq("account",user.getAccount());
         queryWrapper.eq("email",user.getEmail());
-        /*User theUser = this.baseMapper.selectOne(queryWrapper);
+        User theUser = this.baseMapper.selectOne(queryWrapper);
         if (theUser != null) {
             throw new ServiceException(BizExceptionEnum.USER_ALREADY_REG);
-        }*/
+        }
         // 完善账号信息
         String salt = SaltUtil.getRandomSalt();
         String password = SaltUtil.md5Encrypt(user.getPassword(), salt);
@@ -109,6 +109,23 @@ public class UserService extends ServiceImpl<UserMapper, User> {
     @Transactional(rollbackFor = Exception.class)
     public void editUser(UserDto user) {
         User oldUser = this.getById(user.getUserId());
+        if(user.getSpecialty()!=null){
+            String account = LoginContextHolder.getContext().getUser().getName();
+            AuditUser auditUser=new AuditUser();
+            auditUser.setCreateBy(account);
+            auditUser.setCreateTime(new Date());
+            auditUser.setMobile(user.getPhone());
+            auditUser.setUnitId(user.getSpecialty());
+            auditUser.setName(user.getName());
+            auditUser.setType("变更审核");
+            // auditUser.setRank(user.getPosition());
+            auditUser.setUserId(user.getUserId());
+            auditUser.setAuditStatus("待审核");
+            auditUser.setIsdel("0");
+            auditUserService.save(auditUser);
+            oldUser.setStatus("DELETED");
+        }
+
 
         if (LoginContextHolder.getContext().hasRole(Const.ADMIN_NAME)) {
             this.updateById(UserFactory.editUser(user, oldUser));
@@ -137,7 +154,22 @@ public class UserService extends ServiceImpl<UserMapper, User> {
      */
     @Transactional(rollbackFor = Exception.class)
     public void deleteUser(Long userId) {
-
+        User user = this.getOne(new QueryWrapper<User>().eq("user_id", userId));
+        if(user.getSpecialty()!=null){
+            String account = LoginContextHolder.getContext().getUser().getName();
+            AuditUser auditUser=new AuditUser();
+            auditUser.setCreateBy(account);
+            auditUser.setCreateTime(new Date());
+            auditUser.setMobile(user.getPhone());
+            auditUser.setUnitId(user.getSpecialty());
+            auditUser.setName(user.getName());
+            auditUser.setType("无效审核");
+            // auditUser.setRank(user.getPosition());
+            auditUser.setUserId(user.getUserId());
+            auditUser.setAuditStatus("待审核");
+            auditUser.setIsdel("0");
+            auditUserService.save(auditUser);
+        }
         //不能删除超级管理员
         if (userId.equals(Const.ADMIN_ID)) {
             throw new ServiceException(BizExceptionEnum.CANT_DELETE_ADMIN);

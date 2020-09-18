@@ -18,8 +18,8 @@ layui.use(['layer', 'form', 'admin', 'laydate', 'ax', 'formSelects','func'], fun
     var formSelects = layui.formSelects;
     var func = layui.func;
     $(function(){
-        var url= "/dict/listDictsByName?dictTypeName="+'所属';
-        func.initDictSelect(url,"specialty","code","name");
+        var url= "/investigationUnit/listUnit";
+        func.initDictSelect(url,"specialty","unitId","unitName");
     });
     //获取用户信息
     var ajax = new $ax(Feng.ctxPath + "/mgr/getUserInfo?userId=" + Feng.getUrlParam("userId"));
