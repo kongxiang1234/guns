@@ -8,15 +8,33 @@ var UserInfoDlg = {
     }
 };
 
-layui.use(['layer', 'form', 'admin', 'laydate', 'ax', 'formSelects','func'], function () {
+layui.use(['layer', 'form', 'admin', 'laydate', 'ax', 'formSelects','func','upload'], function () {
     var $ = layui.jquery;
     var $ax = layui.ax;
     var form = layui.form;
     var admin = layui.admin;
     var laydate = layui.laydate;
     var layer = layui.layer;
+    var upload = layui.upload;
     var formSelects = layui.formSelects;
     var func = layui.func;
+    upload.render({
+        elem: '#picBtn'
+        , url: Feng.ctxPath + '/system/upload'
+        , before: function (obj) {
+            obj.preview(function (index, file, result) {
+                $('#img1').attr('src', result);
+            });
+        }
+        , done: function (res) {
+
+            $("#pic").val(res.data.fileId);
+            Feng.success(res.message);
+        }
+        , error: function () {
+            Feng.error("上传图片失败！");
+        }
+    });
     // 点击部门时
     $('#deptName').click(function () {
         var formName = encodeURIComponent("parent.UserInfoDlg.data.deptName");

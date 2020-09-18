@@ -14,7 +14,9 @@ layui.use(['table', 'admin', 'ax', 'func', 'laydate', 'form', 'upload'], functio
     var InvestigationInfo = {
         tableId: "investigationInfoTable"
     };
-
+    ChooseAdidValues= function () {
+       debugger
+    };
     /**
      * 初始化表格的列
      */
@@ -282,15 +284,23 @@ layui.use(['table', 'admin', 'ax', 'func', 'laydate', 'form', 'upload'], functio
      * 弹出添加对话框
      */
     InvestigationInfo.openAddDlg = function () {
-        func.open({
-            title: '添加',
+        layer.open({
+            title: "选择工作证",
+            type: 2,
             content: Feng.ctxPath + '/investigationInfo/add',
-            tableId: InvestigationInfo.tableId
+            area: ['50%', '70%'],
+            skin: "layui-layer-molv",
         });
+
     };
     InvestigationInfo.deleteUnit = function () {
 
     }
+    $('#btnAdd').click(function () {
+
+
+
+    });
     /**
      * 点击编辑
      *
@@ -301,6 +311,7 @@ layui.use(['table', 'admin', 'ax', 'func', 'laydate', 'form', 'upload'], functio
             title: '修改',
             content: Feng.ctxPath + '/investigationInfo/edit?infoId=' + data.infoId,
             tableId: InvestigationInfo.tableId
+
         });
     };
 

@@ -82,7 +82,7 @@ public class UserDto implements Serializable, BaseValidatingParam {
     private Integer weekCount;
     private Integer dayCount;
     private Integer integralCount;
-
+    private String pic;
     public UserDto() {
 
     }

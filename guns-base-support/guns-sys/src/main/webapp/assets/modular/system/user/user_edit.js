@@ -8,7 +8,7 @@ var UserInfoDlg = {
     }
 };
 
-layui.use(['layer', 'form', 'admin', 'laydate', 'ax', 'formSelects','func'], function () {
+layui.use(['layer', 'form', 'admin', 'laydate', 'ax', 'formSelects','func','upload'], function () {
     var $ = layui.jquery;
     var $ax = layui.ax;
     var form = layui.form;
@@ -17,6 +17,26 @@ layui.use(['layer', 'form', 'admin', 'laydate', 'ax', 'formSelects','func'], fun
     var layer = layui.layer;
     var formSelects = layui.formSelects;
     var func = layui.func;
+    var upload = layui.upload;
+//普通图片上传
+    upload.render({
+        elem: '#picBtn'
+        , url: Feng.ctxPath + '/system/upload'
+        , before: function (obj) {
+            obj.preview(function (index, file, result) {
+                debugger
+                $('#img1').attr('src', result);
+            });
+        }
+        , done: function (res) {
+            debugger
+            $("#pic").val(res.data.fileId);
+            Feng.success(res.message);
+        }
+        , error: function () {
+            Feng.error("上传图片失败！");
+        }
+    });
     $(function(){
         var url= "/investigationUnit/listUnit";
         func.initDictSelect(url,"specialty","unitId","unitName");
@@ -24,7 +44,8 @@ layui.use(['layer', 'form', 'admin', 'laydate', 'ax', 'formSelects','func'], fun
     //获取用户信息
     var ajax = new $ax(Feng.ctxPath + "/mgr/getUserInfo?userId=" + Feng.getUrlParam("userId"));
     var result = ajax.start();
-    debugger
+    var url = "/rest/system/preview/"+result.data.pic+"";
+    $('#img1').attr('src', url);
     form.val('userForm', result.data);
 
     // 点击部门时
