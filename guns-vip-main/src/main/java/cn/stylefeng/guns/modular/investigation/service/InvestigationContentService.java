@@ -82,11 +82,17 @@ public interface InvestigationContentService extends IService<InvestigationConte
      */
      List<Map<String,Object>> investigationInfoList();
      /**
-     * 获取审核数据（非驳回）
+     * 获取审核数据 未审核
      * @author hujt
      * @Date 2020-09-15
      */
      List<Map<String,Object>> getinvestigationInfoListByStatus();
+     /**
+     * 获取审核（已审核）
+     * @author hujt
+     * @Date 2020-09-18
+     */
+     List<Map<String,Object>> getinvestigationInfoListByStatusDone(String status);
      /**
      * 普通搜索
      * @author hujt
@@ -111,7 +117,7 @@ public interface InvestigationContentService extends IService<InvestigationConte
      * @param param
      * @return
      */
-        void editInvestigationContent(InvestigationContentParam param);
+    void editInvestigationContent(InvestigationContentParam param);
 /**
      * 协查申请删除
      * @param param
