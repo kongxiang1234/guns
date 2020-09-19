@@ -31,8 +31,7 @@
             <span class="tips">请每个人员/单位上传一个Excel，或者点右侧按钮批量导入。</span>
             <span class="plbtn"><img src="/assets/investigationInfo/img/icon71.png" />批量导入</span>
         </h1>
-        <div class="sqbox">
-            @for(item in invesMap.infoList){
+        <div class="sqbox">@for(item in invesMap.infoList){
                 <div class="lsqbox">
                     <h1 class="lsqboxtit">${item.name_company}<img src="/assets/investigationInfo/img/icon57.png" /></h1>
                     <div class="lsqboxnum">身份证号：${item.card_number}</div>
