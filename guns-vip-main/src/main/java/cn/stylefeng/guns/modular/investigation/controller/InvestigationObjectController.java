@@ -106,6 +106,7 @@ public class InvestigationObjectController extends BaseController {
         for (String key : keySet) {
             temp.put("unitName",key);
             temp.put("infoList",resultMap.get(key));
+            temp.put("objectStatus",resultMap.get(key).get(0).get("object_status"));
         }
         model.addAttribute("invesMap",temp);
 

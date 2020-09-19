@@ -121,6 +121,8 @@ public class InvestigationInfoController extends BaseController {
         long serialVersionUID = System.currentTimeMillis();
 
         String excelData2 = request.getParameter("excelData");
+        String employeeCard = request.getParameter("employeeCard");
+        String employeeCardSelect = request.getParameter("employeeCardSelect");
         System.out.println(excelData2);
 
 
@@ -143,10 +145,12 @@ public class InvestigationInfoController extends BaseController {
                 unitObjList.get(i).get(j).setObjectNotice(String.valueOf(serialVersionUID));
                 unitObjList.get(i).get(j).setEmployeeCard(String.valueOf(serialVersionUID));
                 unitObjList.get(i).get(j).setEmployeeCardSelect(String.valueOf(serialVersionUID));
-                unitObjList.get(i).get(j).setCreateTime(new java.sql.Date(System.currentTimeMillis()));
-                unitObjList.get(i).get(j).setUpdateTime(new java.sql.Date(System.currentTimeMillis()));
+                unitObjList.get(i).get(j).setCreateTime(new Date());
+                unitObjList.get(i).get(j).setUpdateTime(new Date());
                 unitObjList.get(i).get(j).setUpdateBy(currentUser.getUsername());
                 unitObjList.get(i).get(j).setObjectStatus("0"); // 0 待完成 1 已完成
+                unitObjList.get(i).get(j).setEmployeeCard(employeeCard); // 第一张工作证
+                unitObjList.get(i).get(j).setEmployeeCardSelect(employeeCardSelect); // 第二张工作证
                 this.investigationObjectService.add(unitObjList.get(i).get(j));
             }
         }

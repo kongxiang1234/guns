@@ -64,7 +64,7 @@ layui.use(['table', 'admin', 'ax', 'func','laydate','form'], function () {
         var parent$ = window.parent.layui.jquery;
         var url = "/rest/system/preview/"+da[0].pic+"";
         parent$("#img2").attr('src', url);
-        parent$("#img2val").val(url);
+        parent$("#img2val").val(da[0].pic);
         admin.closeThisDialog();
         return false;
     });

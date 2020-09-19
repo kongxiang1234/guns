@@ -30,25 +30,25 @@
         </div>
         <h1 class="secondtit"><img src="/assets/investigationInfo/img/icon53.png" />工作证</h1>
         <div class="gzbox">
-            <div class="lgzbox">
+            <div class="lgzbox" style="width: 23rem;height: 13rem;">
                 <div class="xietxt xietxtts">
-                    <img src="/assets/investigationInfo/img/icon44.png" />
-                    <h1>谭珊珊</h1>
-                    <h2>210189196311222145</h2>
-                    <div>单位 : 宿迁市纪委监委</div>
-                    <div>部门 : 第X监察室</div>
-                    <div>职务 : 四级主任科员</div>
+                    <img src="/rest/system/preview/${infoList[0]['infoList'][0].employee_card}" style="width: 350px;height: 180px;left: 10px;top:10px;"/>
+                    <!--<h1>谭珊珊</h1>-->
+                    <!--<h2>210189196311222145</h2>-->
+                    <!--<div>单位 : 宿迁市纪委监委</div>-->
+                    <!--<div>部门 : 第X监察室</div>-->
+                    <!--<div>职务 : 四级主任科员</div>-->
                 </div>
                 <img src="/assets/investigationInfo/img/icon62.png" class="mark"/>
             </div>
-            <div class="lgzbox">
+            <div class="lgzbox" style="width: 23rem;height: 13rem;">
                 <div class="xietxt xietxtts">
-                    <img src="/assets/investigationInfo/img/icon44.png" />
-                    <h1>谭珊珊</h1>
+                    <img src="/rest/system/preview/${infoList[0]['infoList'][0].employee_card_select}" style="width: 350px;height: 180px;left: 10px;top:10px;"/>
+                   <!-- <h1>谭珊珊</h1>
                     <h2>210189196311222145</h2>
                     <div>单位 : 宿迁市纪委监委</div>
                     <div>部门 : 第X监察室</div>
-                    <div>职务 : 四级主任科员</div>
+                    <div>职务 : 四级主任科员</div>-->
                 </div>
                 <img src="/assets/investigationInfo/img/icon62.png" class="mark"/>
             </div>
@@ -107,7 +107,19 @@
 
             <div class="xcdetail">
                 <img src="/assets/investigationInfo/img/icon20.png" />
-                <h1>${items.unitName}账单数据协查&nbsp;&nbsp;&nbsp;<span class="span3">查询中</span>
+                <h1>${items.unitName}账单数据协查&nbsp;&nbsp;&nbsp;
+
+                    @if(items.objectStatus=='0'){
+                     <span class="span3">待审核</span>
+                    @}
+
+                    @if(items.objectStatus=='1'){
+                     <span class="span2">查询中</span>
+                    @}
+
+                    @if(items.objectStatus=='1'){
+                     <span class="span2">查询完成</span>
+                    @}
                     @if(status!='1' && status!='2' && status!='6'){
 
                         <span class="cb">催办</span>

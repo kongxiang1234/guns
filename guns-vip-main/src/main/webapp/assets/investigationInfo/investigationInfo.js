@@ -251,15 +251,23 @@ layui.use(['table', 'admin', 'ax', 'func', 'laydate', 'form', 'upload'], functio
             var Documents_number = $("#Documents_number").val();
             var deadLine = $("#deadLine").val();
             var takePerson = $("#takePersion").val();
+            var img1 = $("#img1val").val();
+            var img2 = $("#img2val").val();
             if (deadLine===null||deadLine === ""||deadLine===undefined ) {
                 Feng.error("请选择最迟反馈时间!");
             }
+            if (img2===null||img2 === ""||img2===undefined ) {
+                Feng.error("请选择第二张工作证!");
+            }
 
+            alert(img1);
+            alert(img2);
             var execldataTemp = [];
             for (var i = 0; i < excelData.length; i++) {
                 var key = Object.keys(excelData[i])[0];
                 execldataTemp.push(excelData[i][key]);
             }
+            debugger
             $.ajax({
                 url: "/investigationInfo/addItem",
                 type: "POST",
@@ -268,6 +276,8 @@ layui.use(['table', 'admin', 'ax', 'func', 'laydate', 'form', 'upload'], functio
                     deadLine: deadLine,
                     documentsNumber: Documents_number,
                     undertaker: takePerson,
+                    in : img1,
+                    employeeCardSelect : img2,
                 },
                 dataType: "json",
                 success: function (data) {

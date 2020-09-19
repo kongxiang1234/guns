@@ -141,6 +141,7 @@ public class InvestigationContentController extends BaseController {
             Map<String, Object> temp = new HashMap<>();
             temp.put("unitName",key);
             temp.put("infoList",resultMap.get(key));
+            temp.put("objectStatus",resultMap.get(key).get(0).get("object_status"));
             list.add(temp);
         }
         model.addAttribute("infoList",list);
@@ -257,6 +258,7 @@ public class InvestigationContentController extends BaseController {
             Map<String, Object> temp = new HashMap<>();
             temp.put("unitName",key);
             temp.put("infoList",resultMap.get(key));
+            temp.put("objectStatus",resultMap.get(key).get(0).get("object_status"));
             List<String> fileNames = pdfs.get(key);
             if(CollectionUtils.isEmpty(fileNames)){
                 fileNames = Lists.newArrayList();
