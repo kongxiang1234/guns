@@ -259,9 +259,6 @@ layui.use(['table', 'admin', 'ax', 'func', 'laydate', 'form', 'upload'], functio
             if (img2===null||img2 === ""||img2===undefined ) {
                 Feng.error("请选择第二张工作证!");
             }
-
-            alert(img1);
-            alert(img2);
             var execldataTemp = [];
             for (var i = 0; i < excelData.length; i++) {
                 var key = Object.keys(excelData[i])[0];
