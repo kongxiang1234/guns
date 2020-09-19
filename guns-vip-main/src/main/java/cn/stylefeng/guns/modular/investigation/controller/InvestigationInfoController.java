@@ -123,8 +123,6 @@ public class InvestigationInfoController extends BaseController {
         String excelData2 = request.getParameter("excelData");
         String employeeCard = request.getParameter("employeeCard");
         String employeeCardSelect = request.getParameter("employeeCardSelect");
-        System.out.println(excelData2);
-
 
         LoginUser currentUser = LoginContextHolder.getContext().getUser();
         investigationInfoParam.setInfoId(serialVersionUID);
