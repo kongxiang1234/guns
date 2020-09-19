@@ -273,7 +273,7 @@ layui.use(['table', 'admin', 'ax', 'func', 'laydate', 'form', 'upload'], functio
                     deadLine: deadLine,
                     documentsNumber: Documents_number,
                     undertaker: takePerson,
-                    in : img1,
+                    employeeCard : img1,
                     employeeCardSelect : img2,
                 },
                 dataType: "json",
